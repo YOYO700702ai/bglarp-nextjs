@@ -4,7 +4,7 @@ import styles from './FloatingBookBtn.module.css';
 export default function FloatingBookBtn() {
     return (
         <a
-            href="https://m.me/bglarp.studio"
+            href="https://www.facebook.com/bglarp.studio/"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.btn}

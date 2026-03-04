@@ -47,7 +47,7 @@ export default function BookingSection() {
                         </div>
                     </div>
 
-                    <a href="https://m.me/bglarp.studio" target="_blank" rel="noopener noreferrer" className={styles.bookBtn}>
+                    <a href="https://www.facebook.com/bglarp.studio/" target="_blank" rel="noopener noreferrer" className={styles.bookBtn}>
                         📩 私訊預約
                     </a>
                 </div>

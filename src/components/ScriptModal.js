@@ -101,7 +101,7 @@ export default function ScriptModal({ card, onClose }) {
 
                 {/* Book button */}
                 <div className={styles.bookWrap}>
-                    <a href="https://m.me/bglarp.studio" target="_blank" rel="noopener noreferrer" className={styles.bookBtn}>
+                    <a href="https://www.facebook.com/bglarp.studio/" target="_blank" rel="noopener noreferrer" className={styles.bookBtn}>
                         馬上預約 →
                     </a>
                 </div>
