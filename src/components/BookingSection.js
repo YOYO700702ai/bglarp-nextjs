@@ -45,7 +45,9 @@ export default function BookingSection() {
                             </div>
                         </div>
                         <div className={styles.contactItem}>
-                            <div className={styles.contactIcon}>📷</div>
+                            <div className={styles.contactIcon}>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
+                            </div>
                             <div>
                                 <h4>IG帳號</h4>
                                 <a href="https://www.instagram.com/bglarp.studio/" target="_blank" rel="noopener noreferrer">bglarp.studio</a>
@@ -53,8 +55,9 @@ export default function BookingSection() {
                         </div>
                     </div>
 
-                    <a href="https://www.facebook.com/bglarp.studio/" target="_blank" rel="noopener noreferrer" className={styles.bookBtn}>
-                        📩 私訊預約
+                    <a href="https://m.me/bglarp.studio" target="_blank" rel="noopener noreferrer" className={styles.bookBtn}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" x2="11" y1="2" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
+                        私訊預約
                     </a>
                 </div>
 
