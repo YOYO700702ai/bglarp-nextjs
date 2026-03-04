@@ -4,10 +4,11 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.88);
+  background: rgba(20, 43, 36, 0.92);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(143, 168, 115, 0.1);
 }
+
 .inner {
   display: flex;
   justify-content: space-between;
@@ -16,8 +17,9 @@
   margin: 0 auto;
   padding: 0.9rem 1.2rem;
 }
+
 .logo {
-  color: white;
+  color: #D5E4C3;
   font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 0.15em;
@@ -27,7 +29,10 @@
   align-items: center;
   gap: 6px;
 }
-.logoIcon { color: #dc2626; }
+
+.logoIcon {
+  color: #E8A63B;
+}
 
 /* Hamburger */
 .burger {
@@ -40,16 +45,26 @@
   padding: 6px;
   z-index: 110;
 }
+
 .bar {
   display: block;
   width: 22px;
   height: 2px;
-  background: white;
+  background: #D5E4C3;
   transition: transform 0.3s, opacity 0.3s;
 }
-.bar1Open { transform: rotate(45deg) translate(5px, 5px); }
-.bar2Open { opacity: 0; }
-.bar3Open { transform: rotate(-45deg) translate(5px, -5px); }
+
+.bar1Open {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.bar2Open {
+  opacity: 0;
+}
+
+.bar3Open {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
 
 /* Mobile links */
 .links {
@@ -58,27 +73,37 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(20, 43, 36, 0.97);
   backdrop-filter: blur(12px);
   flex-direction: column;
   padding: 1rem 1.5rem;
   gap: 0.8rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(143, 168, 115, 0.1);
 }
-.linksOpen { display: flex; }
+
+.linksOpen {
+  display: flex;
+}
+
 .links a {
-  color: #d1d5db;
+  color: #8FA873;
   text-decoration: none;
   font-size: 0.9rem;
   letter-spacing: 0.1em;
   padding: 0.5rem 0;
   transition: color 0.2s;
 }
-.links a:hover { color: #ef4444; }
+
+.links a:hover {
+  color: #E8A63B;
+}
 
 /* Desktop */
 @media (min-width: 768px) {
-  .burger { display: none; }
+  .burger {
+    display: none;
+  }
+
   .links {
     display: flex;
     position: static;
@@ -89,5 +114,8 @@
     gap: 2rem;
     border: none;
   }
-  .links a { font-size: 0.85rem; }
+
+  .links a {
+    font-size: 0.85rem;
+  }
 }

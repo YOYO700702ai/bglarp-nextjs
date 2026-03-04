@@ -1,15 +1,15 @@
 .card {
-    background: #111;
+    background: #1A3830;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(143, 168, 115, 0.1);
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 15px rgba(220, 38, 38, 0.1);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(232, 166, 59, 0.1);
 }
 
 .card:active {
@@ -21,7 +21,7 @@
     position: relative;
     aspect-ratio: 4 / 3;
     overflow: hidden;
-    background: #0a0a0a;
+    background: #12302A;
 }
 
 .imgWrap img {
@@ -42,7 +42,7 @@
     left: 0;
     right: 0;
     height: 40%;
-    background: linear-gradient(to top, rgba(17, 17, 17, 0.7), transparent);
+    background: linear-gradient(to top, rgba(26, 56, 48, 0.7), transparent);
     pointer-events: none;
 }
 
@@ -60,8 +60,8 @@
 
 .tag {
     font-size: 0.55rem;
-    color: #a1a1aa;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #8FA873;
+    border: 1px solid rgba(143, 168, 115, 0.2);
     padding: 2px 6px;
     border-radius: 3px;
     letter-spacing: 0.03em;
@@ -71,7 +71,7 @@
 .title {
     font-size: 0.9rem;
     font-weight: 700;
-    color: #f0f0f0;
+    color: #D5E4C3;
     letter-spacing: 0.08em;
     margin: 0 0 10px 0;
     font-family: 'Noto Serif TC', serif;
@@ -83,7 +83,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 0.65rem;
-    color: #71717a;
+    color: #7A9968;
 }
 
 .players {
@@ -93,7 +93,7 @@
 }
 
 .price {
-    color: #a1a1aa;
+    color: #8FA873;
     font-size: 0.6rem;
     text-align: right;
 }
@@ -101,7 +101,7 @@
 .priceAmt {
     font-size: 1.1rem;
     font-weight: 800;
-    color: #f0f0f0;
+    color: #E8A63B;
     margin: 0 2px;
 }
 

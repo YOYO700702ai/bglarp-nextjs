@@ -1,6 +1,6 @@
 .section {
     padding: 5rem 0 2rem;
-    background: #000;
+    background: #142B24;
 }
 
 .container {
@@ -11,12 +11,12 @@
 
 .header {
     margin-bottom: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(143, 168, 115, 0.15);
     padding-bottom: 1rem;
 }
 
 .tag {
-    color: #dc2626;
+    color: #E8A63B;
     font-weight: bold;
     letter-spacing: 0.2em;
     font-size: 0.75rem;
@@ -28,7 +28,7 @@
     font-size: 1.8rem;
     font-family: 'Noto Serif TC', serif;
     font-weight: bold;
-    color: white;
+    color: #D5E4C3;
     letter-spacing: 0.1em;
     margin: 0;
 }
@@ -40,9 +40,9 @@
 }
 
 .select {
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(143, 168, 115, 0.08);
+    color: #D5E4C3;
+    border: 1px solid rgba(143, 168, 115, 0.15);
     border-radius: 6px;
     padding: 0.5rem 0.8rem;
     font-size: 0.8rem;
@@ -53,11 +53,11 @@
 }
 
 .select:focus {
-    border-color: #dc2626;
+    border-color: #E8A63B;
 }
 
 .loading {
-    color: #71717a;
+    color: #7A9968;
     text-align: center;
     padding: 3rem 0;
     letter-spacing: 0.1em;
@@ -76,9 +76,9 @@
 }
 
 .moreBtn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: rgba(255, 255, 255, 0.8);
+    background: rgba(143, 168, 115, 0.08);
+    border: 1px solid rgba(143, 168, 115, 0.2);
+    color: #8FA873;
     letter-spacing: 0.1em;
     padding: 0.7rem 2rem;
     font-size: 0.85rem;
@@ -88,9 +88,9 @@
 }
 
 .moreBtn:hover {
-    background: #b91c1c;
-    border-color: #dc2626;
-    color: white;
+    background: #E8A63B;
+    border-color: #E8A63B;
+    color: #142B24;
 }
 
 /* Tablet: 2 cols */

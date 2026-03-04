@@ -1,12 +1,12 @@
 .footer {
-    background: #000;
+    background: #0F241E;
     padding: 3rem 0 5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(143, 168, 115, 0.08);
     text-align: center;
 }
 
 .logo {
-    color: white;
+    color: #D5E4C3;
     font-size: 1.3rem;
     font-weight: bold;
     letter-spacing: 0.2em;
@@ -19,11 +19,11 @@
 }
 
 .icon {
-    color: #dc2626;
+    color: #E8A63B;
 }
 
 .copy {
-    color: #6b7280;
+    color: #5A7F4C;
     font-size: 0.75rem;
     letter-spacing: 0.1em;
 }

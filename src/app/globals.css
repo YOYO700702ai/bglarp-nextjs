@@ -13,8 +13,8 @@ html {
 }
 
 body {
-  background-color: #000;
-  color: #cbd5e1;
+  background-color: #142B24;
+  color: #c8dabb;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   overflow-x: hidden;
@@ -27,21 +27,21 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: #142B24;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #2D5A4A;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #b91c1c;
+  background: #E8A63B;
 }
 
 /* ===== Selection ===== */
 ::selection {
-  background: rgba(220, 38, 38, 0.3);
+  background: rgba(232, 166, 59, 0.3);
   color: white;
 }
 

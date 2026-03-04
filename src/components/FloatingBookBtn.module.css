@@ -8,8 +8,8 @@
     left: 0;
     right: 0;
     z-index: 90;
-    background: #dc2626;
-    color: white;
+    background: #E8A63B;
+    color: #142B24;
     font-weight: 700;
     font-size: 0.9rem;
     letter-spacing: 0.15em;
@@ -22,7 +22,7 @@
 }
 
 .btn:hover {
-    background: #b91c1c;
+    background: #d4952e;
 }
 
 /* Hide on desktop */

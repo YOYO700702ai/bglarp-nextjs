@@ -2,7 +2,7 @@
     position: fixed;
     inset: 0;
     z-index: 200;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(14, 30, 25, 0.85);
     backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
@@ -14,8 +14,8 @@
 
 .modal {
     position: relative;
-    background: #09090b;
-    border: 1px solid #27272a;
+    background: #162E27;
+    border: 1px solid rgba(143, 168, 115, 0.15);
     border-radius: 12px;
     max-width: 700px;
     width: 100%;
@@ -28,9 +28,9 @@
     top: 12px;
     right: 12px;
     z-index: 210;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
+    background: rgba(20, 43, 36, 0.7);
+    border: 1px solid rgba(143, 168, 115, 0.15);
+    color: #D5E4C3;
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -43,7 +43,8 @@
 }
 
 .closeBtn:hover {
-    background: #dc2626;
+    background: #E8A63B;
+    color: #142B24;
 }
 
 /* Poster */
@@ -64,7 +65,7 @@
 .posterGrad {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, #09090b 0%, transparent 60%, rgba(0, 0, 0, 0.15) 100%);
+    background: linear-gradient(to top, #162E27 0%, transparent 60%, rgba(20, 43, 36, 0.15) 100%);
     pointer-events: none;
 }
 
@@ -79,9 +80,9 @@
     font-size: 1.5rem;
     font-family: 'Noto Serif TC', serif;
     font-weight: bold;
-    color: white;
+    color: #D5E4C3;
     margin: 0;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 }
 
 /* Tags */
@@ -95,9 +96,9 @@
     padding: 3px 10px;
     font-size: 0.6rem;
     letter-spacing: 0.1em;
-    border: 1px solid #3f3f46;
-    background: rgba(24, 24, 27, 0.5);
-    color: #a1a1aa;
+    border: 1px solid rgba(143, 168, 115, 0.2);
+    background: rgba(26, 56, 48, 0.5);
+    color: #8FA873;
     margin-right: 6px;
     margin-bottom: 6px;
     border-radius: 2px;
@@ -109,9 +110,9 @@
     grid-template-columns: 1fr;
     gap: 2px;
     padding: 3px;
-    background: rgba(39, 39, 42, 0.3);
+    background: rgba(45, 90, 74, 0.2);
     border-radius: 10px;
-    border: 1px solid #27272a;
+    border: 1px solid rgba(143, 168, 115, 0.12);
     margin: 0 20px 20px;
 }
 
@@ -120,13 +121,13 @@
     flex-direction: column;
     gap: 2px;
     padding: 12px 16px;
-    background: #111112;
+    background: #1A3830;
     border-radius: 8px;
 }
 
 .infoLabel {
     font-size: 0.55rem;
-    color: #71717a;
+    color: #7A9968;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -134,7 +135,7 @@
 .infoValue {
     font-size: 0.95rem;
     font-weight: 500;
-    color: #e4e4e7;
+    color: #D5E4C3;
 }
 
 /* Section titles */
@@ -142,10 +143,10 @@
     padding: 0 20px;
     font-size: 0.85rem;
     font-weight: 600;
-    color: #d1d5db;
+    color: #B8CFA8;
     letter-spacing: 0.15em;
     margin-bottom: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(143, 168, 115, 0.08);
     padding-bottom: 8px;
 }
 
@@ -156,7 +157,7 @@
 }
 
 .synPara {
-    color: #a1a1aa;
+    color: #8FA873;
     line-height: 1.8;
     letter-spacing: 0.04em;
     font-weight: 300;
@@ -168,7 +169,7 @@
 }
 
 .synPara:hover {
-    border-left-color: rgba(220, 38, 38, 0.5);
+    border-left-color: rgba(232, 166, 59, 0.5);
 }
 
 /* Characters */
@@ -192,22 +193,22 @@
     height: 60px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #27272a;
+    border: 2px solid rgba(143, 168, 115, 0.2);
     margin-bottom: 8px;
-    background: #18181b;
+    background: #1A3830;
 }
 
 .charName {
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.08em;
-    color: #e4e4e7;
+    color: #D5E4C3;
     margin-bottom: 2px;
 }
 
 .charDesc {
     font-size: 0.6rem;
-    color: #71717a;
+    color: #7A9968;
     line-height: 1.4;
     max-width: 100px;
 }
@@ -221,8 +222,8 @@
 .bookBtn {
     display: inline-block;
     padding: 12px 40px;
-    background: #dc2626;
-    color: white;
+    background: #E8A63B;
+    color: #142B24;
     font-weight: 700;
     font-size: 0.85rem;
     letter-spacing: 0.2em;
@@ -232,7 +233,7 @@
 }
 
 .bookBtn:hover {
-    background: #b91c1c;
+    background: #d4952e;
 }
 
 /* Desktop */
