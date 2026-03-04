@@ -12,7 +12,9 @@ function formatPlayerRange(players) {
 
 export default function ScriptCard({ card, onClick }) {
     const playerRange = formatPlayerRange(card.players || []);
-    const tagsArray = Array.isArray(card.genre) ? card.genre : [];
+    const baseTags = Array.isArray(card.genre) ? card.genre : [];
+    const customTags = card.customTags ? card.customTags.replace(/\//g, ',').replace(/、/g, ',').split(',').map(t => t.trim()).filter(Boolean) : [];
+    const tagsArray = [...baseTags, ...customTags];
     const tagString = tagsArray.length > 0 ? `#${tagsArray.join(' X ')}` : '';
     const fallback = 'https://images.unsplash.com/photo-1505635552518-3448ff116af3?q=80&w=800&auto=format&fit=crop';
 

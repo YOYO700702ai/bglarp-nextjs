@@ -53,6 +53,7 @@ export async function GET() {
     const synopsis = getText(props, '劇情簡介');
     const characters = getText(props, '角色');
     const genre = (props['類型']?.multi_select || []).map(o => o.name);
+    const customTags = getText(props, '類型標籤');
     const duration = getText(props, '時長');
     const price = props['價格']?.number || null;
     const players = (props['人數']?.multi_select || []).map(o => o.name);
@@ -66,7 +67,7 @@ export async function GET() {
       image = coverObj.file?.url || null;
     }
 
-    return { name, synopsis, characters, genre, duration, price, players, image };
+    return { name, synopsis, characters, genre, customTags, duration, price, players, image };
   });
 
   return NextResponse.json(scripts);
