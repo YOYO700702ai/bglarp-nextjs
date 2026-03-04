@@ -49,15 +49,11 @@
 /* Body - Paper Texture */
 .body {
     padding: 12px 14px 16px;
-    background-color: #e2cca5;
-    background-image:
-        url("https://www.transparenttextures.com/patterns/cream-paper.png"),
-        radial-gradient(circle at center, transparent 40%, rgba(130, 95, 50, 0.6) 130%),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, transparent 10%);
-    background-blend-mode: multiply, normal, normal;
+    background-color: #e3d2ab;
+    background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
     color: #0F1A2A;
-    border-top: 2px solid #163528;
-    box-shadow: inset 0 0 15px rgba(100, 70, 30, 0.3);
+    border-top: 1px solid rgba(22, 53, 40, 0.5);
+    box-shadow: inset 0 0 30px rgba(130, 95, 50, 0.25);
 }
 
 .tags {
