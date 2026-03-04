@@ -24,7 +24,22 @@ export default function ScriptGrid() {
 
     const filtered = scripts.filter(s => {
         if (genreFilter !== '全部') {
-            if (!s.genre || !s.genre.includes(genreFilter)) return false;
+            if (!s.genre) return false;
+            let match = false;
+            if (genreFilter === '恐怖') {
+                match = /恐|驚悚/.test(s.genre); // matches 恐怖, 微恐, 中恐, 驚悚
+            } else if (genreFilter === '沉浸') {
+                match = /沉浸|情感|演繹/.test(s.genre);
+            } else if (genreFilter === '機制') {
+                match = /機制|陣營|歡樂|撕/.test(s.genre);
+            } else if (genreFilter === '硬核') {
+                match = /硬核|燒腦/.test(s.genre);
+            } else if (genreFilter === '推理') {
+                match = /推理|還原/.test(s.genre);
+            } else {
+                match = s.genre.includes(genreFilter);
+            }
+            if (!match) return false;
         }
         if (playerFilter !== '全部') {
             if (playerFilter === '9人以上') {
