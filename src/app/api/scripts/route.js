@@ -52,7 +52,7 @@ export async function GET() {
     const name = getText(props, '劇本名稱', true) || '未命名';
     const synopsis = getText(props, '劇情簡介');
     const characters = getText(props, '角色');
-    const genre = getText(props, '類型標籤');
+    const genre = (props['類型']?.multi_select || []).map(o => o.name);
     const duration = getText(props, '時長');
     const price = props['價格']?.number || null;
     const players = (props['人數']?.multi_select || []).map(o => o.name);

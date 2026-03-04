@@ -14,8 +14,7 @@ export default function ScriptModal({ card, onClose }) {
     const price = card.price ? `NT$ ${card.price}/人` : '價格未定';
     const playersStr = (card.players || []).join(', ');
 
-    const genreText = card.genre || '';
-    const tags = genreText.replace(/\//g, ',').replace(/、/g, ',').split(',').map(t => t.trim()).filter(Boolean);
+    const tags = Array.isArray(card.genre) ? card.genre : [];
     const allTags = [...(card.players || []), ...tags];
 
     const synopsis = card.synopsis || '（資料未建立）';

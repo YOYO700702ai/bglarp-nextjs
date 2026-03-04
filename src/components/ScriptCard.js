@@ -12,12 +12,7 @@ function formatPlayerRange(players) {
 
 export default function ScriptCard({ card, onClick }) {
     const playerRange = formatPlayerRange(card.players || []);
-    const genreText = card.genre || '';
-    const tagsArray = genreText
-        .replace(/\//g, ',').replace(/、/g, ',')
-        .split(',')
-        .map(t => t.trim())
-        .filter(Boolean);
+    const tagsArray = Array.isArray(card.genre) ? card.genre : [];
     const tagString = tagsArray.length > 0 ? `#${tagsArray.join(' X ')}` : '';
     const fallback = 'https://images.unsplash.com/photo-1505635552518-3448ff116af3?q=80&w=800&auto=format&fit=crop';
 
