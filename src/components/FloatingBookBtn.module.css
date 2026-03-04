@@ -1,0 +1,33 @@
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    background: #dc2626;
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    padding: 14px 0;
+    text-align: center;
+    transition: background 0.3s;
+    /* safe area for iPhone notch */
+    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+}
+
+.btn:hover {
+    background: #b91c1c;
+}
+
+/* Hide on desktop */
+@media (min-width: 768px) {
+    .btn {
+        display: none;
+    }
+}

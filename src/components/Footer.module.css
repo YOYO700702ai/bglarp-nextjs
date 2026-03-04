@@ -1,0 +1,36 @@
+.footer {
+    background: #000;
+    padding: 3rem 0 5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+.logo {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    font-family: 'Noto Serif TC', serif;
+    margin-bottom: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon {
+    color: #dc2626;
+}
+
+.copy {
+    color: #6b7280;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+/* Extra bottom padding on mobile for floating button */
+@media (max-width: 767px) {
+    .footer {
+        padding-bottom: 5rem;
+    }
+}
