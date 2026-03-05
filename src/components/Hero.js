@@ -53,6 +53,9 @@ export default function Hero() {
                 <h1>劇本放映中</h1>
             </div>
 
+            {/* 右上角聚光燈效果 */}
+            <div className={styles.spotlight} />
+
             {/* 傾斜的膠捲容器 */}
             <div className={styles.filmContainer}>
                 <div className={styles.marqueeTrack}>
