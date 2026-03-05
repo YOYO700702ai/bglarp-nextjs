@@ -95,25 +95,6 @@
     display: block;
 }
 
-/* ===== 底部文字 ===== */
-.bottomText {
-    position: absolute;
-    bottom: 6%;
-    right: 8%;
-    text-align: right;
-    color: #e5e7eb;
-    z-index: 20;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
-}
-
-.bottomText h2 {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 1.5rem;
-    margin: 0;
-    letter-spacing: 3px;
-    font-weight: 400;
-}
-
 /* ===== 載入畫面：淡入動畫 ===== */
 .heroLoaded .filmContainer {
     animation: fadeSlideIn 0.8s ease-out forwards;
@@ -161,18 +142,8 @@
         padding: 8px 0;
     }
 
-    .bottomText h2 {
-        font-size: 1rem;
-        letter-spacing: 2px;
-    }
-
     .titleText {
         top: 12%;
         left: 5%;
-    }
-
-    .bottomText {
-        right: 5%;
-        bottom: 8%;
     }
 }

@@ -77,11 +77,6 @@ export default function Hero() {
                     ) : null}
                 </div>
             </div>
-
-            {/* 底部文字區塊 */}
-            <div className={styles.bottomText}>
-                <h2>打破現實與虛構的邊界，演藝你的第二人生</h2>
-            </div>
         </section>
     );
 }
