@@ -24,7 +24,7 @@ export default function ScriptModal({ card, onClose }) {
 
     // Parse characters
     const charLines = (card.characters || '').split('\n').filter(l => l.trim());
-    const avatarStyles = ['adventurer', 'avataaars', 'big-ears', 'lorelei', 'micah', 'miniavs', 'personas', 'bottts'];
+    const silhouette = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231a1a2e' rx='50'/%3E%3Ccircle cx='50' cy='38' r='18' fill='%2327272a'/%3E%3Cellipse cx='50' cy='82' rx='26' ry='18' fill='%2327272a'/%3E%3C/svg%3E";
 
     return (
         <div className={styles.backdrop} onClick={onClose}>
@@ -85,12 +85,9 @@ export default function ScriptModal({ card, onClose }) {
                                         break;
                                     }
                                 }
-                                const avatarStyle = avatarStyles[idx % avatarStyles.length];
-                                const seed = `${card.name}_${charName}_${idx}`;
-                                const avatarUrl = `https://api.dicebear.com/7.x/${avatarStyle}/svg?seed=${seed}&backgroundColor=1a1a2e,16213e,0f3460&radius=50`;
                                 return (
                                     <div key={idx} className={styles.charItem}>
-                                        <img src={avatarUrl} alt={charName} className={styles.charAvatar} />
+                                        <img src={silhouette} alt={charName} className={styles.charAvatar} />
                                         <div className={styles.charName}>{charName}</div>
                                         {charDesc && <div className={styles.charDesc}>{charDesc}</div>}
                                     </div>
