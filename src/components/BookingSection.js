@@ -22,7 +22,7 @@ export default function BookingSection() {
                             <div>
                                 <h4>劇院地址</h4>
                                 <a href="https://www.google.com/maps/search/?api=1&query=台中市北區太平路19巷1號3樓" target="_blank" rel="noopener noreferrer">
-                                    台中市北區太平路19巷1號3樓<br />(一中街麥當勞正對面三樓)
+                                    台中市北區太平路19巷1號3樓
                                 </a>
                             </div>
                         </div>
