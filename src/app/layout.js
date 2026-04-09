@@ -5,6 +5,7 @@ export const metadata = {
   description: '打破現實與虛構的邊界。走進專屬場景，演繹你的第二人生。台中一中街 LARP 劇本殺推理館。',
   viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
   icons: { icon: '/favicon.ico' },
+  verification: { google: 'FgTNUir7Fyy9YwREQaCB4vwgPX1DAdy6LP9i88s7tp4' },
 };
 
 export default function RootLayout({ children }) {
