@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import ScriptCard from './ScriptCard';
-import ScriptModal from './ScriptModal';
 import styles from './ScriptGrid.module.css';
 
 export default function ScriptGrid() {
@@ -10,7 +9,6 @@ export default function ScriptGrid() {
     const [playerFilter, setPlayerFilter] = useState('全部');
     const [genreFilter, setGenreFilter] = useState('全部');
     const [displayLimit, setDisplayLimit] = useState(10);
-    const [selectedScript, setSelectedScript] = useState(null);
 
     useEffect(() => {
         fetch('/api/scripts')
@@ -28,7 +26,7 @@ export default function ScriptGrid() {
             const genreStr = s.genre.join(',');
             let match = false;
             if (genreFilter === '恐怖') {
-                match = /恐|驚悚/.test(genreStr); // matches 恐怖, 微恐, 中恐, 驚悚
+                match = /恐|驚悚/.test(genreStr);
             } else if (genreFilter === '沉浸') {
                 match = /沉浸|情感|演繹/.test(genreStr);
             } else if (genreFilter === '機制') {
@@ -93,7 +91,7 @@ export default function ScriptGrid() {
                     <>
                         <div className={styles.grid}>
                             {visible.map((s, i) => (
-                                <ScriptCard key={i} card={s} onClick={() => setSelectedScript(s)} />
+                                <ScriptCard key={i} card={s} />
                             ))}
                         </div>
                         {filtered.length > displayLimit && (
@@ -106,10 +104,6 @@ export default function ScriptGrid() {
                     </>
                 )}
             </div>
-
-            {selectedScript && (
-                <ScriptModal card={selectedScript} onClose={() => setSelectedScript(null)} />
-            )}
         </section>
     );
 }

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './ScriptCard.module.css';
 
 function formatPlayerRange(players) {
@@ -10,7 +11,7 @@ function formatPlayerRange(players) {
     return `${nums[0]}~${nums[nums.length - 1]}人`;
 }
 
-export default function ScriptCard({ card, onClick }) {
+export default function ScriptCard({ card }) {
     const playerRange = formatPlayerRange(card.players || []);
     const baseTags = Array.isArray(card.genre) ? card.genre : [];
     const customTags = card.customTags ? card.customTags.replace(/\//g, ',').replace(/、/g, ',').split(',').map(t => t.trim()).filter(Boolean) : [];
@@ -19,7 +20,7 @@ export default function ScriptCard({ card, onClick }) {
     const fallback = 'https://images.unsplash.com/photo-1505635552518-3448ff116af3?q=80&w=800&auto=format&fit=crop';
 
     return (
-        <div className={styles.card} onClick={onClick}>
+        <Link href={`/scripts/${encodeURIComponent(card.name)}`} className={styles.card}>
             <div className={styles.imgWrap}>
                 <img
                     src={card.image || fallback}
@@ -52,6 +53,6 @@ export default function ScriptCard({ card, onClick }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 }

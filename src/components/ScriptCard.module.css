@@ -1,4 +1,6 @@
 .card {
+    display: block;
+    text-decoration: none;
     background: #1F4A3C;
     border-radius: 12px;
     overflow: hidden;
