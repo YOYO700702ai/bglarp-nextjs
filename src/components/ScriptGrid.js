@@ -67,6 +67,7 @@ export default function ScriptGrid() {
                 <div className={styles.filters}>
                     <select value={playerFilter} onChange={e => setPlayerFilter(e.target.value)} className={styles.select}>
                         <option>全部</option>
+                        <option>4人</option>
                         <option>5人</option>
                         <option>6人</option>
                         <option>7人</option>
