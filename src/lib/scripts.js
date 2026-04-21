@@ -43,7 +43,7 @@ export async function getAllScripts() {
     const charMulti = props['角色']?.multi_select || [];
     const charRich = getText(props, '角色');
     const characters = charMulti.length > 0 ? charMulti.map(o => o.name).join('\n') : charRich;
-    const genre = getText(props, '類型標籤').replace(/\//g, ',').replace(/、/g, ',').split(',').map(s => s.trim()).filter(Boolean);
+    const genre = getText(props, '類型標籤').split(/[,\/、.。·\s]+/).map(s => s.trim()).filter(Boolean);
     const duration = getText(props, '時長');
     const price = props['價格']?.number || null;
     const players = (props['人數']?.multi_select || []).map(o => o.name);
