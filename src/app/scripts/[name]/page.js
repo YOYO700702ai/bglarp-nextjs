@@ -4,7 +4,8 @@ import { getAllScripts } from '@/lib/scripts';
 import styles from './page.module.css';
 
 export async function generateMetadata({ params }) {
-  const name = decodeURIComponent(params.name);
+  const { name: rawName } = await params;
+  const name = decodeURIComponent(rawName);
   const scripts = await getAllScripts();
   const script = scripts.find(s => s.name === name);
   if (!script) return { title: '劇本未找到 | BGLARP' };
@@ -22,14 +23,17 @@ export async function generateMetadata({ params }) {
 
 export async function generateStaticParams() {
   const scripts = await getAllScripts();
-  return scripts.map(s => ({ name: encodeURIComponent(s.name) }));
+  return scripts.map(s => ({ name: s.name }));
 }
+
+export const dynamicParams = true;
 
 const silhouette = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231a1a2e' rx='50'/%3E%3Ccircle cx='50' cy='38' r='18' fill='%2327272a'/%3E%3Cellipse cx='50' cy='82' rx='26' ry='18' fill='%2327272a'/%3E%3C/svg%3E";
 const fallback = 'https://images.unsplash.com/photo-1505635552518-3448ff116af3?q=80&w=800&auto=format&fit=crop';
 
 export default async function ScriptPage({ params }) {
-  const name = decodeURIComponent(params.name);
+  const { name: rawName } = await params;
+  const name = decodeURIComponent(rawName);
   const scripts = await getAllScripts();
   const card = scripts.find(s => s.name === name);
   if (!card) notFound();
