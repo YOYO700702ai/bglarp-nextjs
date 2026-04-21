@@ -40,7 +40,9 @@ export async function getAllScripts() {
     const props = p.properties || {};
     const name = getText(props, '劇本名稱', true) || '未命名';
     const synopsis = getText(props, '劇情簡介');
-    const characters = getText(props, '角色');
+    const charMulti = props['角色']?.multi_select || [];
+    const charRich = getText(props, '角色');
+    const characters = charMulti.length > 0 ? charMulti.map(o => o.name).join('\n') : charRich;
     const genre = getText(props, '類型標籤').replace(/\//g, ',').replace(/、/g, ',').split(',').map(s => s.trim()).filter(Boolean);
     const duration = getText(props, '時長');
     const price = props['價格']?.number || null;
