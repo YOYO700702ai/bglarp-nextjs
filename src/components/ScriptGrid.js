@@ -75,7 +75,7 @@ export default function ScriptGrid() {
                                 className={`${styles.tab} ${activeTab === t ? styles.tabActive : ''}`}
                                 onClick={() => setActiveTab(t)}
                             >
-                                [{t}]
+                                {t}
                             </button>
                         ))}
                     </div>
