@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# secrets / local config
+.streamlit/
+.claude/
+
+# python
+__pycache__/
+*.pyc
+
+# local data / unrelated projects
+yadray-rpg/
+劇本圖片（未壓縮）/
+劇本人數資訊更新與排序.xlsx
+劇本資料_Notion匯入.csv
