@@ -1,8 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
 import ScriptCard from './ScriptCard';
-import InfoTabs from './InfoTabs';
 import styles from './ScriptGrid.module.css';
+
+const TABS = ['現正熱映', '優惠專區', '鎮店之本', 'GM介紹'];
 
 export default function ScriptGrid() {
     const [scripts, setScripts] = useState([]);
@@ -10,6 +11,7 @@ export default function ScriptGrid() {
     const [playerFilter, setPlayerFilter] = useState('全部');
     const [genreFilter, setGenreFilter] = useState('全部');
     const [displayLimit, setDisplayLimit] = useState(10);
+    const [activeTab, setActiveTab] = useState('現正熱映');
 
     useEffect(() => {
         fetch('/api/scripts')
@@ -18,7 +20,6 @@ export default function ScriptGrid() {
             .catch(() => setLoading(false));
     }, []);
 
-    // Reset limit when filters change
     useEffect(() => { setDisplayLimit(10); }, [playerFilter, genreFilter]);
 
     const filtered = scripts.filter(s => {
@@ -62,34 +63,47 @@ export default function ScriptGrid() {
     return (
         <section id="scripts" className={styles.section}>
             <div className={styles.container}>
-                <div className={styles.header}>
-                    <span className={styles.tag}>NOW SHOWING</span>
-                    <h2 className={styles.heading}>現正熱映</h2>
+                <div className={styles.headerRow}>
+                    <div className={styles.headerLeft}>
+                        <span className={styles.tag}>NOW SHOWING</span>
+                        <h2 className={styles.heading}>現正熱映</h2>
+                    </div>
+                    <div className={styles.tabBar}>
+                        {TABS.map(t => (
+                            <button
+                                key={t}
+                                className={`${styles.tab} ${activeTab === t ? styles.tabActive : ''}`}
+                                onClick={() => setActiveTab(t)}
+                            >
+                                [{t}]
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
-                <div className={styles.filters}>
-                    <select value={playerFilter} onChange={e => setPlayerFilter(e.target.value)} className={styles.select}>
-                        <option>全部</option>
-                        <option>4人</option>
-                        <option>5人</option>
-                        <option>6人</option>
-                        <option>7人</option>
-                        <option>8人</option>
-                        <option>9人以上</option>
-                    </select>
-                    <select value={genreFilter} onChange={e => setGenreFilter(e.target.value)} className={styles.select}>
-                        <option>全部</option>
-                        <option>推理</option>
-                        <option>硬核</option>
-                        <option>沉浸</option>
-                        <option>恐怖</option>
-                        <option>機制</option>
-                        <option>歡樂</option>
-                    </select>
-                </div>
+                {activeTab === '現正熱映' ? (
+                    <>
+                        <div className={styles.filters}>
+                            <select value={playerFilter} onChange={e => setPlayerFilter(e.target.value)} className={styles.select}>
+                                <option>全部</option>
+                                <option>4人</option>
+                                <option>5人</option>
+                                <option>6人</option>
+                                <option>7人</option>
+                                <option>8人</option>
+                                <option>9人以上</option>
+                            </select>
+                            <select value={genreFilter} onChange={e => setGenreFilter(e.target.value)} className={styles.select}>
+                                <option>全部</option>
+                                <option>推理</option>
+                                <option>硬核</option>
+                                <option>沉浸</option>
+                                <option>恐怖</option>
+                                <option>機制</option>
+                                <option>歡樂</option>
+                            </select>
+                        </div>
 
-                <div className={styles.layout}>
-                    <div className={styles.main}>
                         {loading ? (
                             <p className={styles.loading}>載入中...</p>
                         ) : visible.length === 0 ? (
@@ -110,11 +124,12 @@ export default function ScriptGrid() {
                                 )}
                             </>
                         )}
+                    </>
+                ) : (
+                    <div className={styles.emptyPanel}>
+                        {/* {activeTab} 內容待填入 */}
                     </div>
-                    <aside className={styles.aside}>
-                        <InfoTabs />
-                    </aside>
-                </div>
+                )}
             </div>
         </section>
     );
