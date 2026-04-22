@@ -56,6 +56,11 @@
     border-color: #E8A63B;
 }
 
+.select option {
+    background: #080F0C;
+    color: #FFFFFF;
+}
+
 .loading {
     color: #7A9968;
     text-align: center;
