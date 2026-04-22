@@ -36,6 +36,7 @@ function getText(props, key, isTitle = false) {
 
 export async function getAllScripts() {
   const pages = await fetchNotionPages();
+  pages.sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
   return pages.map(p => {
     const props = p.properties || {};
     const name = getText(props, '劇本名稱', true) || '未命名';
@@ -43,7 +44,10 @@ export async function getAllScripts() {
     const charMulti = props['角色']?.multi_select || [];
     const charRich = getText(props, '角色');
     const characters = charMulti.length > 0 ? charMulti.map(o => o.name).join('\n') : charRich;
-    const genre = getText(props, '類型標籤').split(/[,\/、.。·\s]+/).map(s => s.trim()).filter(Boolean);
+    const genreMulti = (props['類型']?.multi_select || []).map(o => o.name);
+    const customTags = getText(props, '類型標籤');
+    const genreText = customTags.split(/[,\/、.。·\s]+/).map(s => s.trim()).filter(Boolean);
+    const genre = [...new Set([...genreMulti, ...genreText])];
     const duration = getText(props, '時長');
     const price = props['價格']?.number || null;
     const players = (props['人數']?.multi_select || []).map(o => o.name);
@@ -51,6 +55,6 @@ export async function getAllScripts() {
     let image = null;
     if (coverObj.type === 'external') image = coverObj.external?.url || null;
     else if (coverObj.type === 'file') image = coverObj.file?.url || null;
-    return { name, synopsis, characters, genre, customTags: '', duration, price, players, image };
+    return { name, synopsis, characters, genre, customTags, duration, price, players, image };
   });
 }

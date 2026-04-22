@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import ScriptCard from './ScriptCard';
+import InfoTabs from './InfoTabs';
 import styles from './ScriptGrid.module.css';
 
 export default function ScriptGrid() {
@@ -30,7 +31,9 @@ export default function ScriptGrid() {
             } else if (genreFilter === '沉浸') {
                 match = /沉浸|情感|演繹/.test(genreStr);
             } else if (genreFilter === '機制') {
-                match = /機制|陣營|歡樂|撕/.test(genreStr);
+                match = /機制|陣營|撕/.test(genreStr);
+            } else if (genreFilter === '歡樂') {
+                match = /歡樂|輕鬆|搞笑/.test(genreStr);
             } else if (genreFilter === '硬核') {
                 match = /硬核|燒腦/.test(genreStr);
             } else if (genreFilter === '推理') {
@@ -81,29 +84,37 @@ export default function ScriptGrid() {
                         <option>沉浸</option>
                         <option>恐怖</option>
                         <option>機制</option>
+                        <option>歡樂</option>
                     </select>
                 </div>
 
-                {loading ? (
-                    <p className={styles.loading}>載入中...</p>
-                ) : visible.length === 0 ? (
-                    <p className={styles.loading}>無符合條件之劇本。</p>
-                ) : (
-                    <>
-                        <div className={styles.grid}>
-                            {visible.map((s, i) => (
-                                <ScriptCard key={i} card={s} />
-                            ))}
-                        </div>
-                        {filtered.length > displayLimit && (
-                            <div className={styles.moreBtnWrap}>
-                                <button className={styles.moreBtn} onClick={() => setDisplayLimit(n => n + 10)}>
-                                    顯示更多
-                                </button>
-                            </div>
+                <div className={styles.layout}>
+                    <div className={styles.main}>
+                        {loading ? (
+                            <p className={styles.loading}>載入中...</p>
+                        ) : visible.length === 0 ? (
+                            <p className={styles.loading}>無符合條件之劇本。</p>
+                        ) : (
+                            <>
+                                <div className={styles.grid}>
+                                    {visible.map((s, i) => (
+                                        <ScriptCard key={i} card={s} />
+                                    ))}
+                                </div>
+                                {filtered.length > displayLimit && (
+                                    <div className={styles.moreBtnWrap}>
+                                        <button className={styles.moreBtn} onClick={() => setDisplayLimit(n => n + 10)}>
+                                            顯示更多
+                                        </button>
+                                    </div>
+                                )}
+                            </>
                         )}
-                    </>
-                )}
+                    </div>
+                    <aside className={styles.aside}>
+                        <InfoTabs />
+                    </aside>
+                </div>
             </div>
         </section>
     );

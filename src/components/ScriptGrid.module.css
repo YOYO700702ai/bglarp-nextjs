@@ -63,6 +63,21 @@
     letter-spacing: 0.1em;
 }
 
+.layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.main {
+    flex: 1;
+    min-width: 0;
+}
+
+.aside {
+    width: 100%;
+}
+
 /* Grid: 1 col mobile */
 .grid {
     display: grid;
@@ -105,10 +120,22 @@
     }
 }
 
-/* Desktop: 4 cols */
+/* Desktop: side-by-side layout, 3 cols grid */
 @media (min-width: 1024px) {
+    .layout {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .aside {
+        width: 320px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 80px;
+    }
+
     .grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 22px;
     }
 
@@ -117,10 +144,10 @@
     }
 }
 
-/* Wide: 5 cols */
+/* Wide: 4 cols */
 @media (min-width: 1280px) {
     .grid {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 24px;
     }
 }
