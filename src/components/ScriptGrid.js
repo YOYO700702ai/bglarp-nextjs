@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import ScriptCard from './ScriptCard';
 import styles from './ScriptGrid.module.css';
 
-const TABS = ['現正熱映', '優惠專區', '鎮店之本', 'GM介紹'];
+const TABS = ['現正熱映'];
 
 export default function ScriptGrid() {
     const [scripts, setScripts] = useState([]);
