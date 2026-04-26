@@ -38,7 +38,9 @@ export default function ScriptGrid() {
             } else if (genreFilter === '硬核') {
                 match = /硬核|燒腦/.test(genreStr);
             } else if (genreFilter === '推理') {
-                match = /推理|還原/.test(genreStr);
+                match = /推理/.test(genreStr);
+            } else if (genreFilter === '還原') {
+                match = /還原/.test(genreStr);
             } else {
                 match = genreStr.includes(genreFilter);
             }
@@ -96,6 +98,7 @@ export default function ScriptGrid() {
                             <select value={genreFilter} onChange={e => setGenreFilter(e.target.value)} className={styles.select}>
                                 <option>全部</option>
                                 <option>推理</option>
+                                <option>還原</option>
                                 <option>硬核</option>
                                 <option>沉浸</option>
                                 <option>恐怖</option>
