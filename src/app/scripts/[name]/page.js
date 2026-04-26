@@ -28,7 +28,6 @@ export async function generateStaticParams() {
 
 export const dynamicParams = true;
 
-const silhouette = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231a1a2e' rx='50'/%3E%3Ccircle cx='50' cy='38' r='18' fill='%2327272a'/%3E%3Cellipse cx='50' cy='82' rx='26' ry='18' fill='%2327272a'/%3E%3C/svg%3E";
 const fallback = 'https://images.unsplash.com/photo-1505635552518-3448ff116af3?q=80&w=800&auto=format&fit=crop';
 
 export default async function ScriptPage({ params }) {
@@ -113,7 +112,9 @@ export default async function ScriptPage({ params }) {
                 }
                 return (
                   <div key={idx} className={styles.charItem}>
-                    <img src={silhouette} alt={charName} className={styles.charAvatar} />
+                    <div className={styles.charAvatar} aria-label={charName}>
+                      <div className={styles.charSilhouette} />
+                    </div>
                     <div className={styles.charName}>{charName}</div>
                     {charDesc && <div className={styles.charDesc}>{charDesc}</div>}
                   </div>
