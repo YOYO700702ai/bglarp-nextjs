@@ -60,6 +60,9 @@
 
 .tags {
     margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 6px;
 }
 
 .tag {

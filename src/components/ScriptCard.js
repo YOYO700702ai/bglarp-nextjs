@@ -15,8 +15,7 @@ export default function ScriptCard({ card }) {
     const playerRange = formatPlayerRange(card.players || []);
     const baseTags = Array.isArray(card.genre) ? card.genre : [];
     const customTags = card.customTags ? card.customTags.replace(/\//g, ',').replace(/、/g, ',').split(',').map(t => t.trim()).filter(Boolean) : [];
-    const tagsArray = [...baseTags, ...customTags];
-    const tagString = tagsArray.length > 0 ? `#${tagsArray.join(' X ')}` : '';
+    const tagsArray = Array.from(new Set([...baseTags, ...customTags]));
     const fallback = 'https://images.unsplash.com/photo-1505635552518-3448ff116af3?q=80&w=800&auto=format&fit=crop';
 
     return (
@@ -31,9 +30,11 @@ export default function ScriptCard({ card }) {
                 <div className={styles.imgGrad} />
             </div>
             <div className={styles.body}>
-                {tagString && (
+                {tagsArray.length > 0 && (
                     <div className={styles.tags}>
-                        <span className={styles.tag}>{tagString}</span>
+                        {tagsArray.map((t, i) => (
+                            <span key={i} className={styles.tag}>#{t}</span>
+                        ))}
                     </div>
                 )}
                 <h3 className={styles.title}>{card.name}</h3>
