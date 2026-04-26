@@ -189,13 +189,77 @@
 }
 
 .charAvatar {
+    position: relative;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    border: 1px solid rgba(232, 166, 59, 0.55);
     margin-bottom: 8px;
-    background: #111;
+    background:
+        radial-gradient(circle at 50% 34%, rgba(245, 213, 151, 0.28), transparent 28%),
+        radial-gradient(circle at 50% 72%, rgba(232, 166, 59, 0.18), transparent 42%),
+        linear-gradient(145deg, #382714 0%, #17130f 54%, #060606 100%);
+    box-shadow:
+        inset 0 0 0 2px rgba(255, 238, 191, 0.08),
+        inset 0 -12px 20px rgba(0, 0, 0, 0.42),
+        0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+.charAvatar::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 220, 142, 0.34);
+    background:
+        radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.12), transparent 20%),
+        repeating-linear-gradient(120deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 7px);
+}
+
+.charAvatar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 40%, transparent 40%, rgba(0, 0, 0, 0.34) 78%);
+}
+
+.charSilhouette {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    z-index: 1;
+    width: 31px;
+    height: 34px;
+    transform: translateX(-50%);
+    border-radius: 50% 50% 42% 42%;
+    background: linear-gradient(180deg, #2f2a22 0%, #15120f 100%);
+    box-shadow: 0 0 14px rgba(232, 166, 59, 0.22);
+}
+
+.charSilhouette::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -17px;
+    width: 22px;
+    height: 22px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: linear-gradient(180deg, #3c3429 0%, #17130f 100%);
+}
+
+.charSilhouette::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    width: 48px;
+    height: 20px;
+    transform: translateX(-50%);
+    border-radius: 50% 50% 0 0;
+    background: linear-gradient(180deg, #2a241d 0%, #100e0c 100%);
 }
 
 .charName {
@@ -262,6 +326,24 @@
     .charAvatar {
         width: 80px;
         height: 80px;
+    }
+
+    .charSilhouette {
+        bottom: 13px;
+        width: 40px;
+        height: 44px;
+    }
+
+    .charSilhouette::before {
+        top: -22px;
+        width: 28px;
+        height: 28px;
+    }
+
+    .charSilhouette::after {
+        bottom: -8px;
+        width: 60px;
+        height: 25px;
     }
 
     .charName {

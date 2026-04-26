@@ -24,7 +24,6 @@ export default function ScriptModal({ card, onClose }) {
 
     // Parse characters
     const charLines = (card.characters || '').split('\n').filter(l => l.trim());
-    const silhouette = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231a1a2e' rx='50'/%3E%3Ccircle cx='50' cy='38' r='18' fill='%2327272a'/%3E%3Cellipse cx='50' cy='82' rx='26' ry='18' fill='%2327272a'/%3E%3C/svg%3E";
 
     return (
         <div className={styles.backdrop} onClick={onClose}>
@@ -87,7 +86,9 @@ export default function ScriptModal({ card, onClose }) {
                                 }
                                 return (
                                     <div key={idx} className={styles.charItem}>
-                                        <img src={silhouette} alt={charName} className={styles.charAvatar} />
+                                        <div className={styles.charAvatar} aria-label={charName}>
+                                            <div className={styles.charSilhouette} />
+                                        </div>
                                         <div className={styles.charName}>{charName}</div>
                                         {charDesc && <div className={styles.charDesc}>{charDesc}</div>}
                                     </div>
