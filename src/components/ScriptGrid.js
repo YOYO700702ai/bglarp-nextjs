@@ -35,8 +35,6 @@ export default function ScriptGrid() {
                 match = /機制|陣營|撕/.test(genreStr);
             } else if (genreFilter === '歡樂') {
                 match = /歡樂|輕鬆|搞笑/.test(genreStr);
-            } else if (genreFilter === '硬核') {
-                match = /硬核|燒腦/.test(genreStr);
             } else if (genreFilter === '推理') {
                 match = /推理/.test(genreStr);
             } else if (genreFilter === '還原') {
