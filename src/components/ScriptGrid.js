@@ -99,7 +99,6 @@ export default function ScriptGrid() {
                                 <option>全部</option>
                                 <option>推理</option>
                                 <option>還原</option>
-                                <option>硬核</option>
                                 <option>沉浸</option>
                                 <option>恐怖</option>
                                 <option>機制</option>

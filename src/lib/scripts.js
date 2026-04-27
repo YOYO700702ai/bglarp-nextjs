@@ -36,7 +36,7 @@ function getText(props, key, isTitle = false) {
 
 export async function getAllScripts() {
   const pages = await fetchNotionPages();
-  const demoteToBottom = new Set(['血色牌局', '安生']);
+  const demoteToBottom = new Set(['血色牌局', '安生', '灰鼠之冬']);
   const getName = p => (p.properties?.['劇本名稱']?.title || []).map(x => x.plain_text || '').join('');
   pages.sort((a, b) => {
     const aDemote = demoteToBottom.has(getName(a));
