@@ -5,6 +5,12 @@ import styles from './ScriptGrid.module.css';
 
 const TABS = ['現正熱映', '奢華劇本區'];
 const LUXURY_PRICE_THRESHOLD = 1000;
+const LUXURY_NOTES = [
+    '時長長 - 屁股要有把握撐住',
+    '價格貴 - 可能要花掉你幾頓晚餐',
+    '有可能有多NPC陪你，有可能有刺激的機制等你',
+    '只要能撐住，你將會得到難忘珍貴的遊玩體驗',
+];
 
 export default function ScriptGrid() {
     const [scripts, setScripts] = useState([]);
@@ -20,8 +26,6 @@ export default function ScriptGrid() {
             .then(data => { setScripts(data); setLoading(false); })
             .catch(() => setLoading(false));
     }, []);
-
-    useEffect(() => { setDisplayLimit(10); }, [playerFilter, genreFilter, activeTab]);
 
     const tabScripts = activeTab === '奢華劇本區'
         ? scripts.filter(s => typeof s.price === 'number' && s.price > LUXURY_PRICE_THRESHOLD)
@@ -64,6 +68,18 @@ export default function ScriptGrid() {
     });
 
     const visible = filtered.slice(0, displayLimit);
+    const handleTabChange = (tab) => {
+        setActiveTab(tab);
+        setDisplayLimit(10);
+    };
+    const handlePlayerFilterChange = (value) => {
+        setPlayerFilter(value);
+        setDisplayLimit(10);
+    };
+    const handleGenreFilterChange = (value) => {
+        setGenreFilter(value);
+        setDisplayLimit(10);
+    };
 
     return (
         <section id="scripts" className={styles.section}>
@@ -71,14 +87,14 @@ export default function ScriptGrid() {
                 <div className={styles.headerRow}>
                     <div className={styles.headerLeft}>
                         <span className={styles.tag}>NOW SHOWING</span>
-                        <h2 className={styles.heading}>現正熱映</h2>
+                        <h2 className={styles.heading}>{activeTab}</h2>
                     </div>
                     <div className={styles.tabBar}>
                         {TABS.map(t => (
                             <button
                                 key={t}
                                 className={`${styles.tab} ${activeTab === t ? styles.tabActive : ''}`}
-                                onClick={() => setActiveTab(t)}
+                                onClick={() => handleTabChange(t)}
                             >
                                 {t}
                             </button>
@@ -88,8 +104,26 @@ export default function ScriptGrid() {
 
                 {(activeTab === '現正熱映' || activeTab === '奢華劇本區') ? (
                     <>
+                        {activeTab === '奢華劇本區' && (
+                            <aside className={styles.luxuryIntro} aria-label="奢華劇本區介紹">
+                                <div className={styles.luxuryGlow} />
+                                <div className={styles.luxuryKicker}>PREMIUM SCRIPT ROOM</div>
+                                <div className={styles.luxuryContent}>
+                                    <p className={styles.luxuryLead}>這裡的劇本</p>
+                                    <ul className={styles.luxuryList}>
+                                        {LUXURY_NOTES.map(note => (
+                                            <li key={note}>{note}</li>
+                                        ))}
+                                    </ul>
+                                    <p className={styles.luxuryFinal}>
+                                        錢包跟<span className={styles.strikeText}>屁股</span>準備好了？
+                                    </p>
+                                </div>
+                            </aside>
+                        )}
+
                         <div className={styles.filters}>
-                            <select value={playerFilter} onChange={e => setPlayerFilter(e.target.value)} className={styles.select}>
+                            <select value={playerFilter} onChange={e => handlePlayerFilterChange(e.target.value)} className={styles.select}>
                                 <option>全部</option>
                                 <option>4人</option>
                                 <option>5人</option>
@@ -98,7 +132,7 @@ export default function ScriptGrid() {
                                 <option>8人</option>
                                 <option>9人以上</option>
                             </select>
-                            <select value={genreFilter} onChange={e => setGenreFilter(e.target.value)} className={styles.select}>
+                            <select value={genreFilter} onChange={e => handleGenreFilterChange(e.target.value)} className={styles.select}>
                                 <option>全部</option>
                                 <option>推理</option>
                                 <option>還原</option>
