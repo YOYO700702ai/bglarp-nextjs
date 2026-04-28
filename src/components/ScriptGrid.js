@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import ScriptCard from './ScriptCard';
 import styles from './ScriptGrid.module.css';
 
-const TABS = ['現正熱映'];
+const TABS = ['現正熱映', '奢華劇本區'];
+const LUXURY_PRICE_THRESHOLD = 1000;
 
 export default function ScriptGrid() {
     const [scripts, setScripts] = useState([]);
@@ -20,9 +21,13 @@ export default function ScriptGrid() {
             .catch(() => setLoading(false));
     }, []);
 
-    useEffect(() => { setDisplayLimit(10); }, [playerFilter, genreFilter]);
+    useEffect(() => { setDisplayLimit(10); }, [playerFilter, genreFilter, activeTab]);
 
-    const filtered = scripts.filter(s => {
+    const tabScripts = activeTab === '奢華劇本區'
+        ? scripts.filter(s => typeof s.price === 'number' && s.price > LUXURY_PRICE_THRESHOLD)
+        : scripts;
+
+    const filtered = tabScripts.filter(s => {
         if (genreFilter !== '全部') {
             if (!s.genre || s.genre.length === 0) return false;
             const genreStr = s.genre.join(',');
@@ -81,7 +86,7 @@ export default function ScriptGrid() {
                     </div>
                 </div>
 
-                {activeTab === '現正熱映' ? (
+                {(activeTab === '現正熱映' || activeTab === '奢華劇本區') ? (
                     <>
                         <div className={styles.filters}>
                             <select value={playerFilter} onChange={e => setPlayerFilter(e.target.value)} className={styles.select}>
