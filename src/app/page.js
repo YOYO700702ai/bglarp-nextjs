@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import HeroVideo from '@/components/HeroVideo';
 import ScriptGrid from '@/components/ScriptGrid';
 import BookingSection from '@/components/BookingSection';
 import Footer from '@/components/Footer';
@@ -8,6 +9,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      <HeroVideo />
       <ScriptGrid />
       <BookingSection />
       <Footer />
