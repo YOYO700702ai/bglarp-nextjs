@@ -134,6 +134,7 @@ export default function ScriptGrid() {
                             </select>
                             <select value={genreFilter} onChange={e => handleGenreFilterChange(e.target.value)} className={styles.select}>
                                 <option>全部</option>
+                                <option>新手</option>
                                 <option>推理</option>
                                 <option>還原</option>
                                 <option>沉浸</option>
