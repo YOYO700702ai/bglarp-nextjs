@@ -15,7 +15,8 @@ export default function ScriptCard({ card }) {
     const playerRange = formatPlayerRange(card.players || []);
     const baseTags = Array.isArray(card.genre) ? card.genre : [];
     const customTags = card.customTags ? card.customTags.replace(/\//g, ',').replace(/、/g, ',').split(',').map(t => t.trim()).filter(Boolean) : [];
-    const tagsArray = Array.from(new Set([...baseTags, ...customTags]));
+    const isNewbie = baseTags.includes('新手');
+    const tagsArray = Array.from(new Set([...baseTags, ...customTags])).filter(t => t !== '新手');
     const fallback = 'https://images.unsplash.com/photo-1505635552518-3448ff116af3?q=80&w=800&auto=format&fit=crop';
 
     return (
@@ -28,6 +29,7 @@ export default function ScriptCard({ card }) {
                     onError={e => { e.target.src = fallback; }}
                 />
                 <div className={styles.imgGrad} />
+                {isNewbie && <span className={styles.newbieStamp} aria-label="新手友善">新手</span>}
             </div>
             <div className={styles.body}>
                 {tagsArray.length > 0 && (
