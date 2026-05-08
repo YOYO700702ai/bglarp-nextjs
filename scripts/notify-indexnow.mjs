@@ -1,7 +1,7 @@
 import { getAllScripts } from '../src/lib/scripts.js';
 
 const KEY = '892947c5a99d32369902fc100474ca26';
-const HOST = 'bglarp-tw.com';
+const HOST = 'www.bglarp.com';
 const BASE = `https://${HOST}`;
 
 async function main() {

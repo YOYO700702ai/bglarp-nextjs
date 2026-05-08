@@ -1,7 +1,7 @@
 import { getAllScripts } from '@/lib/scripts';
 
 export default async function sitemap() {
-  const base = 'https://bglarp-tw.com';
+  const base = 'https://www.bglarp.com';
   const scripts = await getAllScripts();
 
   const scriptUrls = scripts.map(s => ({
