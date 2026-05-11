@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getAllScripts } from '@/lib/scripts';
+import { getScriptExperience } from '@/lib/scriptExperiences';
 import styles from './page.module.css';
 
 export async function generateMetadata({ params }) {
@@ -36,6 +37,7 @@ export default async function ScriptPage({ params }) {
   const scripts = await getAllScripts();
   const card = scripts.find(s => s.name === name);
   if (!card) notFound();
+  const experience = getScriptExperience(card.name);
 
   const dur = card.duration || '未標示';
   const price = card.price ? `NT$ ${card.price}/人` : '價格未定';
@@ -60,6 +62,7 @@ export default async function ScriptPage({ params }) {
         <div className={styles.posterWrap}>
           <div className={styles.posterBg} style={{ backgroundImage: `url('${card.image || fallback}')` }} />
           <div className={styles.posterGrad} />
+          {experience && <div className={styles.posterQuizBadge}>{experience.label}</div>}
           <div className={styles.posterTitle}>
             <h1>{card.name}</h1>
           </div>
@@ -85,6 +88,19 @@ export default async function ScriptPage({ params }) {
             <div className={styles.infoValue}>{price}</div>
           </div>
         </div>
+
+        {experience && (
+          <a
+            href={experience.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.quizEntry}
+          >
+            <span className={styles.quizEntryKicker}>SPECIAL</span>
+            <span className={styles.quizEntryTitle}>{experience.label}</span>
+            <span className={styles.quizEntryAction}>開始測驗</span>
+          </a>
+        )}
 
         {/* Synopsis */}
         <div className={styles.sectionTitle}>劇情指引</div>

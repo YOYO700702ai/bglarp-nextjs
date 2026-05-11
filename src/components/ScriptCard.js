@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getScriptExperience } from '@/lib/scriptExperiences';
 import styles from './ScriptCard.module.css';
 
 function formatPlayerRange(players) {
@@ -13,6 +14,7 @@ function formatPlayerRange(players) {
 
 export default function ScriptCard({ card }) {
     const playerRange = formatPlayerRange(card.players || []);
+    const experience = getScriptExperience(card.name);
     const baseTags = Array.isArray(card.genre) ? card.genre : [];
     const customTags = card.customTags ? card.customTags.replace(/\//g, ',').replace(/、/g, ',').split(',').map(t => t.trim()).filter(Boolean) : [];
     const isNewbie = baseTags.includes('新手');
@@ -29,6 +31,7 @@ export default function ScriptCard({ card }) {
                     onError={e => { e.target.src = fallback; }}
                 />
                 <div className={styles.imgGrad} />
+                {experience && <span className={styles.quizBadge}>{experience.label}</span>}
                 {isNewbie && <span className={styles.newbieStamp} aria-label="新手友善">新手</span>}
             </div>
             <div className={styles.body}>
