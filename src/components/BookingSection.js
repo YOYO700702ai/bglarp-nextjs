@@ -11,7 +11,7 @@ export default function BookingSection() {
                         BGLARP實境推理館採全預約制。為確保最佳的遊戲體驗，請提前至少 3 天透過臉書專頁私訊或致電進行預約。
                     </p>
                     <p className={styles.desc}>
-                        新手玩家無須擔心，預約時告知我們，客服將為您推薦最適合的入門劇本。每場次皆提供相應時代風格之服裝，為求完美沉浸，建議提早 15 分鐘到場換裝。
+                        新手玩家無須擔心，預約時告知我們，客服將為您推薦最適合的入門劇本。部分場次提供相應時代風格之服裝，建議提早 5 分鐘到場。
                     </p>
 
                     <div className={styles.contactList}>
