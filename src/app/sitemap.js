@@ -18,6 +18,18 @@ export default async function sitemap() {
       changeFrequency: 'weekly',
       priority: 1,
     },
+    {
+      url: `${base}/quiz`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${base}/hanmen-quiz`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
     ...scriptUrls,
   ];
 }

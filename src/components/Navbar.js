@@ -8,7 +8,7 @@ export default function Navbar() {
     return (
         <nav className={styles.nav}>
             <div className={styles.inner}>
-                <a href="#" className={styles.logo}>
+                <a href="/" className={styles.logo}>
                     <span className={styles.logoIcon}>🎬</span> BGLARP
                 </a>
                 <button
@@ -21,8 +21,9 @@ export default function Navbar() {
                     <span className={`${styles.bar} ${open ? styles.bar3Open : ''}`} />
                 </button>
                 <div className={`${styles.links} ${open ? styles.linksOpen : ''}`}>
-                    <a href="#scripts" onClick={() => setOpen(false)}>上映劇本</a>
-                    <a href="#booking" onClick={() => setOpen(false)}>預約入戲</a>
+                    <a href="/#scripts" onClick={() => setOpen(false)}>上映劇本</a>
+                    <a href="/quiz" onClick={() => setOpen(false)}>心測專區</a>
+                    <a href="/#booking" onClick={() => setOpen(false)}>預約入戲</a>
                 </div>
             </div>
         </nav>
