@@ -1,9 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 import ScriptCard from './ScriptCard';
+import { getScriptExperience } from '@/lib/scriptExperiences';
 import styles from './ScriptGrid.module.css';
 
-const TABS = ['現正熱映', '奢華劇本區'];
+const TABS = ['現正熱映', '奢華劇本區', '心測專區'];
 const LUXURY_PRICE_THRESHOLD = 1000;
 const LUXURY_NOTES = [
     '時長長 - 屁股要有把握撐住',
@@ -27,9 +28,18 @@ export default function ScriptGrid() {
             .catch(() => setLoading(false));
     }, []);
 
-    const tabScripts = activeTab === '奢華劇本區'
-        ? scripts.filter(s => typeof s.price === 'number' && s.price > LUXURY_PRICE_THRESHOLD)
-        : scripts;
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.location.hash === '#quiz') {
+            setActiveTab('心測專區');
+        }
+    }, []);
+
+    let tabScripts = scripts;
+    if (activeTab === '奢華劇本區') {
+        tabScripts = scripts.filter(s => typeof s.price === 'number' && s.price > LUXURY_PRICE_THRESHOLD);
+    } else if (activeTab === '心測專區') {
+        tabScripts = scripts.filter(s => getScriptExperience(s.name));
+    }
 
     const filtered = tabScripts.filter(s => {
         if (genreFilter !== '全部') {
@@ -102,7 +112,8 @@ export default function ScriptGrid() {
                     </div>
                 </div>
 
-                {(activeTab === '現正熱映' || activeTab === '奢華劇本區') ? (
+                <span id="quiz" className={styles.anchorOffset} aria-hidden="true" />
+                {(activeTab === '現正熱映' || activeTab === '奢華劇本區' || activeTab === '心測專區') ? (
                     <>
                         {activeTab === '奢華劇本區' && (
                             <aside className={styles.luxuryIntro} aria-label="奢華劇本區介紹">

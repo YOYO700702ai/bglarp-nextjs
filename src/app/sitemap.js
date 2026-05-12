@@ -19,12 +19,6 @@ export default async function sitemap() {
       priority: 1,
     },
     {
-      url: `${base}/quiz`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
       url: `${base}/hanmen-quiz`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
