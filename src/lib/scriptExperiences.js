@@ -1,5 +1,10 @@
 const EXPERIENCES = [
   {
+    match: ['寒門'],
+    label: '心測',
+    url: '/hanmen-quiz',
+  },
+  {
     match: ['塑料溫室', '塑料温室'],
     label: '心測',
     url: 'https://del110931-cmd.github.io/plastik-quiz/',
