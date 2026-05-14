@@ -216,8 +216,30 @@
 
 .filters {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.6rem;
     margin-bottom: 1.5rem;
+}
+
+.searchInput {
+    flex: 1 1 220px;
+    min-width: 160px;
+    background: rgba(143, 168, 115, 0.08);
+    color: #D5E4C3;
+    border: 1px solid rgba(143, 168, 115, 0.15);
+    border-radius: 6px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.searchInput::placeholder {
+    color: rgba(213, 228, 195, 0.4);
+}
+
+.searchInput:focus {
+    border-color: #E8A63B;
 }
 
 .select {

@@ -18,8 +18,24 @@ export default function ScriptGrid() {
     const [loading, setLoading] = useState(true);
     const [playerFilter, setPlayerFilter] = useState('全部');
     const [genreFilter, setGenreFilter] = useState('全部');
-    const [displayLimit, setDisplayLimit] = useState(10);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [displayLimit, setDisplayLimit] = useState(25);
     const [activeTab, setActiveTab] = useState('現正熱映');
+
+    const normalize = (s) => String(s || '').toLowerCase().replace(/\s+/g, '');
+    const fuzzyMatch = (name, query) => {
+        const n = normalize(name);
+        const q = normalize(query);
+        if (!q) return true;
+        if (n.includes(q)) return true;
+        // Subsequence match: every char of query appears in name in order
+        let i = 0;
+        for (const ch of n) {
+            if (ch === q[i]) i++;
+            if (i === q.length) return true;
+        }
+        return false;
+    };
 
     useEffect(() => {
         fetch('/api/scripts')
@@ -74,21 +90,26 @@ export default function ScriptGrid() {
                 if (!(s.players || []).includes(playerFilter)) return false;
             }
         }
+        if (searchQuery && !fuzzyMatch(s.name, searchQuery)) return false;
         return true;
     });
 
     const visible = filtered.slice(0, displayLimit);
     const handleTabChange = (tab) => {
         setActiveTab(tab);
-        setDisplayLimit(10);
+        setDisplayLimit(25);
     };
     const handlePlayerFilterChange = (value) => {
         setPlayerFilter(value);
-        setDisplayLimit(10);
+        setDisplayLimit(25);
     };
     const handleGenreFilterChange = (value) => {
         setGenreFilter(value);
-        setDisplayLimit(10);
+        setDisplayLimit(25);
+    };
+    const handleSearchChange = (value) => {
+        setSearchQuery(value);
+        setDisplayLimit(25);
     };
 
     return (
@@ -134,6 +155,14 @@ export default function ScriptGrid() {
                         )}
 
                         <div className={styles.filters}>
+                            <input
+                                type="search"
+                                value={searchQuery}
+                                onChange={e => handleSearchChange(e.target.value)}
+                                placeholder="搜尋劇本名稱..."
+                                className={styles.searchInput}
+                                aria-label="搜尋劇本"
+                            />
                             <select value={playerFilter} onChange={e => handlePlayerFilterChange(e.target.value)} className={styles.select}>
                                 <option>全部</option>
                                 <option>4人</option>
@@ -168,7 +197,7 @@ export default function ScriptGrid() {
                                 </div>
                                 {filtered.length > displayLimit && (
                                     <div className={styles.moreBtnWrap}>
-                                        <button className={styles.moreBtn} onClick={() => setDisplayLimit(n => n + 10)}>
+                                        <button className={styles.moreBtn} onClick={() => setDisplayLimit(n => n + 25)}>
                                             顯示更多
                                         </button>
                                     </div>
