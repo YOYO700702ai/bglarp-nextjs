@@ -3,11 +3,27 @@ const EXPERIENCES = [
     match: ['寒門'],
     label: '心測',
     url: '/hanmen-quiz',
+    characterImages: {
+      '蕭凌風': '/hanmen-quiz/characters/蕭凌風.jpg',
+      '修璟': '/hanmen-quiz/characters/修璟.jpg',
+      '云清明': '/hanmen-quiz/characters/云清明.jpg',
+      '宣萱': '/hanmen-quiz/characters/宣萱.jpg',
+      '莫辭': '/hanmen-quiz/characters/莫辭.jpg',
+      '容雪鳶': '/hanmen-quiz/characters/容雪鳶.jpg',
+    },
   },
   {
     match: ['惡之華'],
     label: '心測',
     url: '/evil-flower-quiz',
+    characterImages: {
+      '萬寶路': '/evil-flower-quiz/characters/wanbaolu.jpg',
+      '核彈': '/evil-flower-quiz/characters/hedan.jpg',
+      '匹諾曹': '/evil-flower-quiz/characters/pinuocao.jpg',
+      '氏子': '/evil-flower-quiz/characters/shizi.jpg',
+      '阿而': '/evil-flower-quiz/characters/aer.jpg',
+      '玻璃糖': '/evil-flower-quiz/characters/bolitang.jpg',
+    },
   },
   {
     match: ['塑料溫室', '塑料温室'],
@@ -30,4 +46,16 @@ export function getScriptExperience(name) {
   return EXPERIENCES.find(item =>
     item.match.some(alias => normalized.includes(normalizeName(alias)))
   ) || null;
+}
+
+export function getCharacterImage(scriptName, characterName) {
+  const exp = getScriptExperience(scriptName);
+  if (!exp || !exp.characterImages) return null;
+  const trimmed = String(characterName || '').trim();
+  if (exp.characterImages[trimmed]) return exp.characterImages[trimmed];
+  // Fallback: match by includes (handle 「無常：男」 format)
+  for (const [key, url] of Object.entries(exp.characterImages)) {
+    if (trimmed.includes(key)) return url;
+  }
+  return null;
 }

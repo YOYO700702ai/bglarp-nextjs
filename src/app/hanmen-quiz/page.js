@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useRef, useState } from 'react';
+import ResultCardGenerator from '@/components/ResultCardGenerator';
 import styles from './quiz.module.css';
 
 const characters = [
@@ -187,13 +188,15 @@ function getScores() {
 
 export default function HanmenQuizPage() {
   const [selectedGroup, setSelectedGroup] = useState(null);
+  const [playerName, setPlayerName] = useState('');
+  const [nameConfirmed, setNameConfirmed] = useState(false);
   const [answers, setAnswers] = useState(Array(questions.length).fill(null));
   const [step, setStep] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [musicOn, setMusicOn] = useState(false);
   const audioRef = useRef(null);
-  const totalSteps = questions.length + 1;
-  const isGroupStep = step === 0;
+  const totalSteps = questions.length + 2;
+  const isGroupStep = nameConfirmed && step === 0;
 
   const scores = useMemo(() => {
     const nextScores = getScores();
@@ -218,7 +221,17 @@ export default function HanmenQuizPage() {
   const currentQuestion = questions[Math.max(0, step - 1)];
   const selected = isGroupStep ? selectedGroup : answers[step - 1];
   const winner = ranking[0];
-  const progress = showResult ? 100 : Math.round(((step + 1) / totalSteps) * 100);
+  const progress = showResult
+    ? 100
+    : !nameConfirmed
+      ? Math.round((1 / totalSteps) * 100)
+      : Math.round(((step + 2) / totalSteps) * 100);
+
+  const confirmPlayerName = (event) => {
+    event.preventDefault();
+    if (!playerName.trim()) return;
+    setNameConfirmed(true);
+  };
 
   const toggleMusic = async () => {
     const audio = audioRef.current;
@@ -248,7 +261,7 @@ export default function HanmenQuizPage() {
     nextAnswers[step - 1] = optionIndex;
     setAnswers(nextAnswers);
     window.setTimeout(() => {
-      if (step === totalSteps - 1) {
+      if (step === questions.length) {
         setShowResult(true);
         return;
       }
@@ -257,14 +270,22 @@ export default function HanmenQuizPage() {
   };
 
   const previous = () => {
+    if (!nameConfirmed) return;
     if (showResult) {
       setShowResult(false);
       return;
     }
-    setStep((value) => Math.max(0, value - 1));
+    if (step === 0) {
+      setNameConfirmed(false);
+      setSelectedGroup(null);
+      return;
+    }
+    setStep((value) => value - 1);
   };
 
   const restart = () => {
+    setPlayerName('');
+    setNameConfirmed(false);
     setAnswers(Array(questions.length).fill(null));
     setSelectedGroup(null);
     setStep(0);
@@ -304,7 +325,29 @@ export default function HanmenQuizPage() {
 
         {!showResult ? (
           <section className={styles.quizPanel}>
-            {isGroupStep ? (
+            {!nameConfirmed ? (
+              <>
+                <div className={styles.questionMeta}>零、玩家名字</div>
+                <h2>請留下你的名字</h2>
+                <form className={styles.namePanel} onSubmit={confirmPlayerName}>
+                  <label className={styles.nameField}>
+                    <span>測驗完成後，這個名字會印在你的專屬角色圖卡上。</span>
+                    <input
+                      value={playerName}
+                      onChange={(event) => setPlayerName(event.target.value)}
+                      placeholder="輸入玩家名字"
+                      maxLength={14}
+                      autoComplete="name"
+                    />
+                  </label>
+                  <div className={styles.controls}>
+                    <button type="submit" className={styles.primaryButton} disabled={!playerName.trim()}>
+                      開始測驗
+                    </button>
+                  </div>
+                </form>
+              </>
+            ) : isGroupStep ? (
               <>
                 <div className={styles.questionMeta}>一、性別</div>
                 <h2>你的性別是？</h2>
@@ -341,17 +384,18 @@ export default function HanmenQuizPage() {
               </>
             )}
 
-            <div className={styles.controls}>
-              <button
-                type="button"
-                className={styles.secondaryButton}
-                onClick={previous}
-                disabled={step === 0}
-              >
-                上一題
-              </button>
-              <div className={styles.autoHint}>選擇後自動進入下一題</div>
-            </div>
+            {nameConfirmed && (
+              <div className={styles.controls}>
+                <button
+                  type="button"
+                  className={styles.secondaryButton}
+                  onClick={previous}
+                >
+                  上一題
+                </button>
+                <div className={styles.autoHint}>選擇後自動進入下一題</div>
+              </div>
+            )}
           </section>
         ) : (
           <section className={styles.resultPanel}>
@@ -366,6 +410,17 @@ export default function HanmenQuizPage() {
                 {winner.traits.map((trait) => <span key={trait}>{trait}</span>)}
               </div>
               <p className={styles.description}>{winner.description}</p>
+
+              <ResultCardGenerator
+                scriptTitle="寒門"
+                characterName={winner.name}
+                characterImage={winner.image}
+                quote={winner.description}
+                playerName={playerName}
+                theme="hanmen"
+                accent="#e7bd67"
+                secondary="#9f3022"
+              />
 
               <div className={styles.ranking}>
                 {ranking.map((character, index) => (

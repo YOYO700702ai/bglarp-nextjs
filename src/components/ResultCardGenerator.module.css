@@ -1,0 +1,53 @@
+.cardAction {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cardAction button {
+  min-height: 54px;
+  padding: 0 26px;
+  border: 1px solid rgba(232, 194, 117, 0.52);
+  color: #2b120a;
+  background: linear-gradient(180deg, #f0d592, #be8437);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
+  font-family: inherit;
+  font-size: 1.02rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+}
+
+.evilFlower button {
+  border-color: rgba(255, 86, 41, 0.64);
+  color: #070a18;
+  background: linear-gradient(180deg, #fff4dc, #ff5b2c);
+  box-shadow: 0 12px 32px rgba(255, 70, 26, 0.28);
+}
+
+.status {
+  color: rgba(239, 220, 185, 0.72);
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+}
+
+.evilFlower .status {
+  color: rgba(240, 244, 255, 0.7);
+}
+
+.hiddenCanvas {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .cardAction {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .cardAction button {
+    width: 100%;
+  }
+}

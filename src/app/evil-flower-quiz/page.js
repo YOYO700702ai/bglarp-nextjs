@@ -1,9 +1,21 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import ResultCardGenerator from '@/components/ResultCardGenerator';
 import styles from './quiz.module.css';
+
+function MusicNote({ muted }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M9 18.2V5.4l10.2-2v12.2" />
+      <circle cx="6.4" cy="18.2" r="2.7" />
+      <circle cx="16.6" cy="15.6" r="2.7" />
+      {muted && <path className={styles.slash} d="M3.3 3.3 20.8 20.8" />}
+    </svg>
+  );
+}
 
 const groups = [
   {
@@ -230,9 +242,30 @@ function formatScore(score) {
 
 export default function EvilFlowerQuizPage() {
   const [selectedGroup, setSelectedGroup] = useState(null);
+  const [playerName, setPlayerName] = useState('');
+  const [nameConfirmed, setNameConfirmed] = useState(false);
   const [answers, setAnswers] = useState([]);
   const [step, setStep] = useState(0);
   const [showResult, setShowResult] = useState(false);
+  const [musicOn, setMusicOn] = useState(false);
+  const audioRef = useRef(null);
+
+  const toggleMusic = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (musicOn) {
+      audio.pause();
+      setMusicOn(false);
+      return;
+    }
+    try {
+      audio.volume = 0.45;
+      await audio.play();
+      setMusicOn(true);
+    } catch {
+      setMusicOn(false);
+    }
+  };
 
   const activeQuiz = selectedGroup ? quizzes[selectedGroup] : [];
   const activeQuestion = activeQuiz[step];
@@ -258,11 +291,19 @@ export default function EvilFlowerQuizPage() {
   const maxScore = Math.max(1, ...ranking.map((item) => item.score));
   const minScore = Math.min(0, ...ranking.map((item) => item.score));
   const scoreRange = Math.max(1, maxScore - minScore);
-  const progress = !selectedGroup
+  const progress = !nameConfirmed
     ? 0
-    : showResult
-      ? 100
-      : Math.round(((step + 1) / activeQuiz.length) * 100);
+    : !selectedGroup
+      ? 8
+      : showResult
+        ? 100
+        : Math.round(((step + 1) / activeQuiz.length) * 100);
+
+  const confirmPlayerName = (event) => {
+    event.preventDefault();
+    if (!playerName.trim()) return;
+    setNameConfirmed(true);
+  };
 
   const selectGroup = (groupId) => {
     setSelectedGroup(groupId);
@@ -299,6 +340,8 @@ export default function EvilFlowerQuizPage() {
   };
 
   const restart = () => {
+    setPlayerName('');
+    setNameConfirmed(false);
     setSelectedGroup(null);
     setAnswers([]);
     setStep(0);
@@ -308,6 +351,18 @@ export default function EvilFlowerQuizPage() {
 
   return (
     <main className={styles.page}>
+      <audio ref={audioRef} src="/evil-flower-quiz/music.mp3" loop preload="auto" />
+
+      <button
+        type="button"
+        className={styles.musicButton}
+        onClick={toggleMusic}
+        aria-label={musicOn ? '關閉背景音樂' : '開啟背景音樂'}
+        title={musicOn ? '關閉背景音樂' : '開啟背景音樂'}
+      >
+        <MusicNote muted={!musicOn} />
+      </button>
+
       <div className={styles.texture} aria-hidden="true" />
       <section className={styles.shell}>
         <header className={styles.hero}>
@@ -322,7 +377,7 @@ export default function EvilFlowerQuizPage() {
         <section className={styles.stage} aria-live="polite">
           <div className={styles.progressArea}>
             <div className={styles.progressTop}>
-              <span>{selectedGroup ? (showResult ? '結果解鎖' : `${step + 1} / ${activeQuiz.length}`) : '選擇入口'}</span>
+              <span>{!nameConfirmed ? '玩家登記' : selectedGroup ? (showResult ? '結果解鎖' : `${step + 1} / ${activeQuiz.length}`) : '選擇入口'}</span>
               <span>{progress}%</span>
             </div>
             <div className={styles.progressTrack}>
@@ -330,7 +385,27 @@ export default function EvilFlowerQuizPage() {
             </div>
           </div>
 
-          {!selectedGroup ? (
+          {!nameConfirmed ? (
+            <form className={styles.namePanel} onSubmit={confirmPlayerName}>
+              <p className={styles.questionMeta}>零、玩家名字</p>
+              <h2>請留下你的名字</h2>
+              <label className={styles.nameField}>
+                <span>測驗完成後，這個名字會印在你的專屬角色圖卡上。</span>
+                <input
+                  value={playerName}
+                  onChange={(event) => setPlayerName(event.target.value)}
+                  placeholder="輸入玩家名字"
+                  maxLength={14}
+                  autoComplete="name"
+                />
+              </label>
+              <div className={styles.controls}>
+                <button type="submit" className={styles.primaryButton} disabled={!playerName.trim()}>
+                  開始測驗
+                </button>
+              </div>
+            </form>
+          ) : !selectedGroup ? (
             <div className={styles.groupGrid} aria-label="選擇測驗分流">
               {groups.map((group, index) => (
                 <button
@@ -400,6 +475,17 @@ export default function EvilFlowerQuizPage() {
                   <strong>{winner.symbol}</strong>
                 </div>
                 <p className={styles.whisper}>{winner.whisper}</p>
+
+                <ResultCardGenerator
+                  scriptTitle="惡之華"
+                  characterName={winner.name}
+                  characterImage={winner.image}
+                  quote={winner.whisper}
+                  playerName={playerName}
+                  theme="evilFlower"
+                  accent="#ff5a2c"
+                  secondary="#1e61ff"
+                />
 
                 <div className={styles.ranking}>
                   {ranking.map((character, index) => {

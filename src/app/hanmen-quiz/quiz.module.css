@@ -192,6 +192,48 @@
   padding: clamp(30px, 5vw, 52px);
 }
 
+.namePanel {
+  display: grid;
+  gap: 18px;
+}
+
+.nameField {
+  display: grid;
+  gap: 12px;
+}
+
+.nameField span {
+  color: rgba(239, 220, 185, 0.74);
+  font-size: 1rem;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+}
+
+.nameField input {
+  width: 100%;
+  min-height: 62px;
+  padding: 0 18px;
+  border: 1px solid rgba(232, 194, 117, 0.48);
+  color: #fff2cb;
+  background:
+    linear-gradient(90deg, rgba(72, 31, 18, 0.34), rgba(14, 8, 7, 0.6)),
+    rgba(14, 8, 7, 0.54);
+  font-family: inherit;
+  font-size: 1.16rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  outline: none;
+}
+
+.nameField input:focus {
+  border-color: rgba(255, 232, 174, 0.9);
+  box-shadow: 0 0 0 3px rgba(232, 194, 117, 0.16);
+}
+
+.nameField input::placeholder {
+  color: rgba(239, 220, 185, 0.42);
+}
+
 .quizPanel h2 {
   margin: 18px 0 32px;
   color: #fff5dc;

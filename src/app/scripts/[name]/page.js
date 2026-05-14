@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getAllScripts } from '@/lib/scripts';
-import { getScriptExperience } from '@/lib/scriptExperiences';
+import { getScriptExperience, getCharacterImage } from '@/lib/scriptExperiences';
 import styles from './page.module.css';
 
 export async function generateMetadata({ params }) {
@@ -126,10 +126,15 @@ export default async function ScriptPage({ params }) {
                     break;
                   }
                 }
+                const charImg = getCharacterImage(card.name, charName);
                 return (
                   <div key={idx} className={styles.charItem}>
                     <div className={styles.charAvatar} aria-label={charName}>
-                      <div className={styles.charSilhouette} />
+                      {charImg ? (
+                        <img src={charImg} alt={charName} className={styles.charPortrait} />
+                      ) : (
+                        <div className={styles.charSilhouette} />
+                      )}
                     </div>
                     <div className={styles.charName}>{charName}</div>
                     {charDesc && <div className={styles.charDesc}>{charDesc}</div>}
