@@ -155,14 +155,6 @@ export default function ScriptGrid() {
                         )}
 
                         <div className={styles.filters}>
-                            <input
-                                type="search"
-                                value={searchQuery}
-                                onChange={e => handleSearchChange(e.target.value)}
-                                placeholder="搜尋劇本名稱..."
-                                className={styles.searchInput}
-                                aria-label="搜尋劇本"
-                            />
                             <select value={playerFilter} onChange={e => handlePlayerFilterChange(e.target.value)} className={styles.select}>
                                 <option>全部</option>
                                 <option>4人</option>
@@ -182,6 +174,20 @@ export default function ScriptGrid() {
                                 <option>機制</option>
                                 <option>歡樂</option>
                             </select>
+                            <div className={styles.searchWrap}>
+                                <svg className={styles.searchIcon} viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                    <circle cx="11" cy="11" r="7" />
+                                    <line x1="20" y1="20" x2="16.65" y2="16.65" />
+                                </svg>
+                                <input
+                                    type="search"
+                                    value={searchQuery}
+                                    onChange={e => handleSearchChange(e.target.value)}
+                                    placeholder="搜尋劇本"
+                                    className={styles.searchInput}
+                                    aria-label="搜尋劇本"
+                                />
+                            </div>
                         </div>
 
                         {loading ? (
