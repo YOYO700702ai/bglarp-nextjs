@@ -22,7 +22,6 @@ export default function Navbar() {
                 </button>
                 <div className={`${styles.links} ${open ? styles.linksOpen : ''}`}>
                     <a href="/#scripts" onClick={() => setOpen(false)}>上映劇本</a>
-                    <a href="/#quiz" onClick={() => setOpen(false)}>心測專區</a>
                     <a href="/#booking" onClick={() => setOpen(false)}>預約入戲</a>
                 </div>
             </div>
