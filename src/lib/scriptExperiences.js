@@ -5,6 +5,11 @@ const EXPERIENCES = [
     url: '/hanmen-quiz',
   },
   {
+    match: ['惡之華'],
+    label: '心測',
+    url: '/evil-flower-quiz',
+  },
+  {
     match: ['塑料溫室', '塑料温室'],
     label: '心測',
     url: 'https://del110931-cmd.github.io/plastik-quiz/',
