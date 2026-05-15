@@ -333,8 +333,8 @@
   max-width: 900px;
   margin: 18px 0 30px;
   color: #fffaf2;
-  font-size: clamp(1.75rem, 4vw, 3rem);
-  line-height: 1.65;
+  font-size: clamp(1.28rem, 2.35vw, 1.82rem);
+  line-height: 1.72;
   letter-spacing: 0.06em;
   text-shadow: 0 12px 36px rgba(0, 0, 0, 0.72);
 }

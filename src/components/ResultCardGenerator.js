@@ -5,6 +5,8 @@ import styles from './ResultCardGenerator.module.css';
 
 const CARD_WIDTH = 1080;
 const CARD_HEIGHT = 1620;
+const LANDSCAPE_CARD_WIDTH = 1620;
+const LANDSCAPE_CARD_HEIGHT = 1150;
 
 function hashText(text) {
   let hash = 2166136261;
@@ -66,6 +68,29 @@ function containImage(ctx, image, x, y, width, height) {
   ctx.drawImage(image, x + (width - drawWidth) / 2, y + (height - drawHeight) / 2, drawWidth, drawHeight);
 }
 
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function coverImageWithFocus(ctx, image, x, y, width, height, focalX = 0.5, focalY = 0.5) {
+  const imageRatio = image.width / image.height;
+  const targetRatio = width / height;
+  let sourceWidth = image.width;
+  let sourceHeight = image.height;
+  let sourceX = 0;
+  let sourceY = 0;
+
+  if (imageRatio > targetRatio) {
+    sourceWidth = image.height * targetRatio;
+    sourceX = clamp((image.width - sourceWidth) * focalX, 0, image.width - sourceWidth);
+  } else {
+    sourceHeight = image.width / targetRatio;
+    sourceY = clamp((image.height - sourceHeight) * focalY, 0, image.height - sourceHeight);
+  }
+
+  ctx.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, x, y, width, height);
+}
+
 function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
   const chars = String(text || '').replace(/\s+/g, ' ').split('');
   let line = '';
@@ -100,14 +125,14 @@ function drawFitText(ctx, text, x, y, maxWidth, initialSize, minSize, weight = 9
   ctx.fillText(text, x, y);
 }
 
-function drawPattern(ctx, seed, accent, secondary) {
+function drawPattern(ctx, seed, accent, secondary, width = CARD_WIDTH, height = CARD_HEIGHT) {
   ctx.save();
   ctx.globalAlpha = 0.45;
   ctx.lineWidth = 3;
   for (let index = 0; index < 12; index += 1) {
     const next = hashText(`${seed}:${index}`);
-    const x = 60 + (next % 960);
-    const y = 80 + ((next >>> 8) % 1400);
+    const x = 60 + (next % Math.max(1, width - 120));
+    const y = 80 + ((next >>> 8) % Math.max(1, height - 160));
     const length = 70 + ((next >>> 16) % 180);
     const angle = ((next >>> 24) % 360) * Math.PI / 180;
     ctx.strokeStyle = index % 2 === 0 ? accent : secondary;
@@ -126,22 +151,22 @@ function drawPattern(ctx, seed, accent, secondary) {
   ctx.restore();
 }
 
-function drawFrame(ctx, accent) {
+function drawFrame(ctx, accent, theme, secondary, width = CARD_WIDTH, height = CARD_HEIGHT) {
   ctx.save();
   ctx.strokeStyle = accent;
   ctx.lineWidth = 4;
-  ctx.strokeRect(22, 22, CARD_WIDTH - 44, CARD_HEIGHT - 44);
+  ctx.strokeRect(22, 22, width - 44, height - 44);
   ctx.lineWidth = 1.5;
   ctx.strokeStyle = 'rgba(255, 248, 234, 0.42)';
-  ctx.strokeRect(36, 36, CARD_WIDTH - 72, CARD_HEIGHT - 72);
+  ctx.strokeRect(36, 36, width - 72, height - 72);
 
   ctx.strokeStyle = accent;
   ctx.lineWidth = 3;
   const corners = [
     [22, 22, 92, 22, 22, 92],
-    [1058, 22, 988, 22, 1058, 92],
-    [22, 1598, 92, 1598, 22, 1528],
-    [1058, 1598, 988, 1598, 1058, 1528],
+    [width - 22, 22, width - 92, 22, width - 22, 92],
+    [22, height - 22, 92, height - 22, 22, height - 92],
+    [width - 22, height - 22, width - 92, height - 22, width - 22, height - 92],
   ];
   corners.forEach(([x1, y1, x2, y2, x3, y3]) => {
     ctx.beginPath();
@@ -150,6 +175,74 @@ function drawFrame(ctx, accent) {
     ctx.lineTo(x3, y3);
     ctx.stroke();
   });
+
+  if (theme === 'comet') {
+    ctx.globalAlpha = 0.9;
+    ctx.strokeStyle = 'rgba(223, 245, 255, 0.68)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(width * 0.08, height * 0.1);
+    ctx.bezierCurveTo(width * 0.28, height * 0.01, width * 0.52, height * 0.03, width * 0.72, height * 0.13);
+    ctx.stroke();
+
+    const gradient = ctx.createLinearGradient(width * 0.12, height * 0.08, width * 0.7, height * 0.14);
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
+    gradient.addColorStop(0.64, secondary);
+    gradient.addColorStop(1, 'rgba(255, 255, 255, 0.98)');
+    ctx.strokeStyle = gradient;
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.moveTo(width * 0.14, height * 0.1);
+    ctx.bezierCurveTo(width * 0.34, height * 0.06, width * 0.5, height * 0.07, width * 0.7, height * 0.12);
+    ctx.stroke();
+
+    ctx.fillStyle = '#fff8d6';
+    [[0.18, 0.07], [0.76, 0.16], [0.88, 0.84]].forEach(([xRatio, yRatio]) => {
+      const x = width * xRatio;
+      const y = height * yRatio;
+      ctx.beginPath();
+      ctx.moveTo(x, y - 13);
+      ctx.lineTo(x + 6, y - 6);
+      ctx.lineTo(x + 13, y);
+      ctx.lineTo(x + 6, y + 6);
+      ctx.lineTo(x, y + 13);
+      ctx.lineTo(x - 6, y + 6);
+      ctx.lineTo(x - 13, y);
+      ctx.lineTo(x - 6, y - 6);
+      ctx.closePath();
+      ctx.fill();
+    });
+  }
+  ctx.restore();
+}
+
+function drawCharacterNamePlate(ctx, characterName, playerName, accent, secondary) {
+  const plateX = 74;
+  const plateY = 82;
+  const plateWidth = 430;
+  const plateHeight = 190;
+
+  ctx.save();
+  ctx.fillStyle = 'rgba(2, 9, 30, 0.78)';
+  ctx.fillRect(plateX, plateY, plateWidth, plateHeight);
+  ctx.fillStyle = 'rgba(119, 200, 255, 0.16)';
+  ctx.fillRect(plateX + 10, plateY + 10, plateWidth - 20, plateHeight - 20);
+  ctx.fillStyle = accent;
+  ctx.fillRect(plateX, plateY, 10, plateHeight);
+  ctx.strokeStyle = 'rgba(223, 247, 255, 0.58)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(plateX, plateY, plateWidth, plateHeight);
+
+  ctx.font = '900 28px "Noto Serif TC", serif';
+  ctx.fillStyle = secondary;
+  ctx.fillText('心理角色', plateX + 34, plateY + 52);
+
+  ctx.fillStyle = '#fff8ea';
+  drawFitText(ctx, characterName, plateX + 34, plateY + 128, plateWidth - 68, 84, 58);
+
+  ctx.font = '700 24px "Noto Serif TC", serif';
+  ctx.fillStyle = 'rgba(237, 248, 255, 0.78)';
+  ctx.fillText(`玩家 ${playerName}`, plateX + 34, plateY + 164);
   ctx.restore();
 }
 
@@ -208,6 +301,12 @@ export default function ResultCardGenerator({
   theme = 'hanmen',
   accent = '#e7bd67',
   secondary = '#9f3022',
+  cardLayout = 'portrait',
+  imageFit = 'contain',
+  imageFocalX = 0.5,
+  imageFocalY = 0.5,
+  namePlacement = 'bottom',
+  precomposedArtwork = false,
 }) {
   const canvasRef = useRef(null);
   const [status, setStatus] = useState('');
@@ -231,62 +330,92 @@ export default function ResultCardGenerator({
     const image = await loadImage(characterImage);
     if (document.fonts?.ready) await document.fonts.ready;
 
-    canvas.width = CARD_WIDTH;
-    canvas.height = CARD_HEIGHT;
+    const isLandscape = cardLayout === 'landscape';
+    const cardWidth = isLandscape ? LANDSCAPE_CARD_WIDTH : CARD_WIDTH;
+    const cardHeight = isLandscape ? LANDSCAPE_CARD_HEIGHT : CARD_HEIGHT;
+
+    canvas.width = cardWidth;
+    canvas.height = cardHeight;
     ctx.textBaseline = 'alphabetic';
 
-    const background = ctx.createLinearGradient(0, 0, CARD_WIDTH, CARD_HEIGHT);
+    const background = ctx.createLinearGradient(0, 0, cardWidth, cardHeight);
     if (theme === 'evilFlower') {
       background.addColorStop(0, '#050817');
       background.addColorStop(0.42, '#041a75');
       background.addColorStop(1, '#160308');
+    } else if (theme === 'comet') {
+      background.addColorStop(0, '#020a1e');
+      background.addColorStop(0.48, '#123468');
+      background.addColorStop(1, '#09031a');
     } else {
       background.addColorStop(0, '#1b0f09');
       background.addColorStop(0.52, '#3a1a0d');
       background.addColorStop(1, '#070504');
     }
     ctx.fillStyle = background;
-    ctx.fillRect(0, 0, CARD_WIDTH, CARD_HEIGHT);
+    ctx.fillRect(0, 0, cardWidth, cardHeight);
 
-    drawPattern(ctx, serial, accent, secondary);
+    if (!precomposedArtwork) {
+      drawPattern(ctx, serial, accent, secondary, cardWidth, cardHeight);
+    }
 
-    const imageBox = { x: 40, y: 40, width: 1000, height: 1538 };
+    const imageBox = isLandscape
+      ? { x: 38, y: 38, width: cardWidth - 76, height: cardHeight - 76 }
+      : { x: 40, y: 40, width: 1000, height: 1538 };
     ctx.save();
     ctx.beginPath();
     ctx.rect(imageBox.x, imageBox.y, imageBox.width, imageBox.height);
     ctx.clip();
-    ctx.globalAlpha = 0.3;
-    coverImage(ctx, image, imageBox.x, imageBox.y, imageBox.width, imageBox.height);
-    ctx.globalAlpha = 1;
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.32)';
-    ctx.fillRect(imageBox.x, imageBox.y, imageBox.width, imageBox.height);
-    containImage(ctx, image, imageBox.x, imageBox.y, imageBox.width, imageBox.height);
+    if (imageFit === 'cover') {
+      coverImageWithFocus(ctx, image, imageBox.x, imageBox.y, imageBox.width, imageBox.height, imageFocalX, imageFocalY);
+    } else {
+      ctx.globalAlpha = 0.3;
+      coverImage(ctx, image, imageBox.x, imageBox.y, imageBox.width, imageBox.height);
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.32)';
+      ctx.fillRect(imageBox.x, imageBox.y, imageBox.width, imageBox.height);
+      containImage(ctx, image, imageBox.x, imageBox.y, imageBox.width, imageBox.height);
+    }
     ctx.restore();
 
-    const overlayTop = imageBox.y + imageBox.height - 330;
+    const overlayHeight = precomposedArtwork ? 360 : isLandscape ? 260 : 330;
+    const overlayTop = imageBox.y + imageBox.height - overlayHeight;
     const imageShade = ctx.createLinearGradient(0, overlayTop, 0, imageBox.y + imageBox.height);
     imageShade.addColorStop(0, 'rgba(0, 0, 0, 0)');
     imageShade.addColorStop(0.36, 'rgba(0, 0, 0, 0.64)');
     imageShade.addColorStop(1, 'rgba(0, 0, 0, 0.93)');
     ctx.fillStyle = imageShade;
-    ctx.fillRect(imageBox.x, overlayTop, imageBox.width, 330);
+    ctx.fillRect(imageBox.x, overlayTop, imageBox.width, overlayHeight);
 
     ctx.strokeStyle = accent;
     ctx.lineWidth = 3;
-    ctx.strokeRect(imageBox.x, imageBox.y, imageBox.width, imageBox.height);
-    drawFrame(ctx, accent);
+    if (!precomposedArtwork) {
+      ctx.strokeRect(imageBox.x, imageBox.y, imageBox.width, imageBox.height);
+      drawFrame(ctx, accent, theme, secondary, cardWidth, cardHeight);
+    }
+
+    if (!precomposedArtwork && namePlacement === 'topLeft') {
+      drawCharacterNamePlate(ctx, characterName, name, accent, secondary);
+    }
+
+    const textX = isLandscape ? 86 : 74;
+    const scriptY = isLandscape ? cardHeight - 180 : 1320;
+    const nameY = isLandscape ? cardHeight - 104 : 1410;
+    const quoteY = isLandscape ? cardHeight - 52 : 1480;
+    const nameMaxWidth = isLandscape ? 900 : 720;
+    const quoteMaxWidth = isLandscape ? cardWidth - textX - 116 : 900;
 
     ctx.textAlign = 'left';
-    ctx.font = '900 34px "Noto Serif TC", serif';
+    ctx.font = `${isLandscape ? 900 : 900} ${isLandscape ? 30 : 34}px "Noto Serif TC", serif`;
     ctx.fillStyle = accent;
-    ctx.fillText(`${scriptTitle} X Bglarp`, 74, 1320);
+    ctx.fillText(`${scriptTitle} X Bglarp`, textX, scriptY);
 
     ctx.fillStyle = '#fff8ea';
-    drawFitText(ctx, name, 74, 1410, 720, 88, 58);
+    drawFitText(ctx, precomposedArtwork ? name : namePlacement === 'topLeft' ? characterName : name, textX, nameY, nameMaxWidth, isLandscape ? 72 : 88, isLandscape ? 46 : 58);
 
-    ctx.font = '700 32px "Noto Serif TC", serif';
+    ctx.font = `700 ${isLandscape ? 28 : 32}px "Noto Serif TC", serif`;
     ctx.fillStyle = '#f5e6ce';
-    wrapText(ctx, `「${line}」`, 74, 1480, 900, 42, 2);
+    wrapText(ctx, `「${line}」`, textX, quoteY, quoteMaxWidth, isLandscape ? 38 : 42, 2);
 
     const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
     const imageUrl = URL.createObjectURL(blob);
@@ -295,8 +424,10 @@ export default function ResultCardGenerator({
     setStatus('圖卡已在新分頁開啟');
   };
 
+  const themeClass = theme === 'evilFlower' ? styles.evilFlower : theme === 'comet' ? styles.comet : styles.hanmen;
+
   return (
-    <div className={`${styles.cardAction} ${theme === 'evilFlower' ? styles.evilFlower : styles.hanmen}`}>
+    <div className={`${styles.cardAction} ${themeClass}`}>
       <button type="button" onClick={generateCard}>
         生成專屬圖卡
       </button>

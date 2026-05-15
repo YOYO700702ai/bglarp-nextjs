@@ -1,0 +1,521 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #edf8ff;
+  background:
+    linear-gradient(90deg, rgba(4, 8, 24, 0.9), rgba(11, 27, 65, 0.68) 45%, rgba(8, 4, 22, 0.86)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(2, 3, 10, 0.94)),
+    url('/comet-yuanwu-quiz/background.jpg') center / cover fixed;
+  font-family: 'Noto Serif TC', serif;
+}
+
+.page::before,
+.texture {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.page::before {
+  z-index: 0;
+  background:
+    linear-gradient(118deg, rgba(249, 195, 223, 0.18), transparent 22%, rgba(103, 214, 255, 0.18) 44%, transparent 68%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.032) 0,
+      rgba(255, 255, 255, 0.032) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+}
+
+.texture {
+  z-index: 1;
+  background:
+    linear-gradient(180deg, transparent 0, rgba(0, 0, 0, 0.28) 58%, rgba(0, 0, 0, 0.7) 100%),
+    repeating-linear-gradient(115deg, transparent 0 42px, rgba(219, 245, 255, 0.045) 43px, transparent 45px);
+  mix-blend-mode: screen;
+  opacity: 0.8;
+}
+
+.shell {
+  position: relative;
+  z-index: 2;
+  width: min(1140px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: clamp(34px, 6vw, 72px) 0 92px;
+}
+
+.hero {
+  max-width: 860px;
+  margin-bottom: clamp(22px, 4vw, 36px);
+}
+
+.homeLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(211, 235, 255, 0.48);
+  color: #dff7ff;
+  background: rgba(4, 10, 28, 0.62);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+}
+
+.kicker,
+.questionMeta,
+.resultKicker {
+  color: #f5c9df;
+  font-size: 0.86rem;
+  font-weight: 900;
+  letter-spacing: 0.24em;
+}
+
+.hero h1 {
+  margin: 12px 0 0;
+  color: #f7fbff;
+  font-size: clamp(3.15rem, 10vw, 7.6rem);
+  line-height: 1.05;
+  letter-spacing: 0.1em;
+  text-shadow:
+    0 0 22px rgba(130, 210, 255, 0.42),
+    0 18px 48px rgba(0, 0, 0, 0.88);
+}
+
+.lead {
+  max-width: 760px;
+  margin: 22px 0 0;
+  color: rgba(238, 247, 255, 0.82);
+  font-size: clamp(1rem, 2vw, 1.16rem);
+  line-height: 2;
+  letter-spacing: 0.06em;
+}
+
+.stage {
+  position: relative;
+  padding: clamp(22px, 4vw, 38px);
+  border: 1px solid rgba(190, 230, 255, 0.34);
+  background:
+    linear-gradient(145deg, rgba(5, 12, 34, 0.88), rgba(7, 4, 22, 0.84)),
+    linear-gradient(45deg, rgba(249, 195, 223, 0.12), transparent 42%, rgba(111, 202, 255, 0.14));
+  box-shadow:
+    0 30px 92px rgba(0, 0, 0, 0.56),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.stage::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+
+.progressArea {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 24px;
+}
+
+.progressTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+  color: rgba(237, 248, 255, 0.72);
+  font-size: 0.9rem;
+  letter-spacing: 0.16em;
+}
+
+.progressTrack {
+  height: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(190, 230, 255, 0.35);
+  background: rgba(3, 8, 25, 0.76);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #f0bdd8, #f6f8d0 44%, #77d9ff);
+  box-shadow: 0 0 28px rgba(119, 217, 255, 0.38);
+  transition: width 0.28s ease;
+}
+
+.namePanel,
+.groupPanel,
+.quizPanel,
+.resultPanel {
+  position: relative;
+  z-index: 1;
+}
+
+.namePanel,
+.groupPanel,
+.quizPanel {
+  display: grid;
+  gap: 18px;
+}
+
+.namePanel h2,
+.groupPanel h2 {
+  max-width: 760px;
+  margin: 0;
+  color: #f7fbff;
+  font-size: clamp(1.42rem, 3vw, 2.18rem);
+  line-height: 1.55;
+  letter-spacing: 0.06em;
+}
+
+.nameField {
+  display: grid;
+  gap: 10px;
+  max-width: 620px;
+}
+
+.nameField span {
+  color: rgba(237, 248, 255, 0.68);
+  font-size: 0.94rem;
+  letter-spacing: 0.12em;
+}
+
+.nameField input {
+  width: 100%;
+  min-height: 58px;
+  padding: 0 18px;
+  border: 1px solid rgba(190, 230, 255, 0.42);
+  color: #ffffff;
+  background:
+    linear-gradient(90deg, rgba(20, 49, 105, 0.34), rgba(13, 8, 33, 0.62)),
+    rgba(4, 9, 27, 0.72);
+  font-family: inherit;
+  font-size: 1.08rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  outline: none;
+}
+
+.nameField input:focus {
+  border-color: rgba(223, 247, 255, 0.88);
+  box-shadow: 0 0 0 3px rgba(119, 217, 255, 0.18);
+}
+
+.nameField input::placeholder {
+  color: rgba(237, 248, 255, 0.38);
+}
+
+.groupGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.groupCard {
+  min-height: 176px;
+  padding: 22px;
+  border: 1px solid rgba(190, 230, 255, 0.36);
+  color: #edf8ff;
+  background:
+    linear-gradient(135deg, rgba(18, 54, 112, 0.62), rgba(12, 7, 34, 0.78)),
+    rgba(5, 12, 34, 0.72);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.groupCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(245, 201, 223, 0.78);
+  box-shadow: 0 20px 56px rgba(0, 0, 0, 0.34);
+}
+
+.groupCard span {
+  color: #f5c9df;
+  font-size: 0.92rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+}
+
+.groupCard strong {
+  display: block;
+  margin-top: 18px;
+  color: #ffffff;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.35;
+  letter-spacing: 0.08em;
+}
+
+.groupCard em {
+  display: block;
+  margin-top: 14px;
+  color: rgba(237, 248, 255, 0.72);
+  font-size: 0.94rem;
+  font-style: normal;
+  line-height: 1.75;
+  letter-spacing: 0.04em;
+}
+
+.questionTitle {
+  color: #f9db98;
+  font-size: 0.98rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.quizPanel h2 {
+  max-width: 920px;
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: clamp(1.28rem, 2.35vw, 1.82rem);
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  text-shadow: 0 10px 32px rgba(0, 0, 0, 0.66);
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  align-items: start;
+  gap: 14px;
+  width: 100%;
+  min-height: 64px;
+  padding: 16px 18px;
+  border: 1px solid rgba(190, 230, 255, 0.28);
+  color: rgba(237, 248, 255, 0.86);
+  background: rgba(4, 10, 29, 0.62);
+  font-family: inherit;
+  font-size: clamp(0.96rem, 1.8vw, 1.08rem);
+  line-height: 1.65;
+  letter-spacing: 0.04em;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.option:hover {
+  transform: translateY(-1px);
+  border-color: rgba(245, 201, 223, 0.64);
+  background: rgba(16, 36, 82, 0.66);
+}
+
+.optionActive {
+  border-color: rgba(223, 247, 255, 0.88);
+  color: #ffffff;
+  background:
+    linear-gradient(90deg, rgba(245, 201, 223, 0.2), rgba(119, 217, 255, 0.18)),
+    rgba(16, 36, 82, 0.78);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.optionMark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(190, 230, 255, 0.44);
+  color: #f9db98;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.navRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.primaryButton,
+.secondaryButton {
+  min-height: 50px;
+  padding: 0 24px;
+  border: 1px solid rgba(190, 230, 255, 0.42);
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+}
+
+.primaryButton {
+  color: #061229;
+  background: linear-gradient(180deg, #f9fbff, #9edfff 50%, #a19bff);
+  box-shadow: 0 14px 36px rgba(84, 172, 255, 0.25);
+}
+
+.secondaryButton {
+  color: #edf8ff;
+  background: rgba(4, 10, 29, 0.62);
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.resultPanel {
+  display: grid;
+  grid-template-columns: minmax(280px, 480px) minmax(360px, 1fr);
+  gap: clamp(22px, 4vw, 42px);
+  align-items: start;
+}
+
+.resultImage {
+  position: relative;
+  width: min(100%, 480px);
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border: 1px solid rgba(223, 247, 255, 0.42);
+  background: rgba(2, 5, 18, 0.68);
+  box-shadow: 0 22px 62px rgba(0, 0, 0, 0.42);
+}
+
+.resultImage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.resultPortrait {
+  object-fit: cover;
+}
+
+.resultCopy h2 {
+  margin: 10px 0 8px;
+  color: #ffffff;
+  font-size: clamp(3rem, 7vw, 5.6rem);
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-shadow: 0 16px 42px rgba(0, 0, 0, 0.78);
+}
+
+.epithet {
+  margin: 0;
+  color: #f9db98;
+  font-size: 1.08rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+}
+
+.traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.traits span {
+  padding: 7px 12px;
+  border: 1px solid rgba(245, 201, 223, 0.34);
+  color: #f5c9df;
+  background: rgba(5, 12, 34, 0.62);
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.description {
+  margin: 0;
+  color: rgba(237, 248, 255, 0.82);
+  font-size: 1.02rem;
+  line-height: 1.95;
+  letter-spacing: 0.05em;
+}
+
+.resultCopy blockquote {
+  margin: 18px 0 0;
+  padding: 16px 18px;
+  border-left: 3px solid #77d9ff;
+  color: #ffffff;
+  background: rgba(119, 217, 255, 0.08);
+  font-size: 1.02rem;
+  line-height: 1.8;
+  letter-spacing: 0.06em;
+}
+
+.scoreBoard {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.scoreRow {
+  display: grid;
+  grid-template-columns: 86px 1fr 34px;
+  align-items: center;
+  gap: 12px;
+  color: rgba(237, 248, 255, 0.76);
+  font-size: 0.94rem;
+  letter-spacing: 0.08em;
+}
+
+.scoreTrack {
+  height: 7px;
+  overflow: hidden;
+  background: rgba(237, 248, 255, 0.12);
+}
+
+.scoreFill {
+  height: 100%;
+  background: linear-gradient(90deg, #f5c9df, #f9db98, #77d9ff);
+}
+
+.scoreRow strong {
+  color: #ffffff;
+  text-align: right;
+}
+
+@media (max-width: 860px) {
+  .shell {
+    width: min(100% - 24px, 720px);
+  }
+
+  .stage {
+    padding: 18px;
+  }
+
+  .groupGrid,
+  .resultPanel {
+    grid-template-columns: 1fr;
+  }
+
+  .navRow {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero h1 {
+    font-size: clamp(2.6rem, 14vw, 4rem);
+  }
+
+  .option {
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .scoreRow {
+    grid-template-columns: 72px 1fr 28px;
+  }
+}

@@ -26,6 +26,19 @@ const EXPERIENCES = [
     },
   },
   {
+    match: ['彗星掠過鳶屋時', '彗星掠过鸢屋时', '鳶屋', '鸢屋'],
+    label: '心測',
+    url: '/comet-yuanwu-quiz',
+    characterImages: {
+      '愛山': '/comet-yuanwu-quiz/characters/aishan.jpg',
+      '利根川': '/comet-yuanwu-quiz/characters/tonegawa.jpg',
+      '越前': '/comet-yuanwu-quiz/characters/echizen.jpg',
+      '真蒲': '/comet-yuanwu-quiz/characters/ayame.jpg',
+      '小糊塗': '/comet-yuanwu-quiz/characters/kohutou.jpg',
+      '令子': '/comet-yuanwu-quiz/characters/reiko.jpg',
+    },
+  },
+  {
     match: ['塑料溫室', '塑料温室'],
     label: '心測',
     url: 'https://del110931-cmd.github.io/plastik-quiz/',

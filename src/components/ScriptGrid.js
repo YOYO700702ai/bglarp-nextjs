@@ -46,7 +46,7 @@ export default function ScriptGrid() {
 
     useEffect(() => {
         if (typeof window !== 'undefined' && window.location.hash === '#quiz') {
-            setActiveTab('心測專區');
+            window.requestAnimationFrame(() => setActiveTab('心測專區'));
         }
     }, []);
 

@@ -237,8 +237,8 @@
 .quizPanel h2 {
   margin: 18px 0 32px;
   color: #fff5dc;
-  font-size: clamp(1.65rem, 3.6vw, 2.55rem);
-  line-height: 1.65;
+  font-size: clamp(1.28rem, 2.35vw, 1.8rem);
+  line-height: 1.7;
   letter-spacing: 0.05em;
 }
 

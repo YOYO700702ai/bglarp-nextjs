@@ -27,6 +27,13 @@
   box-shadow: 0 12px 32px rgba(255, 70, 26, 0.28);
 }
 
+.comet button {
+  border-color: rgba(194, 232, 255, 0.72);
+  color: #07112b;
+  background: linear-gradient(180deg, #f8fdff, #9bd5ff 48%, #7e76e9);
+  box-shadow: 0 12px 34px rgba(87, 169, 255, 0.28);
+}
+
 .status {
   color: rgba(239, 220, 185, 0.72);
   font-size: 0.9rem;
@@ -35,6 +42,10 @@
 
 .evilFlower .status {
   color: rgba(240, 244, 255, 0.7);
+}
+
+.comet .status {
+  color: rgba(224, 242, 255, 0.78);
 }
 
 .hiddenCanvas {
