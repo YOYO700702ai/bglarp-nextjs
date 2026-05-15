@@ -27,7 +27,7 @@ const characters = [
   {
     id: 'aishan',
     group: 'male',
-    name: '愛山',
+    name: '完山',
     image: '/comet-yuanwu-quiz/characters/aishan.jpg',
     cardImage: '/comet-yuanwu-quiz/cards/aishan-card.jpg',
     epithet: '長輩型守望者',
@@ -60,7 +60,7 @@ const characters = [
   {
     id: 'ayame',
     group: 'female',
-    name: '真蒲',
+    name: '菖蒲',
     image: '/comet-yuanwu-quiz/characters/ayame.jpg',
     cardImage: '/comet-yuanwu-quiz/cards/ayame-card.jpg',
     epithet: '被愛型閃光者',
