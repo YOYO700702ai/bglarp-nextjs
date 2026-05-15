@@ -7,6 +7,9 @@ const CARD_WIDTH = 1080;
 const CARD_HEIGHT = 1620;
 const LANDSCAPE_CARD_WIDTH = 1620;
 const LANDSCAPE_CARD_HEIGHT = 1150;
+const PORTRAIT_SIGNATURE_Y = CARD_HEIGHT - 300;
+const PORTRAIT_PLAYER_NAME_Y = CARD_HEIGHT - 204;
+const PORTRAIT_QUOTE_Y = CARD_HEIGHT - 126;
 
 function hashText(text) {
   let hash = 2166136261;
@@ -123,6 +126,41 @@ function drawFitText(ctx, text, x, y, maxWidth, initialSize, minSize, weight = 9
     size -= 4;
   } while (size >= minSize);
   ctx.fillText(text, x, y);
+}
+
+function measureSpacedText(ctx, chars, spacing) {
+  return chars.reduce((total, char) => total + ctx.measureText(char).width, 0) + Math.max(0, chars.length - 1) * spacing;
+}
+
+function drawSpacedFitText(ctx, text, x, y, maxWidth, initialSize, minSize, spacing, weight = 900) {
+  const chars = Array.from(String(text || ''));
+  let size = initialSize;
+  let nextSpacing = spacing;
+
+  do {
+    ctx.font = `${weight} ${size}px "Noto Serif TC", serif`;
+    if (measureSpacedText(ctx, chars, nextSpacing) <= maxWidth) break;
+    if (nextSpacing > 0) {
+      nextSpacing = Math.max(0, nextSpacing - 3);
+    } else {
+      size -= 4;
+    }
+  } while (size >= minSize);
+
+  let cursor = x;
+  chars.forEach((char) => {
+    ctx.fillText(char, cursor, y);
+    cursor += ctx.measureText(char).width + nextSpacing;
+  });
+}
+
+function getPlayerNameSpacing(name) {
+  const length = Array.from(String(name || '')).length;
+  if (length <= 1) return 0;
+  if (length === 2) return 12;
+  if (length === 3) return 8;
+  if (length === 4) return 5;
+  return 2;
 }
 
 function drawPattern(ctx, seed, accent, secondary, width = CARD_WIDTH, height = CARD_HEIGHT) {
@@ -399,23 +437,33 @@ export default function ResultCardGenerator({
     }
 
     const textX = isLandscape ? 86 : 74;
-    const scriptY = isLandscape ? cardHeight - 180 : 1320;
-    const nameY = isLandscape ? cardHeight - 104 : 1410;
-    const quoteY = isLandscape ? cardHeight - 52 : 1480;
+    const scriptY = isLandscape ? cardHeight - 180 : PORTRAIT_SIGNATURE_Y;
+    const nameY = isLandscape ? cardHeight - 104 : PORTRAIT_PLAYER_NAME_Y;
+    const quoteY = isLandscape ? cardHeight - 52 : PORTRAIT_QUOTE_Y;
     const nameMaxWidth = isLandscape ? 900 : 720;
     const quoteMaxWidth = isLandscape ? cardWidth - textX - 116 : 900;
+
+    const signatureY = precomposedArtwork && !isLandscape ? PORTRAIT_SIGNATURE_Y : scriptY;
+    const playerNameY = precomposedArtwork && !isLandscape ? PORTRAIT_PLAYER_NAME_Y : nameY;
+    const playerQuoteY = precomposedArtwork && !isLandscape ? PORTRAIT_QUOTE_Y : quoteY;
 
     ctx.textAlign = 'left';
     ctx.font = `${isLandscape ? 900 : 900} ${isLandscape ? 30 : 34}px "Noto Serif TC", serif`;
     ctx.fillStyle = accent;
-    ctx.fillText(`${scriptTitle} X Bglarp`, textX, scriptY);
+    ctx.fillText(`${scriptTitle} X Bglarp`, textX, signatureY);
 
+    ctx.textAlign = 'left';
     ctx.fillStyle = '#fff8ea';
-    drawFitText(ctx, precomposedArtwork ? name : namePlacement === 'topLeft' ? characterName : name, textX, nameY, nameMaxWidth, isLandscape ? 72 : 88, isLandscape ? 46 : 58);
+    const displayName = namePlacement === 'topLeft' && !precomposedArtwork ? characterName : name;
+    if (displayName === name) {
+      drawSpacedFitText(ctx, displayName, textX, playerNameY, nameMaxWidth, isLandscape ? 72 : 88, isLandscape ? 46 : 58, getPlayerNameSpacing(displayName));
+    } else {
+      drawFitText(ctx, displayName, textX, playerNameY, nameMaxWidth, isLandscape ? 72 : 88, isLandscape ? 46 : 58);
+    }
 
     ctx.font = `700 ${isLandscape ? 28 : 32}px "Noto Serif TC", serif`;
     ctx.fillStyle = '#f5e6ce';
-    wrapText(ctx, `「${line}」`, textX, quoteY, quoteMaxWidth, isLandscape ? 38 : 42, 2);
+    wrapText(ctx, `「${line}」`, textX, playerQuoteY, quoteMaxWidth, isLandscape ? 38 : 42, 2);
 
     const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
     const imageUrl = URL.createObjectURL(blob);
