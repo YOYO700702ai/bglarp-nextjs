@@ -30,10 +30,10 @@ const EXPERIENCES = [
     label: '心測',
     url: '/comet-yuanwu-quiz',
     characterImages: {
-      '愛山': '/comet-yuanwu-quiz/characters/aishan.jpg',
+      '完山': '/comet-yuanwu-quiz/characters/aishan.jpg',
       '利根川': '/comet-yuanwu-quiz/characters/tonegawa.jpg',
       '越前': '/comet-yuanwu-quiz/characters/echizen.jpg',
-      '真蒲': '/comet-yuanwu-quiz/characters/ayame.jpg',
+      '菖蒲': '/comet-yuanwu-quiz/characters/ayame.jpg',
       '小糊塗': '/comet-yuanwu-quiz/characters/kohutou.jpg',
       '令子': '/comet-yuanwu-quiz/characters/reiko.jpg',
     },
