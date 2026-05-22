@@ -386,10 +386,10 @@ export default function NoMoreHeartbreakQuizPage() {
               <div className={styles.resultBody}>
                 <div className={styles.resultPortrait}>
                   <Image
-                    src={winner.image}
+                    src={winner.cardImage}
                     alt={winner.name}
-                    width={540}
-                    height={760}
+                    width={1024}
+                    height={1536}
                     sizes="(max-width: 720px) 80vw, 360px"
                     priority
                   />
@@ -409,7 +409,7 @@ export default function NoMoreHeartbreakQuizPage() {
               <ResultCardGenerator
                 scriptTitle={SCRIPT_TITLE}
                 characterName={winner.name}
-                characterImage={winner.image}
+                characterImage={winner.cardImage}
                 precomposedArtwork={winner.cardImage}
                 quote={winner.whisper}
                 playerName={playerName}
