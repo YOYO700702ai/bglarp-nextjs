@@ -39,6 +39,20 @@ const EXPERIENCES = [
     },
   },
   {
+    match: ['沒頭腦東西不傷心', '没头脑东西不伤心'],
+    label: '心測',
+    url: '/no-more-heartbreak-quiz',
+    characterImages: {
+      '倒霉蛋': '/no-more-heartbreak-quiz/characters/cooler.jpg',
+      '大聰明': '/no-more-heartbreak-quiz/characters/smart.jpg',
+      '愛哭鬼': '/no-more-heartbreak-quiz/characters/crybaby.jpg',
+      '瞌睡蟲': '/no-more-heartbreak-quiz/characters/sleepy.jpg',
+      '黏人精': '/no-more-heartbreak-quiz/characters/clingy.jpg',
+      '粘人精': '/no-more-heartbreak-quiz/characters/clingy.jpg',
+      '開心果': '/no-more-heartbreak-quiz/characters/laugh.jpg',
+    },
+  },
+  {
     match: ['塑料溫室', '塑料温室'],
     label: '心測',
     url: 'https://del110931-cmd.github.io/plastik-quiz/',

@@ -1,0 +1,519 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #f6ecd7;
+  background:
+    linear-gradient(180deg, rgba(10, 6, 24, 0.78), rgba(5, 3, 8, 0.92)),
+    url('/no-more-heartbreak-quiz/background.jpg') center / cover fixed;
+  font-family: 'Noto Serif TC', serif;
+}
+
+.texture {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 5px),
+    radial-gradient(circle at 50% 50%, transparent 50%, rgba(0, 0, 0, 0.55));
+  opacity: 0.6;
+}
+
+.musicButton {
+  position: fixed;
+  z-index: 20;
+  top: 18px;
+  right: 18px;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(227, 181, 107, 0.55);
+  border-radius: 50%;
+  color: #e3b56b;
+  background: rgba(10, 6, 24, 0.78);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5), inset 0 0 14px rgba(227, 181, 107, 0.12);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.musicButton:hover {
+  transform: translateY(-1px);
+}
+
+.musicButton svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.slash {
+  stroke-width: 2.1;
+}
+
+.shell {
+  position: relative;
+  z-index: 3;
+  width: min(1080px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: clamp(34px, 6vw, 64px) 0 90px;
+}
+
+.hero {
+  max-width: 760px;
+  margin-bottom: clamp(20px, 4vw, 32px);
+}
+
+.homeLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 1px solid rgba(227, 181, 107, 0.5);
+  color: #e3b56b;
+  background: rgba(10, 6, 24, 0.55);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-decoration: none;
+}
+
+.kicker,
+.questionMeta,
+.resultKicker {
+  margin-top: 22px;
+  color: #e3b56b;
+  font-size: 0.84rem;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+}
+
+.hero h1 {
+  margin: 10px 0 0;
+  color: #f9f0d7;
+  font-size: clamp(2.4rem, 7vw, 4.4rem);
+  line-height: 1.15;
+  letter-spacing: 0.12em;
+  text-shadow: 0 18px 42px rgba(0, 0, 0, 0.7);
+}
+
+.lead {
+  max-width: 640px;
+  margin-top: 20px;
+  color: rgba(246, 236, 215, 0.85);
+  font-size: clamp(0.98rem, 1.8vw, 1.12rem);
+  line-height: 2;
+  letter-spacing: 0.06em;
+}
+
+.note {
+  max-width: 640px;
+  margin-top: 14px;
+  color: rgba(246, 236, 215, 0.55);
+  font-size: 0.85rem;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+}
+
+.stage {
+  position: relative;
+  padding: clamp(20px, 4vw, 32px);
+  border: 1px solid rgba(227, 181, 107, 0.4);
+  background: linear-gradient(135deg, rgba(20, 12, 38, 0.86), rgba(8, 5, 16, 0.82));
+  box-shadow:
+    0 26px 80px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 1px rgba(125, 109, 208, 0.14);
+  backdrop-filter: blur(12px);
+}
+
+.progressArea {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 22px;
+}
+
+.progressTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+  color: rgba(246, 236, 215, 0.7);
+  font-size: 0.88rem;
+  letter-spacing: 0.16em;
+}
+
+.progressTrack {
+  height: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(125, 109, 208, 0.42);
+  background: rgba(8, 4, 18, 0.7);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #7d6dd0, #f5e6b9 50%, #e3b56b);
+  box-shadow: 0 0 18px rgba(227, 181, 107, 0.42);
+  transition: width 0.28s ease;
+}
+
+.namePanel,
+.quizPanel,
+.resultPanel {
+  position: relative;
+  z-index: 1;
+  animation: panelIn 0.45s ease both;
+}
+
+.namePanel {
+  max-width: 720px;
+}
+
+.namePanel h2,
+.quizPanel h2 {
+  margin: 12px 0 22px;
+  color: #fbf3df;
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+}
+
+.nameField {
+  display: grid;
+  gap: 10px;
+}
+
+.nameField span {
+  color: rgba(246, 236, 215, 0.7);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  letter-spacing: 0.06em;
+}
+
+.nameField input {
+  width: 100%;
+  min-height: 56px;
+  padding: 0 16px;
+  border: 1px solid rgba(227, 181, 107, 0.5);
+  color: #fbf3df;
+  background: rgba(8, 4, 18, 0.72);
+  font-family: inherit;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  outline: none;
+}
+
+.nameField input:focus {
+  border-color: rgba(245, 230, 185, 0.9);
+  box-shadow: 0 0 0 3px rgba(227, 181, 107, 0.16);
+}
+
+.nameField input::placeholder {
+  color: rgba(246, 236, 215, 0.35);
+}
+
+.optionList {
+  display: grid;
+  gap: 12px;
+}
+
+.optionButton {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid rgba(125, 109, 208, 0.4);
+  background: rgba(14, 8, 28, 0.6);
+  color: #f6ecd7;
+  font-family: inherit;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+.optionButton:hover {
+  border-color: rgba(227, 181, 107, 0.85);
+  background: rgba(22, 12, 44, 0.78);
+  transform: translateX(2px);
+}
+
+.optionButtonActive {
+  border-color: #e3b56b;
+  background: rgba(40, 22, 70, 0.85);
+}
+
+.optionLetter {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(227, 181, 107, 0.6);
+  color: #e3b56b;
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.optionText {
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.primaryButton,
+.secondaryButton {
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.primaryButton {
+  background: #e3b56b;
+  color: #1a0f30;
+  box-shadow: inset 0 -2px 0 rgba(70, 40, 12, 0.22);
+}
+
+.primaryButton:hover {
+  transform: translateY(-1px);
+  background: #f0c97e;
+}
+
+.primaryButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.secondaryButton {
+  background: transparent;
+  color: rgba(246, 236, 215, 0.85);
+  border-color: rgba(227, 181, 107, 0.45);
+}
+
+.secondaryButton:hover {
+  border-color: rgba(227, 181, 107, 0.85);
+  color: #fbf3df;
+}
+
+.resultName {
+  margin: 12px 0 4px;
+  color: #fbf3df;
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  letter-spacing: 0.18em;
+  text-shadow: 0 18px 42px rgba(0, 0, 0, 0.7);
+}
+
+.resultEn {
+  color: rgba(227, 181, 107, 0.85);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  margin: 0 0 24px;
+}
+
+.resultBody {
+  display: grid;
+  gap: clamp(18px, 4vw, 32px);
+  grid-template-columns: 1fr;
+  margin-bottom: 28px;
+}
+
+@media (min-width: 720px) {
+  .resultBody {
+    grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.resultPortrait {
+  position: relative;
+  border: 1px solid rgba(227, 181, 107, 0.4);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.55);
+}
+
+.resultPortrait :global(img) {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.resultText {
+  display: grid;
+  gap: 14px;
+}
+
+.resultEpithet {
+  color: #e3b56b;
+  font-size: 1.04rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.traitList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.traitList li {
+  padding: 4px 12px;
+  border: 1px solid rgba(125, 109, 208, 0.55);
+  border-radius: 999px;
+  color: #d9c9ff;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+}
+
+.resultDescription {
+  color: rgba(246, 236, 215, 0.86);
+  font-size: 1rem;
+  line-height: 2;
+  letter-spacing: 0.06em;
+}
+
+.whisper {
+  margin-top: 4px;
+  padding: 16px 18px;
+  border-left: 3px solid #e3b56b;
+  background: rgba(40, 22, 70, 0.45);
+  color: #f9f0d7;
+  font-size: 1rem;
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+  font-style: italic;
+}
+
+.ranking {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.rankingItem {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border: 1px solid rgba(125, 109, 208, 0.25);
+  background: rgba(14, 8, 28, 0.55);
+  font-size: 0.92rem;
+}
+
+.rankingTop {
+  border-color: rgba(227, 181, 107, 0.7);
+  background: rgba(40, 22, 70, 0.7);
+}
+
+.rankNumber {
+  color: rgba(227, 181, 107, 0.7);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.rankingTop .rankNumber {
+  color: #f5e6b9;
+}
+
+.rankName {
+  color: #f6ecd7;
+  letter-spacing: 0.08em;
+}
+
+.rankBarTrack {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.rankBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #7d6dd0, #e3b56b);
+  transition: width 0.4s ease;
+}
+
+.rankScore {
+  color: rgba(246, 236, 215, 0.55);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+}
+
+.rankingTop .rankScore {
+  color: #e3b56b;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 540px) {
+  .musicButton {
+    width: 42px;
+    height: 42px;
+    top: 12px;
+    right: 12px;
+  }
+
+  .optionButton {
+    padding: 12px 14px;
+    font-size: 0.94rem;
+  }
+
+  .rankingItem {
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+  }
+
+  .rankNumber {
+    grid-column: 1;
+  }
+
+  .rankName {
+    grid-column: 2;
+  }
+
+  .rankScore {
+    grid-column: 3;
+  }
+
+  .rankBarTrack {
+    grid-column: 1 / -1;
+  }
+}
