@@ -62,7 +62,7 @@ export default async function ScriptPage({ params }) {
         <div className={styles.posterWrap}>
           <div className={styles.posterBg} style={{ backgroundImage: `url('${card.image || fallback}')` }} />
           <div className={styles.posterGrad} />
-          {experience && <div className={styles.posterQuizBadge}>{experience.label}</div>}
+          {experience?.url && <div className={styles.posterQuizBadge}>{experience.label}</div>}
           <div className={styles.posterTitle}>
             <h1>{card.name}</h1>
           </div>
@@ -89,7 +89,7 @@ export default async function ScriptPage({ params }) {
           </div>
         </div>
 
-        {experience && (
+        {experience?.url && (
           <a
             href={experience.url}
             target="_blank"

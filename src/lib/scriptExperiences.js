@@ -39,6 +39,23 @@ const EXPERIENCES = [
     },
   },
   {
+    match: ['幻方館謀殺奇境', '幻方馆谋杀奇境', '幻方館'],
+    characterImages: {
+      '武藤孝太': '/huanfangguan/characters/muto-takata.jpg',
+      '武藤 孝太': '/huanfangguan/characters/muto-takata.jpg',
+      '武藤楓': '/huanfangguan/characters/muto-kaede.jpg',
+      '武藤 楓': '/huanfangguan/characters/muto-kaede.jpg',
+      '紅谷拓也': '/huanfangguan/characters/benitani-takuya.jpg',
+      '紅谷 拓也': '/huanfangguan/characters/benitani-takuya.jpg',
+      '紅谷雅美': '/huanfangguan/characters/benitani-masami.jpg',
+      '紅谷 雅美': '/huanfangguan/characters/benitani-masami.jpg',
+      '竹間英助': '/huanfangguan/characters/takema-eisuke.jpg',
+      '竹間 英助': '/huanfangguan/characters/takema-eisuke.jpg',
+      '竹間明日香': '/huanfangguan/characters/takema-asuka.jpg',
+      '竹間 明日香': '/huanfangguan/characters/takema-asuka.jpg',
+    },
+  },
+  {
     match: ['沒頭腦東西不傷心', '没头脑东西不伤心'],
     label: '心測',
     url: '/no-more-heartbreak-quiz',

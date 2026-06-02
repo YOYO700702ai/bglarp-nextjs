@@ -31,7 +31,7 @@ export default function ScriptCard({ card }) {
                     onError={e => { e.target.src = fallback; }}
                 />
                 <div className={styles.imgGrad} />
-                {experience && <span className={styles.quizBadge}>{experience.label}</span>}
+                {experience?.url && <span className={styles.quizBadge}>{experience.label}</span>}
                 {isNewbie && <span className={styles.newbieStamp} aria-label="新手友善">新手</span>}
             </div>
             <div className={styles.body}>
