@@ -39,6 +39,16 @@ const EXPERIENCES = [
     },
   },
   {
+    match: ['連環殺人犯那些事引發的血案', '连环杀人犯那些事引发的血案'],
+    characterImages: {
+      '變態': '/xueyan/characters/pervert.jpg',
+      '渣男': '/xueyan/characters/jerk.jpg',
+      '兇手': '/xueyan/characters/killer.jpg',
+      '小三': '/xueyan/characters/mistress.jpg',
+      '騙子': '/xueyan/characters/liar.jpg',
+    },
+  },
+  {
     match: ['幻方館謀殺奇境', '幻方馆谋杀奇境', '幻方館'],
     characterImages: {
       '武藤孝太': '/huanfangguan/characters/muto-takata.jpg',
