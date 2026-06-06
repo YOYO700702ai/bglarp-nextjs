@@ -49,6 +49,17 @@ const EXPERIENCES = [
     },
   },
   {
+    match: ['女巫請睜眼', '女巫请睁眼'],
+    characterImages: {
+      '巴頓': '/witch/characters/barton.jpg',
+      '安德烈': '/witch/characters/andrei.jpg',
+      '瑪德琳': '/witch/characters/madeline.jpg',
+      '里西': '/witch/characters/leslie.jpg',
+      '波琳娜': '/witch/characters/polina.jpg',
+      '諾娜': '/witch/characters/nona.jpg',
+    },
+  },
+  {
     match: ['幻方館謀殺奇境', '幻方馆谋杀奇境', '幻方館'],
     characterImages: {
       '武藤孝太': '/huanfangguan/characters/muto-takata.jpg',
