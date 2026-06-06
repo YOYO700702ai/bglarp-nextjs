@@ -28,6 +28,7 @@ export async function generateStaticParams() {
 }
 
 export const dynamicParams = true;
+export const revalidate = 3600; // ISR: re-fetch from Notion every hour
 
 const fallback = 'https://images.unsplash.com/photo-1505635552518-3448ff116af3?q=80&w=800&auto=format&fit=crop';
 
