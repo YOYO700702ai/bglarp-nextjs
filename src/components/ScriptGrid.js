@@ -4,8 +4,22 @@ import ScriptCard from './ScriptCard';
 import { getScriptExperience } from '@/lib/scriptExperiences';
 import styles from './ScriptGrid.module.css';
 
-const TABS = ['現正熱映', '奢華劇本區', '心測專區'];
+const TABS = ['現正熱映', '奢華劇本區', '心測專區', '限時活動'];
 const LUXURY_PRICE_THRESHOLD = 1000;
+const PROMOTIONS = [
+    {
+        src: '/promotions/jun-niugui-tongliu.jpg',
+        alt: '6月連刷企劃：同流合屋 X 牛鬼蛇神 命案雙連刷',
+    },
+    {
+        src: '/promotions/jun-fang-series.jpg',
+        alt: '6月連刷企劃：方館系列 真相雙部曲（幻方館 X 立方館）',
+    },
+    {
+        src: '/promotions/jun-guhunling.jpg',
+        alt: '6月連刷企劃：蠱魂鈴系列 4選2 連刷',
+    },
+];
 const LUXURY_NOTES = [
     '時長長 - 屁股要有把握撐住',
     '價格貴 - 可能要花掉你幾頓晚餐',
@@ -211,6 +225,20 @@ export default function ScriptGrid() {
                             </>
                         )}
                     </>
+                ) : activeTab === '限時活動' ? (
+                    <div className={styles.promotionGrid}>
+                        {PROMOTIONS.map((promo, i) => (
+                            <a
+                                key={i}
+                                href="https://m.me/bglarp.studio"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.promotionItem}
+                            >
+                                <img src={promo.src} alt={promo.alt} loading="lazy" />
+                            </a>
+                        ))}
+                    </div>
                 ) : (
                     <div className={styles.emptyPanel}>
                         {/* {activeTab} 內容待填入 */}
