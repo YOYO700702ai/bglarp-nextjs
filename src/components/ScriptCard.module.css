@@ -1,5 +1,7 @@
 .card {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     text-decoration: none;
     background: #1F4A3C;
     border-radius: 12px;
@@ -138,6 +140,9 @@
 
 /* Body - Paper Texture */
 .body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
     padding: 12px 14px 16px;
     background-color: #e3d2ab;
     background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
@@ -178,6 +183,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: auto;
     font-size: 0.85rem;
     color: #0F1A2A;
 }
