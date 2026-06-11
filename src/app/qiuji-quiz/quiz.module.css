@@ -1,0 +1,655 @@
+.page {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  overflow-x: hidden;
+  padding: clamp(24px, 4vw, 48px) 16px;
+  color: #e6d8c3;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(197, 160, 89, 0.08), transparent 70%),
+    radial-gradient(ellipse 60% 80% at 82% 100%, rgba(50, 30, 10, 0.44), transparent 70%),
+    #0d0b09;
+  font-family: 'Noto Serif TC', serif;
+}
+
+.page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 247, 218, 0.026) 0, rgba(255, 247, 218, 0.026) 1px, transparent 1px, transparent 8px),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.52));
+  opacity: 0.76;
+}
+
+.aura {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 8%, rgba(232, 207, 138, 0.06), transparent 30%),
+    radial-gradient(circle at 12% 78%, rgba(130, 82, 34, 0.18), transparent 26%);
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 576px);
+  min-height: 540px;
+  overflow: hidden;
+  border: 1px solid rgba(197, 160, 89, 0.18);
+  border-radius: 8px;
+  background: rgba(15, 12, 8, 0.74);
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.82),
+    inset 0 0 30px rgba(197, 160, 89, 0.04);
+  backdrop-filter: blur(16px);
+}
+
+.shell::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(197, 160, 89, 0.08);
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  z-index: 2;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.corner::before,
+.corner::after {
+  content: '';
+  position: absolute;
+  background: #c5a059;
+}
+
+.corner::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+}
+
+.corner::after {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+}
+
+.topLeft {
+  top: 10px;
+  left: 10px;
+}
+
+.topRight {
+  top: 10px;
+  right: 10px;
+  transform: scaleX(-1);
+}
+
+.bottomLeft {
+  bottom: 10px;
+  left: 10px;
+  transform: scaleY(-1);
+}
+
+.bottomRight {
+  right: 10px;
+  bottom: 10px;
+  transform: scale(-1);
+}
+
+.intro,
+.genderPanel,
+.questionPanel,
+.resultPanel {
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 0.72s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.intro {
+  display: flex;
+  min-height: 540px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(32px, 8vw, 48px);
+  color: #e6d8c3;
+  text-align: center;
+}
+
+.intro h1 {
+  margin: 0 0 12px 0.28em;
+  background: linear-gradient(90deg, #9a7a3a, #e8cf8a, #c5a059, #e8cf8a, #9a7a3a);
+  background-size: 200% auto;
+  color: transparent;
+  font-size: clamp(4rem, 15vw, 6rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.28em;
+  text-shadow: 0 12px 36px rgba(0, 0, 0, 0.42);
+  animation: shimmer 4s linear infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.subtitle,
+.resultKicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #9e8b6e;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.52em;
+}
+
+.subtitle {
+  margin: 0 0 48px;
+}
+
+.subtitle span,
+.resultKicker span {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.5));
+}
+
+.subtitle span:last-child,
+.resultKicker span:last-child {
+  background: linear-gradient(90deg, rgba(197, 160, 89, 0.5), transparent);
+}
+
+.nameField {
+  display: grid;
+  width: min(100%, 360px);
+  gap: 10px;
+  margin-bottom: 44px;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+  padding-bottom: 8px;
+  text-align: left;
+}
+
+.nameField span {
+  color: rgba(197, 160, 89, 0.72);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+}
+
+.nameField input {
+  width: 100%;
+  min-height: 42px;
+  border: 0;
+  color: #fdfbf7;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1.16rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  outline: none;
+}
+
+.nameField:focus-within {
+  border-color: #c5a059;
+}
+
+.primaryButton,
+.genderButton,
+.option,
+.restartButton,
+.musicButton {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: min(100%, 320px);
+  min-height: 56px;
+  border: 1px solid rgba(197, 160, 89, 0.42);
+  border-radius: 2px;
+  color: #c5a059;
+  background: transparent;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.42em;
+  transition: border-color 0.28s ease, background 0.28s ease, transform 0.28s ease;
+}
+
+.primaryButton svg,
+.restartButton svg,
+.musicButton svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.primaryButton:hover,
+.primaryButton:focus-visible {
+  border-color: #c5a059;
+  background: rgba(197, 160, 89, 0.1);
+  transform: translateY(-1px);
+}
+
+.primaryButton:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.genderPanel {
+  display: flex;
+  min-height: 540px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(36px, 9vw, 54px);
+}
+
+.genderPanel h2 {
+  margin: 0 0 44px;
+  color: #fdfbf7;
+  font-size: clamp(1.55rem, 5vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+
+.genderGrid {
+  display: grid;
+  width: min(100%, 380px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.genderButton {
+  display: grid;
+  min-height: 126px;
+  place-items: center;
+  border: 1px solid rgba(197, 160, 89, 0.32);
+  border-radius: 2px;
+  color: #c5a059;
+  background: rgba(15, 12, 8, 0.5);
+  transition: border-color 0.28s ease, background 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+}
+
+.genderButton span {
+  margin-left: 0.28em;
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: 0.28em;
+}
+
+.genderButton small {
+  color: #9e8b6e;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+}
+
+.genderButton:hover,
+.genderButton:focus-visible {
+  border-color: #c5a059;
+  background: rgba(197, 160, 89, 0.14);
+  box-shadow: 0 0 20px rgba(197, 160, 89, 0.18);
+  transform: translateY(-2px);
+}
+
+.questionPanel {
+  padding: clamp(28px, 7vw, 48px);
+}
+
+.questionTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+  padding-bottom: 14px;
+  color: #c5a059;
+  font-size: 0.84rem;
+  font-weight: 900;
+  letter-spacing: 0.24em;
+}
+
+.questionTop span:last-child {
+  color: #9e8b6e;
+  font-size: 0.76rem;
+}
+
+.progressTrack {
+  position: relative;
+  height: 1px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  background: rgba(197, 160, 89, 0.12);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, rgba(197, 160, 89, 0.4), #c5a059);
+  transition: width 0.42s ease;
+}
+
+.questionPanel h2 {
+  margin: 0 0 34px;
+  color: #fdfbf7;
+  font-size: clamp(1.28rem, 5vw, 1.6rem);
+  font-weight: 900;
+  line-height: 1.78;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 34px 1fr;
+  align-items: start;
+  gap: 14px;
+  border: 0;
+  border-left: 2px solid rgba(197, 160, 89, 0.16);
+  border-radius: 2px;
+  padding: 16px 14px;
+  color: #d0c2ad;
+  background: transparent;
+  text-align: left;
+  transition: border-color 0.28s ease, background 0.28s ease, color 0.28s ease, transform 0.28s ease;
+}
+
+.option span {
+  color: rgba(197, 160, 89, 0.56);
+  font-family: Georgia, serif;
+  font-size: 0.78rem;
+  font-style: italic;
+  line-height: 1.8;
+}
+
+.option strong {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.72;
+  letter-spacing: 0.08em;
+}
+
+.option:hover,
+.option:focus-visible {
+  border-left-color: #c5a059;
+  color: #fdfbf7;
+  background: rgba(197, 160, 89, 0.07);
+  transform: translateX(4px);
+}
+
+.resultPanel {
+  display: flex;
+  min-height: 540px;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(28px, 7vw, 42px);
+  text-align: center;
+}
+
+.resultKicker {
+  margin: 0 0 28px;
+  color: #c5a059;
+}
+
+.posterFrame {
+  width: min(100%, 256px);
+  aspect-ratio: 3 / 4;
+  margin-bottom: 28px;
+  padding: 3px;
+  background: linear-gradient(160deg, #c5a059, #7a5c28, #c5a059, #e8cf8a, #7a5c28);
+  box-shadow:
+    0 0 40px rgba(197, 160, 89, 0.25),
+    0 20px 60px rgba(0, 0, 0, 0.76);
+}
+
+.posterInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 2px solid #0d0b09;
+}
+
+.posterInner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s ease;
+}
+
+.posterFrame:hover img {
+  transform: scale(1.04);
+}
+
+.posterShade {
+  position: absolute;
+  inset: auto 0 0;
+  height: 34%;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.resultPanel h2 {
+  margin: 0 0 20px 0.2em;
+  color: #fdfbf7;
+  font-size: clamp(2.5rem, 10vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+}
+
+.resultDescription {
+  max-width: 432px;
+  margin: 0 0 34px;
+  color: #bdb09c;
+  font-size: clamp(1rem, 2.5vw, 1.08rem);
+  line-height: 2.15;
+  letter-spacing: 0.1em;
+  text-align: justify;
+}
+
+.scoreMap {
+  width: min(100%, 384px);
+  margin-bottom: 30px;
+}
+
+.scoreMap h3 {
+  margin: 0 0 16px;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+  padding-bottom: 10px;
+  color: #c5a059;
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-align: left;
+}
+
+.scoreRow {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.scoreLabel {
+  display: flex;
+  justify-content: space-between;
+  color: #d0c2ad;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.scoreTrack {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(197, 160, 89, 0.12);
+}
+
+.scoreTrack div {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(197, 160, 89, 0.4), #c5a059);
+  transition: width 0.8s ease;
+}
+
+.resultActions {
+  position: relative;
+  display: grid;
+  width: min(100%, 360px);
+  gap: 18px;
+  padding-top: 26px;
+}
+
+.resultActions::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 68%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.44), transparent);
+  transform: translateX(-50%);
+}
+
+.restartButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  padding: 0 0 6px;
+  color: #d0c2ad;
+  background: transparent;
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.24em;
+  transition: border-color 0.28s ease, color 0.28s ease;
+}
+
+.restartButton:hover,
+.restartButton:focus-visible {
+  border-color: #c5a059;
+  color: #c5a059;
+}
+
+.musicButton {
+  position: fixed;
+  z-index: 20;
+  top: 20px;
+  right: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  border-radius: 999px;
+  padding: 0 14px;
+  color: rgba(197, 160, 89, 0.72);
+  background: rgba(0, 0, 0, 0.4);
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.24em;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.28s ease, color 0.28s ease, transform 0.28s ease;
+}
+
+.musicButton:hover,
+.musicButton:focus-visible {
+  border-color: rgba(197, 160, 89, 0.56);
+  color: #c5a059;
+  transform: scale(1.04);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    padding: 16px 12px;
+  }
+
+  .shell {
+    min-height: 500px;
+  }
+
+  .intro,
+  .genderPanel {
+    min-height: 500px;
+  }
+
+  .subtitle,
+  .resultKicker {
+    gap: 10px;
+    letter-spacing: 0.36em;
+  }
+
+  .subtitle span,
+  .resultKicker span {
+    width: 28px;
+  }
+
+  .genderGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .questionPanel,
+  .resultPanel {
+    padding: 28px 22px;
+  }
+
+  .musicButton {
+    top: 12px;
+    right: 12px;
+    min-height: 34px;
+    padding: 0 10px;
+  }
+}

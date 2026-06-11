@@ -214,7 +214,38 @@ function drawFrame(ctx, accent, theme, secondary, width = CARD_WIDTH, height = C
     ctx.stroke();
   });
 
-  if (theme === 'comet') {
+  if (theme === 'qiuji') {
+    ctx.globalAlpha = 0.92;
+    ctx.strokeStyle = 'rgba(232, 207, 138, 0.64)';
+    ctx.lineWidth = 2;
+    [[0.12, 0.16, 0.28, 0.08, 0.48, 0.15], [0.88, 0.84, 0.72, 0.92, 0.52, 0.85]].forEach(([x1, y1, x2, y2, x3, y3]) => {
+      ctx.beginPath();
+      ctx.moveTo(width * x1, height * y1);
+      ctx.bezierCurveTo(width * x2, height * y2, width * x2, height * y2, width * x3, height * y3);
+      ctx.stroke();
+    });
+
+    ctx.fillStyle = secondary;
+    [[0.18, 0.12], [0.82, 0.88]].forEach(([xRatio, yRatio]) => {
+      const x = width * xRatio;
+      const y = height * yRatio;
+      ctx.beginPath();
+      ctx.ellipse(x, y, 28, 8, -0.45, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(x + 22, y - 12, 22, 7, 0.55, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    ctx.strokeStyle = 'rgba(255, 248, 226, 0.32)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(58, height - 118);
+    ctx.lineTo(118, height - 58);
+    ctx.moveTo(width - 58, 118);
+    ctx.lineTo(width - 118, 58);
+    ctx.stroke();
+  } else if (theme === 'comet') {
     ctx.globalAlpha = 0.9;
     ctx.strokeStyle = 'rgba(223, 245, 255, 0.68)';
     ctx.lineWidth = 2;
@@ -381,6 +412,10 @@ export default function ResultCardGenerator({
       background.addColorStop(0, '#050817');
       background.addColorStop(0.42, '#041a75');
       background.addColorStop(1, '#160308');
+    } else if (theme === 'qiuji') {
+      background.addColorStop(0, '#0d0b09');
+      background.addColorStop(0.52, '#241809');
+      background.addColorStop(1, '#050403');
     } else if (theme === 'comet') {
       background.addColorStop(0, '#020a1e');
       background.addColorStop(0.48, '#123468');
@@ -440,8 +475,8 @@ export default function ResultCardGenerator({
     const scriptY = isLandscape ? cardHeight - 180 : PORTRAIT_SIGNATURE_Y;
     const nameY = isLandscape ? cardHeight - 104 : PORTRAIT_PLAYER_NAME_Y;
     const quoteY = isLandscape ? cardHeight - 52 : PORTRAIT_QUOTE_Y;
-    const nameMaxWidth = isLandscape ? 900 : 720;
-    const quoteMaxWidth = isLandscape ? cardWidth - textX - 116 : 900;
+    const nameMaxWidth = theme === 'qiuji' && !isLandscape ? 600 : isLandscape ? 900 : 720;
+    const quoteMaxWidth = theme === 'qiuji' && !isLandscape ? 640 : isLandscape ? cardWidth - textX - 116 : 900;
 
     const signatureY = precomposedArtwork && !isLandscape ? PORTRAIT_SIGNATURE_Y : scriptY;
     const playerNameY = precomposedArtwork && !isLandscape ? PORTRAIT_PLAYER_NAME_Y : nameY;
@@ -472,7 +507,13 @@ export default function ResultCardGenerator({
     setStatus('圖卡已在新分頁開啟');
   };
 
-  const themeClass = theme === 'evilFlower' ? styles.evilFlower : theme === 'comet' ? styles.comet : styles.hanmen;
+  const themeClass = theme === 'evilFlower'
+    ? styles.evilFlower
+    : theme === 'comet'
+      ? styles.comet
+      : theme === 'qiuji'
+        ? styles.qiuji
+        : styles.hanmen;
 
   return (
     <div className={`${styles.cardAction} ${themeClass}`}>

@@ -39,6 +39,19 @@ const EXPERIENCES = [
     },
   },
   {
+    match: ['求己'],
+    label: '心測',
+    url: '/qiuji-quiz',
+    characterImages: {
+      '趙明合': '/qiuji-quiz/characters/zhao-minghe.jpg',
+      '即墨永康': '/qiuji-quiz/characters/jimo-yongkang.jpg',
+      '溫若儀': '/qiuji-quiz/characters/wen-ruoyi.jpg',
+      '艾憐': '/qiuji-quiz/characters/ai-lian.jpg',
+      '沈千': '/qiuji-quiz/characters/shen-qian.jpg',
+      '雲依': '/qiuji-quiz/characters/yun-yi.jpg',
+    },
+  },
+  {
     match: ['連環殺人犯那些事引發的血案', '连环杀人犯那些事引发的血案'],
     characterImages: {
       '變態': '/xueyan/characters/pervert.jpg',
