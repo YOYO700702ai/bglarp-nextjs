@@ -99,6 +99,21 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
   let line = '';
   let lineCount = 0;
 
+  const drawLine = (value, nextChar = '') => {
+    const orphanClosingMark = /^[」』）》】〕〉》、。，；：！？]/.test(nextChar);
+    if (orphanClosingMark && value.length > 5) {
+      return {
+        current: value.slice(0, -4),
+        next: value.slice(-4),
+      };
+    }
+
+    return {
+      current: value,
+      next: '',
+    };
+  };
+
   for (let index = 0; index < chars.length; index += 1) {
     const nextLine = line + chars[index];
     if (ctx.measureText(nextLine).width > maxWidth && line) {
@@ -107,8 +122,9 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
         ctx.fillText(`${line.slice(0, Math.max(0, line.length - 2))}…`, x, y);
         return;
       }
-      ctx.fillText(line, x, y);
-      line = chars[index];
+      const wrapped = drawLine(line, chars[index]);
+      ctx.fillText(wrapped.current, x, y);
+      line = `${wrapped.next}${chars[index]}`;
       y += lineHeight;
     } else {
       line = nextLine;
@@ -476,7 +492,7 @@ export default function ResultCardGenerator({
     const nameY = isLandscape ? cardHeight - 104 : PORTRAIT_PLAYER_NAME_Y;
     const quoteY = isLandscape ? cardHeight - 52 : PORTRAIT_QUOTE_Y;
     const nameMaxWidth = theme === 'qiuji' && !isLandscape ? 600 : isLandscape ? 900 : 720;
-    const quoteMaxWidth = theme === 'qiuji' && !isLandscape ? 640 : isLandscape ? cardWidth - textX - 116 : 900;
+    const quoteMaxWidth = theme === 'qiuji' && !isLandscape ? 780 : isLandscape ? cardWidth - textX - 116 : 900;
 
     const signatureY = precomposedArtwork && !isLandscape ? PORTRAIT_SIGNATURE_Y : scriptY;
     const playerNameY = precomposedArtwork && !isLandscape ? PORTRAIT_PLAYER_NAME_Y : nameY;
