@@ -275,7 +275,7 @@ export default function ScriptGrid() {
                                     {activityPlaying ? (
                                         <iframe
                                             className={styles.activityIframe}
-                                            src={`https://www.youtube-nocookie.com/embed/${FEATURED_ACTIVITY.videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1&iv_load_policy=3`}
+                                            src={`https://www.youtube-nocookie.com/embed/${FEATURED_ACTIVITY.videoId}?autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1&controls=1&iv_load_policy=3&showinfo=0`}
                                             title="六月連刷活動短片"
                                             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
                                             allowFullScreen
