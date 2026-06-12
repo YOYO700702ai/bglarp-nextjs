@@ -8,8 +8,8 @@ const TABS = ['現正熱映', '奢華劇本區', '心測專區', '限時活動']
 const LUXURY_PRICE_THRESHOLD = 1000;
 const FACEBOOK_PAGE_URL = 'https://www.facebook.com/bglarp.studio/';
 const FEATURED_ACTIVITY = {
-    videoId: 's5up0iiEZqs',
-    poster: 'https://i.ytimg.com/vi/s5up0iiEZqs/hqdefault.jpg',
+    videoId: '6bYtqkPyz90',
+    poster: 'https://i.ytimg.com/vi/6bYtqkPyz90/hqdefault.jpg',
     title: '六月連刷開戰',
     subtitle: '一場不夠，就把真相追到第二場。',
     description: '命案雙連刷、方館雙部曲、蠱魂鈴四選二、惠子禁閉單日場，六月把最適合接著玩的組合一次排好。揪齊人、卡好時段，今晚不要只破一個局。',
@@ -255,6 +255,34 @@ export default function ScriptGrid() {
                                     >
                                         我要卡位
                                     </a>
+                                </div>
+                            </div>
+                            <div className={styles.activityCampaignPanel} aria-label="六月連刷活動短片">
+                                <div className={styles.activityVideoFrame}>
+                                    {activityPlaying ? (
+                                        <iframe
+                                            className={styles.activityIframe}
+                                            src={`https://www.youtube-nocookie.com/embed/${FEATURED_ACTIVITY.videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1&iv_load_policy=3`}
+                                            title="六月連刷活動短片"
+                                            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                                            allowFullScreen
+                                        />
+                                    ) : (
+                                        <button
+                                            type="button"
+                                            className={styles.activityPoster}
+                                            onClick={() => setActivityPlaying(true)}
+                                            aria-label="播放六月連刷活動短片"
+                                        >
+                                            <img src={FEATURED_ACTIVITY.poster} alt="" referrerPolicy="no-referrer" />
+                                            <span className={styles.activityPlayBtn} aria-hidden="true">
+                                                <svg viewBox="0 0 64 64" width="58" height="58">
+                                                    <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.56)" stroke="#E8A63B" strokeWidth="2" />
+                                                    <polygon points="26,20 26,44 46,32" fill="#E8A63B" />
+                                                </svg>
+                                            </span>
+                                        </button>
+                                    )}
                                 </div>
                                 <p className={styles.activityDescription}>{FEATURED_ACTIVITY.description}</p>
                                 <div className={styles.activityTags}>
