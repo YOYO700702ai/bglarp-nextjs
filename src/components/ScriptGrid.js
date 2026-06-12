@@ -6,13 +6,14 @@ import styles from './ScriptGrid.module.css';
 
 const TABS = ['現正熱映', '奢華劇本區', '心測專區', '限時活動'];
 const LUXURY_PRICE_THRESHOLD = 1000;
+const FACEBOOK_PAGE_URL = 'https://www.facebook.com/bglarp.studio/';
 const FEATURED_ACTIVITY = {
-    title: '六月限時連刷企劃',
-    subtitle: '活動短片改由私訊提供，先挑一組最想挑戰的劇本組合。',
-    description: '本期把適合接連體驗的劇本排成幾組活動檔期。往下挑海報；想刷哪一組，直接私訊我們確認人數、時段和適合程度。',
-    previewTitle: '活動短片',
-    previewText: '為避免外部平台露出帳號資訊，短片改由私訊提供。',
-    highlights: ['限時活動', '連刷企劃', '私訊預約'],
+    videoId: 's5up0iiEZqs',
+    poster: 'https://i.ytimg.com/vi/s5up0iiEZqs/hqdefault.jpg',
+    title: '六月連刷開戰',
+    subtitle: '一場不夠，就把真相追到第二場。',
+    description: '命案雙連刷、方館雙部曲、蠱魂鈴四選二、惠子禁閉單日場，六月把最適合接著玩的組合一次排好。揪齊人、卡好時段，今晚不要只破一個局。',
+    highlights: ['雙本連刷', '六月限定', '揪團開場'],
 };
 const PROMOTIONS = [
     {
@@ -47,6 +48,7 @@ export default function ScriptGrid() {
     const [searchQuery, setSearchQuery] = useState('');
     const [displayLimit, setDisplayLimit] = useState(25);
     const [activeTab, setActiveTab] = useState('現正熱映');
+    const [activityPlaying, setActivityPlaying] = useState(false);
 
     const normalize = (s) => String(s || '').toLowerCase().replace(/\s+/g, '');
     const fuzzyMatch = (name, query) => {
@@ -123,6 +125,7 @@ export default function ScriptGrid() {
     const visible = filtered.slice(0, displayLimit);
     const handleTabChange = (tab) => {
         setActiveTab(tab);
+        setActivityPlaying(false);
         setDisplayLimit(25);
     };
     const handlePlayerFilterChange = (value) => {
@@ -239,25 +242,25 @@ export default function ScriptGrid() {
                     </>
                 ) : activeTab === '限時活動' ? (
                     <div className={styles.activityLayout}>
-                        <section className={styles.activityFeature} aria-label="限時活動介紹">
+                        <section className={styles.activityFeature} aria-label="六月限時活動">
                             <div className={styles.activityCopy}>
                                 <span className={styles.activityKicker}>LIMITED EVENT</span>
                                 <h3>{FEATURED_ACTIVITY.title}</h3>
                                 <p className={styles.activitySubtitle}>{FEATURED_ACTIVITY.subtitle}</p>
                                 <div className={styles.activityActions}>
                                     <a
-                                        href="https://m.me/bglarp.studio"
+                                        href={FACEBOOK_PAGE_URL}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        私訊索取短片
+                                        前往粉專活動
                                     </a>
                                     <a
-                                        href="https://m.me/bglarp.studio"
+                                        href={FACEBOOK_PAGE_URL}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        私訊預約
+                                        我要卡位
                                     </a>
                                 </div>
                                 <p className={styles.activityDescription}>{FEATURED_ACTIVITY.description}</p>
@@ -267,11 +270,32 @@ export default function ScriptGrid() {
                                     ))}
                                 </div>
                             </div>
-                            <div className={styles.activityPreviewPanel} aria-label="活動短片預告">
-                                <div className={styles.activityPreviewInner}>
-                                    <span>EVENT SHORT</span>
-                                    <strong>{FEATURED_ACTIVITY.previewTitle}</strong>
-                                    <p>{FEATURED_ACTIVITY.previewText}</p>
+                            <div className={styles.activityCampaignPanel} aria-label="六月連刷活動重點">
+                                <div className={styles.activityVideoFrame}>
+                                    {activityPlaying ? (
+                                        <iframe
+                                            className={styles.activityIframe}
+                                            src={`https://www.youtube-nocookie.com/embed/${FEATURED_ACTIVITY.videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1&iv_load_policy=3`}
+                                            title="六月連刷活動短片"
+                                            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                                            allowFullScreen
+                                        />
+                                    ) : (
+                                        <button
+                                            type="button"
+                                            className={styles.activityPoster}
+                                            onClick={() => setActivityPlaying(true)}
+                                            aria-label="播放六月連刷活動短片"
+                                        >
+                                            <img src={FEATURED_ACTIVITY.poster} alt="" referrerPolicy="no-referrer" />
+                                            <span className={styles.activityPlayBtn} aria-hidden="true">
+                                                <svg viewBox="0 0 64 64" width="58" height="58">
+                                                    <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.56)" stroke="#E8A63B" strokeWidth="2" />
+                                                    <polygon points="26,20 26,44 46,32" fill="#E8A63B" />
+                                                </svg>
+                                            </span>
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </section>
@@ -279,14 +303,14 @@ export default function ScriptGrid() {
                         <div className={styles.promotionWallHeader}>
                             <span>EVENT POSTERS</span>
                             <h3>本期活動海報</h3>
-                            <p>每張海報都是一組可預約活動，點開後直接私訊我們，會有人協助你安排適合的場次。</p>
+                            <p>挑你今晚想刷的組合，進粉專看活動資訊，揪團卡位。</p>
                         </div>
 
                         <div className={styles.promotionGrid}>
                             {PROMOTIONS.map((promo, i) => (
                                 <a
                                     key={i}
-                                    href="https://m.me/bglarp.studio"
+                                    href={FACEBOOK_PAGE_URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className={styles.promotionItem}
