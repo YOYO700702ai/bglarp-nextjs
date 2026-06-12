@@ -19,6 +19,10 @@ const PROMOTIONS = [
         src: '/promotions/jun-guhunling.jpg',
         alt: '6月連刷企劃：蠱魂鈴系列 4選2 連刷',
     },
+    {
+        src: '/promotions/jun-huizi-jinbi.jpg',
+        alt: '6月連刷企劃：惠子 X 禁閉兇間 單日連刷 800 元',
+    },
 ];
 const LUXURY_NOTES = [
     '時長長 - 屁股要有把握撐住',
