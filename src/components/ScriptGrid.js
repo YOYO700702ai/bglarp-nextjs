@@ -6,6 +6,13 @@ import styles from './ScriptGrid.module.css';
 
 const TABS = ['現正熱映', '奢華劇本區', '心測專區', '限時活動'];
 const LUXURY_PRICE_THRESHOLD = 1000;
+const FEATURED_ACTIVITY = {
+    videoId: 's5up0iiEZqs',
+    title: '六月限時連刷企劃',
+    subtitle: '先看這支短片，選一組最想挑戰的劇本組合。',
+    description: '本期把適合接連體驗的劇本排成幾組活動檔期。看完短片，往下挑海報；想刷哪一組，直接私訊我們確認人數、時段和適合程度。',
+    highlights: ['限時活動', '連刷企劃', '私訊預約'],
+};
 const PROMOTIONS = [
     {
         src: '/promotions/jun-niugui-tongliu.jpg',
@@ -230,18 +237,66 @@ export default function ScriptGrid() {
                         )}
                     </>
                 ) : activeTab === '限時活動' ? (
-                    <div className={styles.promotionGrid}>
-                        {PROMOTIONS.map((promo, i) => (
-                            <a
-                                key={i}
-                                href="https://m.me/bglarp.studio"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={styles.promotionItem}
-                            >
-                                <img src={promo.src} alt={promo.alt} loading="lazy" />
-                            </a>
-                        ))}
+                    <div className={styles.activityLayout}>
+                        <section className={styles.activityFeature} aria-label="限時活動介紹">
+                            <div className={styles.activityCopy}>
+                                <span className={styles.activityKicker}>LIMITED EVENT</span>
+                                <h3>{FEATURED_ACTIVITY.title}</h3>
+                                <p className={styles.activitySubtitle}>{FEATURED_ACTIVITY.subtitle}</p>
+                                <div className={styles.activityActions}>
+                                    <a
+                                        href={`https://youtube.com/shorts/${FEATURED_ACTIVITY.videoId}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        開啟短片
+                                    </a>
+                                    <a
+                                        href="https://m.me/bglarp.studio"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        私訊預約
+                                    </a>
+                                </div>
+                                <p className={styles.activityDescription}>{FEATURED_ACTIVITY.description}</p>
+                                <div className={styles.activityTags}>
+                                    {FEATURED_ACTIVITY.highlights.map(item => (
+                                        <span key={item}>{item}</span>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className={styles.activityVideoShell}>
+                                <div className={styles.activityVideoFrame}>
+                                    <iframe
+                                        src={`https://www.youtube.com/embed/${FEATURED_ACTIVITY.videoId}?rel=0&modestbranding=1&playsinline=1`}
+                                        title={`${FEATURED_ACTIVITY.title}活動短片`}
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowFullScreen
+                                    />
+                                </div>
+                            </div>
+                        </section>
+
+                        <div className={styles.promotionWallHeader}>
+                            <span>EVENT POSTERS</span>
+                            <h3>本期活動海報</h3>
+                            <p>每張海報都是一組可預約活動，點開後直接私訊我們，會有人協助你安排適合的場次。</p>
+                        </div>
+
+                        <div className={styles.promotionGrid}>
+                            {PROMOTIONS.map((promo, i) => (
+                                <a
+                                    key={i}
+                                    href="https://m.me/bglarp.studio"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={styles.promotionItem}
+                                >
+                                    <img src={promo.src} alt={promo.alt} loading="lazy" />
+                                </a>
+                            ))}
+                        </div>
                     </div>
                 ) : (
                     <div className={styles.emptyPanel}>
