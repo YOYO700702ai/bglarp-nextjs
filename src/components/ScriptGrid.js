@@ -72,7 +72,7 @@ export default function ScriptGrid() {
     if (activeTab === '奢華劇本區') {
         tabScripts = scripts.filter(s => typeof s.price === 'number' && s.price > LUXURY_PRICE_THRESHOLD);
     } else if (activeTab === '心測專區') {
-        tabScripts = scripts.filter(s => getScriptExperience(s.name));
+        tabScripts = scripts.filter(s => getScriptExperience(s.name)?.url);
     }
 
     const filtered = tabScripts.filter(s => {
