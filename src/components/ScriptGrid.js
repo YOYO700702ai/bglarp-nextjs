@@ -253,13 +253,6 @@ export default function ScriptGrid() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        前往粉專活動
-                                    </a>
-                                    <a
-                                        href={FACEBOOK_PAGE_URL}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
                                         我要卡位
                                     </a>
                                 </div>
