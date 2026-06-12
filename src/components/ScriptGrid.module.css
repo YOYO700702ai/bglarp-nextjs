@@ -432,8 +432,8 @@
     position: relative;
     overflow: hidden;
     display: grid;
-    gap: 1.25rem;
-    padding: 1rem;
+    gap: 1.45rem;
+    padding: 1.05rem;
     border: 1px solid rgba(232, 166, 59, 0.34);
     border-radius: 8px;
     background:
@@ -468,8 +468,9 @@
     z-index: 1;
     display: grid;
     align-content: center;
-    gap: 0.75rem;
-    padding: 0.45rem;
+    gap: 0.82rem;
+    max-width: 760px;
+    padding: 0.55rem;
 }
 
 .activityKicker {
@@ -501,10 +502,12 @@
 }
 
 .activityDescription {
-    max-width: 760px;
+    max-width: 720px;
     margin: 0;
+    padding-left: 0.9rem;
+    border-left: 2px solid rgba(232, 166, 59, 0.36);
     color: rgba(213, 228, 195, 0.82);
-    line-height: 1.8;
+    line-height: 1.85;
     letter-spacing: 0.04em;
 }
 
@@ -512,7 +515,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.45rem;
-    margin-top: 0.15rem;
+    margin-top: 0.2rem;
 }
 
 .activityTags span {
@@ -530,7 +533,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.65rem;
-    margin-top: 0.2rem;
+    margin-top: 0.35rem;
 }
 
 .activityActions a {
@@ -715,7 +718,8 @@
     .activityFeature {
         grid-template-columns: minmax(0, 1fr) minmax(250px, 330px);
         align-items: center;
-        padding: 1.3rem;
+        padding: 1.45rem;
+        gap: 1.7rem;
     }
 
     .activityCampaignPanel {
@@ -731,8 +735,9 @@
 
 @media (min-width: 1180px) {
     .activityFeature {
-        grid-template-columns: minmax(0, 1fr) 340px;
-        padding: 1.6rem;
+        grid-template-columns: minmax(0, 1fr) 342px;
+        padding: 1.85rem;
+        gap: 2rem;
     }
 
     .promotionGrid {

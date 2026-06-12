@@ -256,6 +256,12 @@ export default function ScriptGrid() {
                                         我要卡位
                                     </a>
                                 </div>
+                                <p className={styles.activityDescription}>{FEATURED_ACTIVITY.description}</p>
+                                <div className={styles.activityTags}>
+                                    {FEATURED_ACTIVITY.highlights.map(item => (
+                                        <span key={item}>{item}</span>
+                                    ))}
+                                </div>
                             </div>
                             <div className={styles.activityCampaignPanel} aria-label="六月連刷活動短片">
                                 <div className={styles.activityVideoFrame}>
@@ -283,12 +289,6 @@ export default function ScriptGrid() {
                                             </span>
                                         </button>
                                     )}
-                                </div>
-                                <p className={styles.activityDescription}>{FEATURED_ACTIVITY.description}</p>
-                                <div className={styles.activityTags}>
-                                    {FEATURED_ACTIVITY.highlights.map(item => (
-                                        <span key={item}>{item}</span>
-                                    ))}
                                 </div>
                             </div>
                         </section>
