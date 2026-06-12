@@ -7,10 +7,11 @@ import styles from './ScriptGrid.module.css';
 const TABS = ['現正熱映', '奢華劇本區', '心測專區', '限時活動'];
 const LUXURY_PRICE_THRESHOLD = 1000;
 const FEATURED_ACTIVITY = {
-    videoId: 's5up0iiEZqs',
     title: '六月限時連刷企劃',
-    subtitle: '先看這支短片，選一組最想挑戰的劇本組合。',
-    description: '本期把適合接連體驗的劇本排成幾組活動檔期。看完短片，往下挑海報；想刷哪一組，直接私訊我們確認人數、時段和適合程度。',
+    subtitle: '活動短片改由私訊提供，先挑一組最想挑戰的劇本組合。',
+    description: '本期把適合接連體驗的劇本排成幾組活動檔期。往下挑海報；想刷哪一組，直接私訊我們確認人數、時段和適合程度。',
+    previewTitle: '活動短片',
+    previewText: '為避免外部平台露出帳號資訊，短片改由私訊提供。',
     highlights: ['限時活動', '連刷企劃', '私訊預約'],
 };
 const PROMOTIONS = [
@@ -245,11 +246,11 @@ export default function ScriptGrid() {
                                 <p className={styles.activitySubtitle}>{FEATURED_ACTIVITY.subtitle}</p>
                                 <div className={styles.activityActions}>
                                     <a
-                                        href={`https://youtube.com/shorts/${FEATURED_ACTIVITY.videoId}`}
+                                        href="https://m.me/bglarp.studio"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        開啟短片
+                                        私訊索取短片
                                     </a>
                                     <a
                                         href="https://m.me/bglarp.studio"
@@ -266,14 +267,11 @@ export default function ScriptGrid() {
                                     ))}
                                 </div>
                             </div>
-                            <div className={styles.activityVideoShell}>
-                                <div className={styles.activityVideoFrame}>
-                                    <iframe
-                                        src={`https://www.youtube.com/embed/${FEATURED_ACTIVITY.videoId}?rel=0&modestbranding=1&playsinline=1`}
-                                        title={`${FEATURED_ACTIVITY.title}活動短片`}
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        allowFullScreen
-                                    />
+                            <div className={styles.activityPreviewPanel} aria-label="活動短片預告">
+                                <div className={styles.activityPreviewInner}>
+                                    <span>EVENT SHORT</span>
+                                    <strong>{FEATURED_ACTIVITY.previewTitle}</strong>
+                                    <p>{FEATURED_ACTIVITY.previewText}</p>
                                 </div>
                             </div>
                         </section>
