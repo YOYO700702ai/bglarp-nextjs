@@ -270,34 +270,6 @@ export default function ScriptGrid() {
                                     ))}
                                 </div>
                             </div>
-                            <div className={styles.activityCampaignPanel} aria-label="六月連刷活動重點">
-                                <div className={styles.activityVideoFrame}>
-                                    {activityPlaying ? (
-                                        <iframe
-                                            className={styles.activityIframe}
-                                            src={`https://www.youtube-nocookie.com/embed/${FEATURED_ACTIVITY.videoId}?autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1&controls=1&iv_load_policy=3&showinfo=0`}
-                                            title="六月連刷活動短片"
-                                            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-                                            allowFullScreen
-                                        />
-                                    ) : (
-                                        <button
-                                            type="button"
-                                            className={styles.activityPoster}
-                                            onClick={() => setActivityPlaying(true)}
-                                            aria-label="播放六月連刷活動短片"
-                                        >
-                                            <img src={FEATURED_ACTIVITY.poster} alt="" referrerPolicy="no-referrer" />
-                                            <span className={styles.activityPlayBtn} aria-hidden="true">
-                                                <svg viewBox="0 0 64 64" width="58" height="58">
-                                                    <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.56)" stroke="#E8A63B" strokeWidth="2" />
-                                                    <polygon points="26,20 26,44 46,32" fill="#E8A63B" />
-                                                </svg>
-                                            </span>
-                                        </button>
-                                    )}
-                                </div>
-                            </div>
                         </section>
 
                         <div className={styles.promotionWallHeader}>
