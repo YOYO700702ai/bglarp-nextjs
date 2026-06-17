@@ -47,7 +47,7 @@ export default function ScriptGrid() {
     const [genreFilter, setGenreFilter] = useState('全部');
     const [searchQuery, setSearchQuery] = useState('');
     const [displayLimit, setDisplayLimit] = useState(25);
-    const [activeTab, setActiveTab] = useState('現正熱映');
+    const [activeTab, setActiveTab] = useState('限時活動');
     const [activityPlaying, setActivityPlaying] = useState(false);
 
     const normalize = (s) => String(s || '').toLowerCase().replace(/\s+/g, '');
