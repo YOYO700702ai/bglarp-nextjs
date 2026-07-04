@@ -161,7 +161,7 @@ export default function ScriptGrid() {
                             <aside className={styles.quizIntro} aria-label="心測專區介紹">
                                 <div className={styles.quizIntroKicker}>PERSONALITY STORIES</div>
                                 <p className={styles.quizIntroLine}>在故事開始之前，先遇見另一個自己。</p>
-                                <p className={styles.quizIntroSub}>一分鐘心測，測出你最像劇本裡的誰——測完再入戲，你會更懂自己為什麼被打中。</p>
+                                <p className={styles.quizIntroSub}>一分鐘心測，測出你最像劇本裡的誰。</p>
                             </aside>
                         )}
 
