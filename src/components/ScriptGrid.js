@@ -10,27 +10,19 @@ const FACEBOOK_PAGE_URL = 'https://www.facebook.com/bglarp.studio/';
 const FEATURED_ACTIVITY = {
     videoId: '6bYtqkPyz90',
     poster: 'https://i.ytimg.com/vi/6bYtqkPyz90/hqdefault.jpg',
-    title: '六月連刷開戰',
-    subtitle: '一場不夠，就把真相追到第二場。',
-    description: '命案雙連刷、方館雙部曲、蠱魂鈴四選二、惠子禁閉單日場，六月把最適合接著玩的組合一次排好。揪齊人、卡好時段，今晚不要只破一個局。',
-    highlights: ['雙本連刷', '六月限定', '揪團開場'],
+    title: '暑假優惠開跑',
+    subtitle: '整個暑假，都是走進案發現場的季節。',
+    description: '學生優惠 8/31 前有效，任意劇本折 50 元；4-5 人劇本單日連刷兩本，每本只要 400 元。開學前把想玩的本一次補完，冷氣吹整天。',
+    highlights: ['學生優惠', '連刷 400', '暑假限定'],
 };
 const PROMOTIONS = [
     {
-        src: '/promotions/jun-niugui-tongliu.jpg',
-        alt: '6月連刷企劃：同流合屋 X 牛鬼蛇神 命案雙連刷',
+        src: '/promotions/summer-student-discount.jpg',
+        alt: '暑假學生優惠：即日起至 8/31，出示在學學生證任意劇本折 50 元',
     },
     {
-        src: '/promotions/jun-fang-series.jpg',
-        alt: '6月連刷企劃：方館系列 真相雙部曲（幻方館 X 立方館）',
-    },
-    {
-        src: '/promotions/jun-guhunling.jpg',
-        alt: '6月連刷企劃：蠱魂鈴系列 4選2 連刷',
-    },
-    {
-        src: '/promotions/jun-huizi-jinbi.jpg',
-        alt: '6月連刷企劃：惠子 X 禁閉兇間 單日連刷 800 元',
+        src: '/promotions/summer-4-5-double.jpg',
+        alt: '暑假連刷優惠：4-5 人劇本單日任選連刷兩本，每本只要 400 元',
     },
 ];
 const LUXURY_NOTES = [
