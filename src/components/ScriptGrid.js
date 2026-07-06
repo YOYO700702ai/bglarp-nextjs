@@ -27,14 +27,17 @@ const PROMOTIONS = [
     {
         src: '/promotions/qiuji-lottery.jpg',
         alt: '求己七月抽獎活動：分享貼文、Tag 3 位朋友、留言「求神不如求己」，抽 3 組精美紀念品，開獎 2026/07/31',
+        ratio: 1, // width / height，用來讓不同比例海報等高排列
     },
     {
         src: '/promotions/summer-student-discount.jpg',
         alt: '暑假學生優惠：即日起至 8/31，出示在學學生證任意劇本折 50 元',
+        ratio: 0.708,
     },
     {
         src: '/promotions/summer-4-5-double.jpg',
         alt: '暑假連刷優惠：4-5 人劇本單日任選連刷兩本，每本只要 400 元',
+        ratio: 0.708,
     },
 ];
 const LUXURY_NOTES = [
@@ -372,6 +375,7 @@ export default function ScriptGrid() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className={styles.promotionItem}
+                                    style={{ flexGrow: promo.ratio || 1 }}
                                 >
                                     <img src={promo.src} alt={promo.alt} loading="lazy" />
                                 </a>
