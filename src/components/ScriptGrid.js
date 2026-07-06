@@ -268,11 +268,11 @@ export default function ScriptGrid() {
                                 <p className={styles.activitySubtitle}>{QIUJI_ACTIVITY.subtitle}</p>
                                 <div className={styles.activityActions}>
                                     <a
-                                        href={FACEBOOK_PAGE_URL}
+                                        href={QIUJI_IG_URL}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        前往粉專參加
+                                        前往 IG 參加
                                     </a>
                                 </div>
                                 <p className={styles.activityDescription}>
