@@ -12,8 +12,8 @@ const QIUJI_ACTIVITY = {
     poster: 'https://i.ytimg.com/vi/63jTWDKbUgA/hqdefault.jpg',
     title: '求神不如求己',
     subtitle: '七月抽獎活動・精美紀念品抽獎，共抽出 3 組幸運得主。',
-    description: '參加方式：分享本篇貼文、Tag 3 位朋友、留言「求神不如求己」。開獎日期 2026/07/31（五），中獎名單將於官方粉專公布。',
-    highlights: ['分享抽獎', '3 組得主', '開獎 7/31'],
+    description: '參加方式：分享 IG 影片貼文、Tag 3 位朋友、留言「求神不如求己」。截止日期 2026/07/31（五），中獎名單將於 8/05 於官方粉專公布。',
+    highlights: ['分享抽獎', '截止 7/31', '8/05 公布'],
 };
 const FEATURED_ACTIVITY = {
     videoId: '6bYtqkPyz90',
@@ -256,7 +256,7 @@ export default function ScriptGrid() {
                     </>
                 ) : activeTab === '限時活動' ? (
                     <div className={styles.activityLayout}>
-                        <section className={styles.activityFeature} aria-label="求己七月抽獎活動">
+                        <section className={`${styles.activityFeature} ${styles.activityFeatureWide}`} aria-label="求己七月抽獎活動">
                             <div className={styles.activityCopy}>
                                 <span className={styles.activityKicker}>LUCKY DRAW · 七月抽獎</span>
                                 <h3>{QIUJI_ACTIVITY.title}</h3>
@@ -277,8 +277,8 @@ export default function ScriptGrid() {
                                     ))}
                                 </div>
                             </div>
-                            <div className={styles.activityCampaignPanel} aria-label="求己活動短片">
-                                <div className={styles.activityVideoFrame}>
+                            <div className={`${styles.activityCampaignPanel} ${styles.activityPanelWide}`} aria-label="求己活動短片">
+                                <div className={`${styles.activityVideoFrame} ${styles.activityFrameWide}`}>
                                     {qiujiPlaying ? (
                                         <iframe
                                             className={styles.activityIframe}

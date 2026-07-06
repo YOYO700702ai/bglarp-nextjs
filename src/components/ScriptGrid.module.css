@@ -585,6 +585,16 @@
     background: #050806;
 }
 
+/* Wide (16:9) variant for landscape activity videos */
+.activityPanelWide {
+    width: 100%;
+    max-width: none;
+}
+
+.activityFrameWide {
+    aspect-ratio: 16 / 9;
+}
+
 .activityIframe,
 .activityPoster,
 .activityPoster img {
@@ -723,8 +733,16 @@
         gap: 1.55rem;
     }
 
+    .activityFeatureWide {
+        grid-template-columns: minmax(0, 1fr) minmax(340px, 480px);
+    }
+
     .activityCampaignPanel {
         order: initial;
+    }
+
+    .activityPanelWide {
+        align-self: center;
     }
 
     .promotionGrid {
@@ -740,6 +758,10 @@
         padding: 1rem 1.35rem 1rem 1.55rem;
         gap: 1.85rem;
         background-position: center;
+    }
+
+    .activityFeatureWide {
+        grid-template-columns: minmax(0, 1fr) 500px;
     }
 
     .promotionGrid {
