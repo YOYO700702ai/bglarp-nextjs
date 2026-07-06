@@ -7,6 +7,14 @@ import styles from './ScriptGrid.module.css';
 const TABS = ['現正熱映', '奢華劇本區', '心測專區', '限時活動'];
 const LUXURY_PRICE_THRESHOLD = 1000;
 const FACEBOOK_PAGE_URL = 'https://www.facebook.com/bglarp.studio/';
+const QIUJI_ACTIVITY = {
+    videoId: '63jTWDKbUgA',
+    poster: 'https://i.ytimg.com/vi/63jTWDKbUgA/hqdefault.jpg',
+    title: '求神不如求己',
+    subtitle: '七月抽獎活動・精美紀念品抽獎，共抽出 3 組幸運得主。',
+    description: '參加方式：分享本篇貼文、Tag 3 位朋友、留言「求神不如求己」。開獎日期 2026/07/31（五），中獎名單將於官方粉專公布。',
+    highlights: ['分享抽獎', '3 組得主', '開獎 7/31'],
+};
 const FEATURED_ACTIVITY = {
     videoId: '6bYtqkPyz90',
     poster: 'https://i.ytimg.com/vi/6bYtqkPyz90/hqdefault.jpg',
@@ -16,6 +24,10 @@ const FEATURED_ACTIVITY = {
     highlights: ['學生優惠', '連刷 400', '暑假限定'],
 };
 const PROMOTIONS = [
+    {
+        src: '/promotions/qiuji-lottery.jpg',
+        alt: '求己七月抽獎活動：分享貼文、Tag 3 位朋友、留言「求神不如求己」，抽 3 組精美紀念品，開獎 2026/07/31',
+    },
     {
         src: '/promotions/summer-student-discount.jpg',
         alt: '暑假學生優惠：即日起至 8/31，出示在學學生證任意劇本折 50 元',
@@ -41,6 +53,7 @@ export default function ScriptGrid() {
     const [displayLimit, setDisplayLimit] = useState(25);
     const [activeTab, setActiveTab] = useState('限時活動');
     const [activityPlaying, setActivityPlaying] = useState(false);
+    const [qiujiPlaying, setQiujiPlaying] = useState(false);
 
     const normalize = (s) => String(s || '').toLowerCase().replace(/\s+/g, '');
     const fuzzyMatch = (name, query) => {
@@ -118,6 +131,7 @@ export default function ScriptGrid() {
     const handleTabChange = (tab) => {
         setActiveTab(tab);
         setActivityPlaying(false);
+        setQiujiPlaying(false);
         setDisplayLimit(25);
     };
     const handlePlayerFilterChange = (value) => {
@@ -242,7 +256,58 @@ export default function ScriptGrid() {
                     </>
                 ) : activeTab === '限時活動' ? (
                     <div className={styles.activityLayout}>
-                        <section className={styles.activityFeature} aria-label="六月限時活動">
+                        <section className={styles.activityFeature} aria-label="求己七月抽獎活動">
+                            <div className={styles.activityCopy}>
+                                <span className={styles.activityKicker}>LUCKY DRAW · 七月抽獎</span>
+                                <h3>{QIUJI_ACTIVITY.title}</h3>
+                                <p className={styles.activitySubtitle}>{QIUJI_ACTIVITY.subtitle}</p>
+                                <div className={styles.activityActions}>
+                                    <a
+                                        href={FACEBOOK_PAGE_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        前往粉專參加
+                                    </a>
+                                </div>
+                                <p className={styles.activityDescription}>{QIUJI_ACTIVITY.description}</p>
+                                <div className={styles.activityTags}>
+                                    {QIUJI_ACTIVITY.highlights.map(item => (
+                                        <span key={item}>{item}</span>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className={styles.activityCampaignPanel} aria-label="求己活動短片">
+                                <div className={styles.activityVideoFrame}>
+                                    {qiujiPlaying ? (
+                                        <iframe
+                                            className={styles.activityIframe}
+                                            src={`https://www.youtube-nocookie.com/embed/${QIUJI_ACTIVITY.videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1&iv_load_policy=3`}
+                                            title="求己活動短片"
+                                            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                                            allowFullScreen
+                                        />
+                                    ) : (
+                                        <button
+                                            type="button"
+                                            className={styles.activityPoster}
+                                            onClick={() => setQiujiPlaying(true)}
+                                            aria-label="播放求己活動短片"
+                                        >
+                                            <img src={QIUJI_ACTIVITY.poster} alt="" referrerPolicy="no-referrer" />
+                                            <span className={styles.activityPlayBtn} aria-hidden="true">
+                                                <svg viewBox="0 0 64 64" width="58" height="58">
+                                                    <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.56)" stroke="#E8A63B" strokeWidth="2" />
+                                                    <polygon points="26,20 26,44 46,32" fill="#E8A63B" />
+                                                </svg>
+                                            </span>
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className={styles.activityFeature} aria-label="暑假限時活動">
                             <div className={styles.activityCopy}>
                                 <span className={styles.activityKicker}>LIMITED EVENT</span>
                                 <h3>{FEATURED_ACTIVITY.title}</h3>
