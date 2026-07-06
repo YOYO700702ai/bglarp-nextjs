@@ -45,8 +45,8 @@ export default async function ScriptPage({ params }) {
   const playersStr = (card.players || []).join(', ');
   const baseTags = Array.isArray(card.genre) ? card.genre : [];
   const customTextArr = card.customTags ? card.customTags.replace(/\//g, ',').replace(/、/g, ',').split(',').map(t => t.trim()).filter(Boolean) : [];
-  const tags = [...baseTags, ...customTextArr];
-  const allTags = [...(card.players || []), ...tags];
+  const tags = Array.from(new Set([...baseTags, ...customTextArr]));
+  const allTags = Array.from(new Set([...(card.players || []), ...tags]));
   const paragraphs = (card.synopsis || '（資料未建立）').split('\n').filter(p => p.trim());
   const charLines = (card.characters || '').split('\n').filter(l => l.trim());
 
