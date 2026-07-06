@@ -1,5 +1,17 @@
 const EXPERIENCES = [
   {
+    match: ['白兔和她的屍體', '白兔和她的尸体', '白兔'],
+    characterImages: {
+      '瓦力雄': '/white-rabbit/characters/walixiong.jpg',
+      '瓦森達': '/white-rabbit/characters/wasenda.jpg',
+      '瓦森达': '/white-rabbit/characters/wasenda.jpg',
+      '阮天明': '/white-rabbit/characters/ruantianming.jpg',
+      '阮天勇': '/white-rabbit/characters/ruantianyong.jpg',
+      '杜氏春': '/white-rabbit/characters/dushichun.jpg',
+      '裴若希': '/white-rabbit/characters/peiruoxi.jpg',
+    },
+  },
+  {
     match: ['寒門'],
     label: '心測',
     url: '/hanmen-quiz',
