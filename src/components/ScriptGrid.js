@@ -7,6 +7,7 @@ import styles from './ScriptGrid.module.css';
 const TABS = ['現正熱映', '奢華劇本區', '心測專區', '限時活動'];
 const LUXURY_PRICE_THRESHOLD = 1000;
 const FACEBOOK_PAGE_URL = 'https://www.facebook.com/bglarp.studio/';
+const QIUJI_IG_URL = 'https://www.instagram.com/reel/DacU7Lyj2bG/';
 const QIUJI_ACTIVITY = {
     videoId: '63jTWDKbUgA',
     poster: 'https://i.ytimg.com/vi/63jTWDKbUgA/hqdefault.jpg',
@@ -28,6 +29,7 @@ const PROMOTIONS = [
         src: '/promotions/qiuji-lottery.jpg',
         alt: '求己七月抽獎活動：分享貼文、Tag 3 位朋友、留言「求神不如求己」，抽 3 組精美紀念品，開獎 2026/07/31',
         ratio: 1, // width / height，用來讓不同比例海報等高排列
+        href: QIUJI_IG_URL,
     },
     {
         src: '/promotions/summer-student-discount.jpg',
@@ -273,7 +275,18 @@ export default function ScriptGrid() {
                                         前往粉專參加
                                     </a>
                                 </div>
-                                <p className={styles.activityDescription}>{QIUJI_ACTIVITY.description}</p>
+                                <p className={styles.activityDescription}>
+                                    參加方式：分享{' '}
+                                    <a
+                                        href={QIUJI_IG_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.inlineLink}
+                                    >
+                                        IG 影片貼文
+                                    </a>
+                                    、Tag 3 位朋友、留言「求神不如求己」。截止日期 2026/07/31（五），中獎名單將於 8/05 於官方粉專公布。
+                                </p>
                                 <div className={styles.activityTags}>
                                     {QIUJI_ACTIVITY.highlights.map(item => (
                                         <span key={item}>{item}</span>
@@ -371,7 +384,7 @@ export default function ScriptGrid() {
                             {PROMOTIONS.map((promo, i) => (
                                 <a
                                     key={i}
-                                    href={FACEBOOK_PAGE_URL}
+                                    href={promo.href || FACEBOOK_PAGE_URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className={styles.promotionItem}

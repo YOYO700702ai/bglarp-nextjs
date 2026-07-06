@@ -512,6 +512,18 @@
     letter-spacing: 0.04em;
 }
 
+.inlineLink {
+    color: #F0C66F;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+}
+
+.inlineLink:hover {
+    color: #FFF2CC;
+}
+
 .activityTags {
     display: flex;
     flex-wrap: wrap;
