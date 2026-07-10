@@ -2,11 +2,21 @@ import Script from 'next/script';
 import './globals.css';
 
 export const metadata = {
+  metadataBase: new URL('https://www.bglarp.com'),
   title: 'BGLARP 實境推理館 | 台中劇本殺・沉浸劇場・狼人殺・陣營遊戲',
   description: '台中一中街 BGLARP 實境推理館。打破現實與虛構的邊界，走進專屬場景演繹你的第二人生。劇本殺、沉浸劇場、狼人殺、陣營遊戲一次滿足。',
   keywords: '劇本殺, 沉浸劇場, 狼人殺, 陣營遊戲, LARP, 實境推理, 台中劇本殺, 一中街劇本殺, BGLARP',
   icons: { icon: '/favicon.ico' },
   verification: { google: 'FgTNUir7Fyy9YwREQaCB4vwgPX1DAdy6LP9i88s7tp4' },
+  openGraph: {
+    title: 'BGLARP 實境推理館 | 台中劇本殺・沉浸劇場',
+    description: '台中一中街 BGLARP 實境推理館。打破現實與虛構的邊界，走進專屬場景演繹你的第二人生。',
+    url: 'https://www.bglarp.com',
+    siteName: 'BGLARP 實境推理館',
+    locale: 'zh_TW',
+    type: 'website',
+    images: [{ url: '/hero-cover.jpg', width: 1200, height: 675, alt: 'BGLARP 實境推理館' }],
+  },
 };
 
 export const viewport = {
