@@ -1,6 +1,11 @@
+'use client';
+import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getScriptExperience } from '@/lib/scriptExperiences';
 import styles from './ScriptCard.module.css';
+
+const FALLBACK_IMG = 'https://images.unsplash.com/photo-1505635552518-3448ff116af3?q=80&w=800&auto=format&fit=crop';
 
 function formatPlayerRange(players) {
     const nums = players
@@ -19,16 +24,17 @@ export default function ScriptCard({ card }) {
     const customTags = card.customTags ? card.customTags.replace(/\//g, ',').replace(/、/g, ',').split(',').map(t => t.trim()).filter(Boolean) : [];
     const isNewbie = baseTags.includes('新手');
     const tagsArray = Array.from(new Set([...baseTags, ...customTags])).filter(t => t !== '新手');
-    const fallback = 'https://images.unsplash.com/photo-1505635552518-3448ff116af3?q=80&w=800&auto=format&fit=crop';
+    const [imgSrc, setImgSrc] = useState(card.image || FALLBACK_IMG);
 
     return (
         <Link href={`/scripts/${encodeURIComponent(card.name)}`} className={styles.card}>
             <div className={styles.imgWrap}>
-                <img
-                    src={card.image || fallback}
+                <Image
+                    src={imgSrc}
                     alt={card.name}
-                    loading="lazy"
-                    onError={e => { e.target.src = fallback; }}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 25vw, 20vw"
+                    onError={() => setImgSrc(FALLBACK_IMG)}
                 />
                 <div className={styles.imgGrad} />
                 {experience?.url && <span className={styles.quizBadge}>{experience.label}</span>}

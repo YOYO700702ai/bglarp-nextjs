@@ -25,10 +25,35 @@ export const viewport = {
   viewportFit: 'cover',
 };
 
+const localBusinessJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'EntertainmentBusiness',
+  name: 'BGLARP 實境推理館',
+  description: '台中一中街劇本殺・沉浸劇場・狼人殺・陣營遊戲，全預約制實境推理體驗。',
+  url: 'https://www.bglarp.com',
+  telephone: '+886-4-2225-0020',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '北區太平路19巷1號3樓',
+    addressLocality: '台中市',
+    addressCountry: 'TW',
+  },
+  image: 'https://www.bglarp.com/hero-cover.jpg',
+  sameAs: [
+    'https://www.facebook.com/bglarp.studio/',
+    'https://www.instagram.com/bglarp.studio/',
+  ],
+  priceRange: 'NT$400-NT$2000',
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="zh-Hant">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&display=swap"
           rel="stylesheet"

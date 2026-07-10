@@ -42,6 +42,12 @@ const PROMOTIONS = [
         ratio: 0.708,
     },
 ];
+const TAB_KICKERS = {
+    '現正熱映': 'NOW SHOWING',
+    '奢華劇本區': 'PREMIUM SCRIPT ROOM',
+    '心測專區': 'PERSONALITY STORIES',
+    '限時活動': 'LIMITED EVENT',
+};
 const LUXURY_NOTES = [
     '時長長 - 屁股要有把握撐住',
     '價格貴 - 可能要花掉你幾頓晚餐',
@@ -157,7 +163,7 @@ export default function ScriptGrid() {
             <div className={styles.container}>
                 <div className={styles.headerRow}>
                     <div className={styles.headerLeft}>
-                        <span className={styles.tag}>NOW SHOWING</span>
+                        <span className={styles.tag}>{TAB_KICKERS[activeTab] || 'NOW SHOWING'}</span>
                         <h2 className={styles.heading}>{activeTab}</h2>
                     </div>
                     <div className={styles.tabBar}>
@@ -241,7 +247,18 @@ export default function ScriptGrid() {
                         {loading ? (
                             <p className={styles.loading}>載入中...</p>
                         ) : visible.length === 0 ? (
-                            <p className={styles.loading}>無符合條件之劇本。</p>
+                            <div className={styles.noResult}>
+                                <p>找不到符合條件的劇本。</p>
+                                <p className={styles.noResultHint}>換個關鍵字試試，或直接告訴我們你想玩什麼——</p>
+                                <a
+                                    href="https://m.me/bglarp.studio"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={styles.noResultBtn}
+                                >
+                                    私訊我們幫你找 →
+                                </a>
+                            </div>
                         ) : (
                             <>
                                 <div className={styles.grid}>

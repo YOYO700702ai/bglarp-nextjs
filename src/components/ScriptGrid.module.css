@@ -859,3 +859,34 @@
         line-height: 1.7;
     }
 }
+
+.noResult {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #8FA873;
+    letter-spacing: 0.08em;
+    line-height: 2;
+}
+
+.noResultHint {
+    color: rgba(213, 228, 195, 0.55);
+    font-size: 0.88rem;
+    margin: 0.3rem 0 1.2rem;
+}
+
+.noResultBtn {
+    display: inline-block;
+    padding: 0.7rem 1.6rem;
+    background: #E8A63B;
+    color: #142B24;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.noResultBtn:hover {
+    transform: translateY(-2px);
+    background: #F0C66F;
+}
