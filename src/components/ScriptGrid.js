@@ -263,7 +263,7 @@ export default function ScriptGrid() {
                             <>
                                 <div className={styles.grid}>
                                     {visible.map((s, i) => (
-                                        <ScriptCard key={i} card={s} />
+                                        <ScriptCard key={s.name} card={s} />
                                     ))}
                                 </div>
                                 {filtered.length > displayLimit && (

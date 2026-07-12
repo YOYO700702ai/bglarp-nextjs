@@ -24,17 +24,22 @@ export default function ScriptCard({ card }) {
     const customTags = card.customTags ? card.customTags.replace(/\//g, ',').replace(/、/g, ',').split(',').map(t => t.trim()).filter(Boolean) : [];
     const isNewbie = baseTags.includes('新手');
     const tagsArray = Array.from(new Set([...baseTags, ...customTags])).filter(t => t !== '新手');
-    const [imgSrc, setImgSrc] = useState(card.image || FALLBACK_IMG);
+    // Track load failures per image URL (not per component instance) so a
+    // recycled card never shows the previous script's picture.
+    const [erroredSrc, setErroredSrc] = useState(null);
+    const wantedSrc = card.image || FALLBACK_IMG;
+    const imgSrc = erroredSrc === wantedSrc ? FALLBACK_IMG : wantedSrc;
 
     return (
         <Link href={`/scripts/${encodeURIComponent(card.name)}`} className={styles.card}>
             <div className={styles.imgWrap}>
                 <Image
+                    key={imgSrc}
                     src={imgSrc}
                     alt={card.name}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 25vw, 20vw"
-                    onError={() => setImgSrc(FALLBACK_IMG)}
+                    onError={() => setErroredSrc(wantedSrc)}
                 />
                 <div className={styles.imgGrad} />
                 {experience?.url && <span className={styles.quizBadge}>{experience.label}</span>}
