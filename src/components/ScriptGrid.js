@@ -21,8 +21,8 @@ const FEATURED_ACTIVITY = {
     poster: 'https://i.ytimg.com/vi/6bYtqkPyz90/hqdefault.jpg',
     title: '暑假優惠開跑',
     subtitle: '整個暑假，都是走進案發現場的季節。',
-    description: '學生優惠 8/31 前有效，任意劇本折 50 元；4-5 人劇本單日連刷兩本，每本只要 400 元。開學前把想玩的本一次補完，冷氣吹整天。',
-    highlights: ['學生優惠', '連刷 400', '暑假限定'],
+    description: '學生優惠 8/31 前有效，出示在學學生證任意劇本折 50 元。開學前把想玩的本一次補完，冷氣吹整天。',
+    highlights: ['學生優惠', '折 50 元', '暑假限定'],
 };
 const PROMOTIONS = [
     {
@@ -34,11 +34,6 @@ const PROMOTIONS = [
     {
         src: '/promotions/summer-student-discount.jpg',
         alt: '暑假學生優惠：即日起至 8/31，出示在學學生證任意劇本折 50 元',
-        ratio: 0.708,
-    },
-    {
-        src: '/promotions/summer-4-5-double.jpg',
-        alt: '暑假連刷優惠：4-5 人劇本單日任選連刷兩本，每本只要 400 元',
         ratio: 0.708,
     },
 ];
@@ -361,13 +356,13 @@ export default function ScriptGrid() {
                                     ))}
                                 </div>
                             </div>
-                            <div className={styles.activityCampaignPanel} aria-label="六月連刷活動短片">
+                            <div className={styles.activityCampaignPanel} aria-label="暑假優惠活動短片">
                                 <div className={styles.activityVideoFrame}>
                                     {activityPlaying ? (
                                         <iframe
                                             className={styles.activityIframe}
                                             src={`https://www.youtube-nocookie.com/embed/${FEATURED_ACTIVITY.videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1&iv_load_policy=3`}
-                                            title="六月連刷活動短片"
+                                            title="暑假優惠活動短片"
                                             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
                                             allowFullScreen
                                         />
@@ -376,7 +371,7 @@ export default function ScriptGrid() {
                                             type="button"
                                             className={styles.activityPoster}
                                             onClick={() => setActivityPlaying(true)}
-                                            aria-label="播放六月連刷活動短片"
+                                            aria-label="播放暑假優惠活動短片"
                                         >
                                             <img src={FEATURED_ACTIVITY.poster} alt="" referrerPolicy="no-referrer" />
                                             <span className={styles.activityPlayBtn} aria-hidden="true">
