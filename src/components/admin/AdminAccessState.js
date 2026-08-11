@@ -5,11 +5,31 @@ import { getSupabaseBrowserConnection } from '@/lib/supabase/browser';
 import { LockIcon, RefreshIcon, WarningIcon } from './AdminIcons';
 import styles from './Admin.module.css';
 
+const USERNAME_PATTERN = /^[a-z0-9._-]+$/;
+
 export default function AdminAccessState({ state, message, onRetry }) {
   const [signingIn, setSigningIn] = useState(false);
   const [signInError, setSignInError] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  async function signIn() {
+  async function signIn(event) {
+    event.preventDefault();
+    const normalizedUsername = username.trim().toLowerCase();
+
+    if (!normalizedUsername) {
+      setSignInError('請輸入帳號。');
+      return;
+    }
+    if (!USERNAME_PATTERN.test(normalizedUsername)) {
+      setSignInError('帳號只能使用英文小寫、數字、句點、底線或連字號。');
+      return;
+    }
+    if (!password) {
+      setSignInError('請輸入密碼。');
+      return;
+    }
+
     setSigningIn(true);
     setSignInError('');
     const connection = getSupabaseBrowserConnection();
@@ -19,14 +39,22 @@ export default function AdminAccessState({ state, message, onRetry }) {
       return;
     }
 
-    const next = window.location.pathname + window.location.search;
-    const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
-    const { error } = await connection.client.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo },
-    });
-    if (error) {
-      setSignInError('登入沒有完成，請稍後再試。');
+    try {
+      const { error } = await connection.client.auth.signInWithPassword({
+        email: `${normalizedUsername}@auth.bglarp.com`,
+        password,
+      });
+      if (error) {
+        setSignInError('帳號或密碼不正確，請再試一次。');
+        return;
+      }
+
+      setPassword('');
+      if (onRetry) await onRetry();
+      else window.location.reload();
+    } catch {
+      setSignInError('登入服務暫時連不上，請稍後再試。');
+    } finally {
       setSigningIn(false);
     }
   }
@@ -43,6 +71,7 @@ export default function AdminAccessState({ state, message, onRetry }) {
 
   const signedOut = state === 'signedOut';
   const forbidden = state === 'forbidden';
+  const showLogin = signedOut || forbidden;
 
   return (
     <div className={styles.accessCard} role="alert">
@@ -52,25 +81,62 @@ export default function AdminAccessState({ state, message, onRetry }) {
       <p className={styles.eyebrow}>{signedOut ? 'STAFF SIGN IN' : 'ACCESS CHECK'}</p>
       <h1>{signedOut ? '登入後才能管理劇本' : forbidden ? '這個帳號沒有後台權限' : '後台暫時連不上'}</h1>
       <p>{message || (signedOut
-        ? '請使用已登記的員工 Google 帳號登入。'
+        ? '請輸入共用的員工帳號與密碼。'
         : forbidden
-          ? '如果你是新加入的員工，請請管理者將你的帳號加入允許名單。'
+          ? '請改用共用的員工帳號與密碼登入。'
           : '資料沒有遺失。請檢查網路後再重新連線。')}</p>
-      {signInError && <p className={styles.inlineError}>{signInError}</p>}
-      <div className={styles.accessActions}>
-        {signedOut && (
-          <button type="button" className={styles.primaryButton} onClick={signIn} disabled={signingIn}>
+      {showLogin && (
+        <form className={styles.accessLoginForm} onSubmit={signIn} noValidate>
+          <label className={styles.accessLoginField}>
+            <span>帳號</span>
+            <input
+              type="text"
+              name="username"
+              value={username}
+              onChange={(event) => {
+                setUsername(event.target.value.toLowerCase());
+                setSignInError('');
+              }}
+              autoComplete="username"
+              autoCapitalize="none"
+              spellCheck={false}
+              inputMode="text"
+              placeholder="輸入員工帳號"
+              aria-invalid={Boolean(signInError)}
+              disabled={signingIn}
+            />
+          </label>
+          <label className={styles.accessLoginField}>
+            <span>密碼</span>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={(event) => {
+                setPassword(event.target.value);
+                setSignInError('');
+              }}
+              autoComplete="current-password"
+              placeholder="輸入密碼"
+              aria-invalid={Boolean(signInError)}
+              disabled={signingIn}
+            />
+          </label>
+          {signInError && <p className={styles.inlineError} role="alert">{signInError}</p>}
+          <button type="submit" className={styles.primaryButton} disabled={signingIn}>
             {signingIn ? <span className={styles.spinnerSmall} aria-hidden="true" /> : <LockIcon />}
-            {signingIn ? '正在前往登入…' : '使用 Google 登入'}
+            {signingIn ? '正在登入…' : '登入後台'}
           </button>
-        )}
-        {!forbidden && onRetry && (
+        </form>
+      )}
+      {onRetry && (
+        <div className={styles.accessActions}>
           <button type="button" className={styles.secondaryButton} onClick={onRetry}>
             <RefreshIcon />
             重新連線
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

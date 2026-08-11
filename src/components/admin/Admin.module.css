@@ -225,6 +225,60 @@
   margin-top: 26px;
 }
 
+.accessLoginForm {
+  display: grid;
+  gap: 16px;
+  margin-top: 26px;
+  text-align: left;
+}
+
+.accessLoginField {
+  display: grid;
+  gap: 7px;
+}
+
+.accessLoginField > span {
+  color: #3f4b5c;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.accessLoginField input {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 12px;
+  color: var(--admin-ink);
+  background: #fff;
+  border: 1px solid #ccd4de;
+  border-radius: 8px;
+  outline: 0;
+  font: inherit;
+  font-size: 14px;
+  transition: border .15s ease, box-shadow .15s ease;
+}
+
+.accessLoginField input:focus {
+  border-color: var(--admin-gold);
+  box-shadow: 0 0 0 3px rgba(201, 148, 63, .13);
+}
+
+.accessLoginField input[aria-invalid='true'] {
+  border-color: var(--admin-red);
+}
+
+.accessLoginField input:disabled {
+  color: #727c89;
+  background: #f2f4f6;
+}
+
+.accessLoginForm .inlineError {
+  text-align: center;
+}
+
+.accessLoginForm .primaryButton {
+  width: 100%;
+}
+
 .eyebrow {
   margin: 0;
   color: var(--admin-gold-dark);
