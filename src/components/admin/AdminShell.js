@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { getSupabaseBrowserConnection } from '@/lib/supabase/browser';
 import styles from './Admin.module.css';
@@ -24,7 +23,6 @@ async function signOutCurrentSession(client) {
 }
 
 export default function AdminShell({ children, compact = false }) {
-  const router = useRouter();
   const [signingOut, setSigningOut] = useState(false);
   const [signOutFailed, setSignOutFailed] = useState(false);
 
@@ -41,8 +39,7 @@ export default function AdminShell({ children, compact = false }) {
       const { error } = await signOutCurrentSession(connection.client);
       if (error) throw error;
 
-      router.replace('/admin/scripts');
-      router.refresh();
+      window.location.replace('/admin/scripts');
     } catch {
       setSignOutFailed(true);
     } finally {
