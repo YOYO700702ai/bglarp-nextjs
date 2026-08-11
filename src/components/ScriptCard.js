@@ -29,9 +29,13 @@ export default function ScriptCard({ card }) {
     const [erroredSrc, setErroredSrc] = useState(null);
     const wantedSrc = card.image || FALLBACK_IMG;
     const imgSrc = erroredSrc === wantedSrc ? FALLBACK_IMG : wantedSrc;
+    const publicKey = card.slug || card.name;
+    const isFree = card.priceStatus === 'free';
+    const hasFixedPrice = card.priceStatus === 'fixed'
+        || (card.priceStatus == null && typeof card.price === 'number');
 
     return (
-        <Link href={`/scripts/${encodeURIComponent(card.name)}`} className={styles.card}>
+        <Link href={`/scripts/${encodeURIComponent(publicKey)}`} className={styles.card}>
             <div className={styles.imgWrap}>
                 <Image
                     key={imgSrc}
@@ -63,7 +67,9 @@ export default function ScriptCard({ card }) {
                         {playerRange}
                     </div>
                     <div className={styles.price}>
-                        {card.price
+                        {isFree
+                            ? <span className={styles.priceAmt}>免費</span>
+                            : hasFixedPrice
                             ? <>NT$ <span className={styles.priceAmt}>{card.price}</span> /人</>
                             : <span style={{ color: '#71717a' }}>價格未定</span>
                         }

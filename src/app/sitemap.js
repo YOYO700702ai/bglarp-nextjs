@@ -5,8 +5,10 @@ export default async function sitemap() {
   const scripts = await getAllScripts();
 
   const scriptUrls = scripts.map(s => ({
-    url: `${base}/scripts/${encodeURIComponent(s.name)}`,
-    lastModified: new Date(),
+    url: `${base}/scripts/${encodeURIComponent(s.slug || s.name)}`,
+    lastModified: s.updatedAt || s.publishedAt
+      ? new Date(s.updatedAt || s.publishedAt)
+      : undefined,
     changeFrequency: 'monthly',
     priority: 0.8,
   }));

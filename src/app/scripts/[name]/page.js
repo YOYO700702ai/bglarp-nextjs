@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import Link from 'next/link';
 import { getAllScripts } from '@/lib/scripts';
 import { getScriptExperience, getCharacterImage } from '@/lib/scriptExperiences';
@@ -6,14 +6,18 @@ import styles from './page.module.css';
 
 export async function generateMetadata({ params }) {
   const { name: rawName } = await params;
-  const name = decodeURIComponent(rawName);
+  const publicKey = rawName;
   const scripts = await getAllScripts();
-  const script = scripts.find(s => s.name === name);
+  const script = scripts.find(s => s.slug === publicKey)
+    || scripts.find(s => s.name === publicKey);
   if (!script) return { title: '劇本未找到 | BGLARP' };
   const desc = script.synopsis?.replace(/\n/g, ' ').slice(0, 120) || `台中 BGLARP 實境推理館 - ${script.name}`;
   return {
     title: `${script.name} | BGLARP 實境推理館`,
     description: desc,
+    alternates: {
+      canonical: `/scripts/${encodeURIComponent(script.slug || script.name)}`,
+    },
     openGraph: {
       title: `${script.name} | BGLARP 實境推理館`,
       description: desc,
@@ -24,7 +28,7 @@ export async function generateMetadata({ params }) {
 
 export async function generateStaticParams() {
   const scripts = await getAllScripts();
-  return scripts.map(s => ({ name: s.name }));
+  return scripts.map(s => ({ name: s.slug || s.name }));
 }
 
 export const dynamicParams = true;
@@ -34,14 +38,22 @@ const fallback = 'https://images.unsplash.com/photo-1505635552518-3448ff116af3?q
 
 export default async function ScriptPage({ params }) {
   const { name: rawName } = await params;
-  const name = decodeURIComponent(rawName);
+  const publicKey = rawName;
   const scripts = await getAllScripts();
-  const card = scripts.find(s => s.name === name);
+  const card = scripts.find(s => s.slug === publicKey)
+    || scripts.find(s => s.name === publicKey);
   if (!card) notFound();
+  if (card.slug && publicKey !== card.slug) {
+    permanentRedirect(`/scripts/${encodeURIComponent(card.slug)}`);
+  }
   const experience = getScriptExperience(card.name);
 
   const dur = card.duration || '未標示';
-  const price = card.price ? `NT$ ${card.price}/人` : '價格未定';
+  const price = card.priceStatus === 'free'
+    ? '免費'
+    : ((card.priceStatus === 'fixed' || (card.priceStatus == null && typeof card.price === 'number'))
+      ? `NT$ ${card.price}/人`
+      : '價格未定');
   const playersStr = (card.players || []).join(', ');
   const baseTags = Array.isArray(card.genre) ? card.genre : [];
   const customTextArr = card.customTags ? card.customTags.replace(/\//g, ',').replace(/、/g, ',').split(',').map(t => t.trim()).filter(Boolean) : [];
