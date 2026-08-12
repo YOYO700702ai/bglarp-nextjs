@@ -4,13 +4,43 @@ import { getAllScripts } from '@/lib/scripts';
 import { getScriptExperience, getCharacterImage } from '@/lib/scriptExperiences';
 import styles from './page.module.css';
 
+function routeKeyCandidates(rawName) {
+  const candidates = [rawName];
+
+  try {
+    const decodedName = decodeURIComponent(rawName);
+    if (!candidates.includes(decodedName)) candidates.push(decodedName);
+  } catch {
+    // A literal or malformed percent sign is still a valid legacy route key.
+  }
+
+  return candidates;
+}
+
+function findScriptByRoute(scripts, rawName) {
+  const candidates = routeKeyCandidates(rawName);
+
+  // Slugs are canonical. Only fall back to a legacy title after every slug
+  // candidate has been checked, so a title can never shadow another slug.
+  for (const publicKey of candidates) {
+    const script = scripts.find(item => item.slug === publicKey);
+    if (script) return { script, publicKey };
+  }
+
+  for (const publicKey of candidates) {
+    const script = scripts.find(item => item.name === publicKey);
+    if (script) return { script, publicKey };
+  }
+
+  return null;
+}
+
 export async function generateMetadata({ params }) {
   const { name: rawName } = await params;
-  const publicKey = rawName;
   const scripts = await getAllScripts();
-  const script = scripts.find(s => s.slug === publicKey)
-    || scripts.find(s => s.name === publicKey);
-  if (!script) return { title: '劇本未找到 | BGLARP' };
+  const match = findScriptByRoute(scripts, rawName);
+  if (!match) return { title: '劇本未找到 | BGLARP' };
+  const { script } = match;
   const desc = script.synopsis?.replace(/\n/g, ' ').slice(0, 120) || `台中 BGLARP 實境推理館 - ${script.name}`;
   return {
     title: `${script.name} | BGLARP 實境推理館`,
@@ -38,11 +68,10 @@ const fallback = 'https://images.unsplash.com/photo-1505635552518-3448ff116af3?q
 
 export default async function ScriptPage({ params }) {
   const { name: rawName } = await params;
-  const publicKey = rawName;
   const scripts = await getAllScripts();
-  const card = scripts.find(s => s.slug === publicKey)
-    || scripts.find(s => s.name === publicKey);
-  if (!card) notFound();
+  const match = findScriptByRoute(scripts, rawName);
+  if (!match) notFound();
+  const { script: card, publicKey } = match;
   if (card.slug && publicKey !== card.slug) {
     permanentRedirect(`/scripts/${encodeURIComponent(card.slug)}`);
   }
