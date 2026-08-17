@@ -152,6 +152,26 @@ export default async function ScriptPage({ params }) {
           ))}
         </div>
 
+        {experience?.video && (
+          <section className={styles.videoSection} aria-labelledby="script-video-title">
+            <div className={styles.sectionTitle} id="script-video-title">故事影片</div>
+            <div className={styles.videoFrame}>
+              <video
+                className={styles.scriptVideo}
+                controls
+                playsInline
+                preload="metadata"
+                poster={experience.video.poster}
+                aria-label={experience.video.title}
+              >
+                <source src={experience.video.src} type="video/mp4" />
+                您的瀏覽器不支援影片播放。
+              </video>
+            </div>
+            <p className={styles.videoCaption}>{experience.video.title}</p>
+          </section>
+        )}
+
         {/* Characters */}
         {charLines.length > 0 && (
           <>

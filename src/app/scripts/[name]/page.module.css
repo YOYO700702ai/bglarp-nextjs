@@ -255,6 +255,36 @@
     margin: 0 0 12px 0;
 }
 
+/* Story video */
+.videoSection {
+    margin-bottom: 28px;
+}
+
+.videoFrame {
+    margin: 0 20px;
+    overflow: hidden;
+    border: 1px solid rgba(180, 35, 35, 0.46);
+    border-radius: 8px;
+    background: #030303;
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.44);
+}
+
+.scriptVideo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    background: #030303;
+}
+
+.videoCaption {
+    margin: 9px 20px 0;
+    color: #a1a1aa;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-align: right;
+}
+
 /* Characters */
 .charGrid {
     display: grid;
