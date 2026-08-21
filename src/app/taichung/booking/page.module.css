@@ -1,0 +1,152 @@
+.page {
+  min-height: 100vh;
+  background: #09130f;
+}
+
+.hero {
+  padding: 8.5rem 1.2rem 5rem;
+  border-bottom: 1px solid rgba(143, 168, 115, 0.14);
+  background:
+    linear-gradient(105deg, rgba(4, 10, 8, 0.96), rgba(8, 25, 18, 0.78)),
+    radial-gradient(circle at 80% 30%, rgba(232, 166, 59, 0.16), transparent 32%),
+    url('/hero-cover.jpg') center / cover;
+}
+
+.inner,
+.processInner {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  display: flex;
+  gap: 0.55rem;
+  margin-bottom: 2rem;
+  color: #7f9581;
+  font-size: 0.76rem;
+}
+
+.breadcrumb a {
+  color: #b9caaa;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: #e8a63b;
+}
+
+.kicker {
+  color: #e8a63b;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+}
+
+.hero h1 {
+  max-width: 850px;
+  margin: 0.7rem 0 1rem;
+  color: #fff1cf;
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(2.2rem, 6vw, 4.6rem);
+  line-height: 1.16;
+  letter-spacing: 0.05em;
+}
+
+.hero p {
+  max-width: 760px;
+  margin: 0;
+  color: #c2d1bd;
+  font-size: 0.94rem;
+  line-height: 1.95;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.7rem;
+}
+
+.actions a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.72rem 1.05rem;
+  border: 1px solid rgba(232, 166, 59, 0.48);
+  border-radius: 4px;
+  color: #f0c66f;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-decoration: none;
+}
+
+.actions a:first-child {
+  border-color: #e8a63b;
+  background: #e8a63b;
+  color: #142b24;
+}
+
+.process {
+  padding: 4.5rem 1.2rem;
+  background:
+    radial-gradient(circle at 10% 25%, rgba(232, 166, 59, 0.07), transparent 25%),
+    #0b1712;
+}
+
+.process header {
+  margin-bottom: 1.6rem;
+}
+
+.process h2 {
+  margin: 0.55rem 0 0;
+  color: #d5e4c3;
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(1.8rem, 4vw, 2.75rem);
+}
+
+.stepGrid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.stepCard {
+  position: relative;
+  min-height: 190px;
+  padding: 1.35rem 1.25rem 1.35rem 4.2rem;
+  border: 1px solid rgba(143, 168, 115, 0.2);
+  border-radius: 7px;
+  background: rgba(4, 11, 8, 0.6);
+}
+
+.stepCard > span {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.2rem;
+  color: #e8a63b;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.stepCard h3 {
+  margin: 0;
+  color: #fff1cf;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.stepCard p {
+  margin: 0.7rem 0 0;
+  color: #9ead9c;
+  font-size: 0.84rem;
+  line-height: 1.8;
+}
+
+@media (min-width: 760px) {
+  .stepGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

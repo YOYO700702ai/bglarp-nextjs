@@ -9,7 +9,7 @@ export default function HeroVideo() {
     const src = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
 
     return (
-        <section className={styles.wrap} aria-label="主視覺影片">
+        <section className={styles.wrap} aria-labelledby="home-hero-title">
             <div className={styles.frame}>
                 {playing ? (
                     <iframe
@@ -26,7 +26,11 @@ export default function HeroVideo() {
                         onClick={() => setPlaying(true)}
                         aria-label="播放主視覺影片"
                     >
-                        <img src="/hero-cover.jpg" alt="" className={styles.posterImg} />
+                        <img
+                            src="/hero-cover.jpg"
+                            alt="BGLARP 台中一中街劇本殺場館主視覺"
+                            className={styles.posterImg}
+                        />
                         <span className={styles.playBtn} aria-hidden="true">
                             <svg viewBox="0 0 64 64" width="48" height="48">
                                 <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.55)" stroke="#E8A63B" strokeWidth="2" />
@@ -35,6 +39,14 @@ export default function HeroVideo() {
                         </span>
                     </button>
                 )}
+            </div>
+            <div className={styles.heroCopy}>
+                <span>TAICHUNG IMMERSIVE MYSTERY</span>
+                <h1 id="home-hero-title">台中一中街劇本殺｜BGLARP 實境推理館</h1>
+                <p>
+                    從同行人數、喜歡的故事類型與可遊玩時間開始，
+                    挑選適合這次聚會的沉浸式推理體驗。
+                </p>
             </div>
             <div className={styles.gradTop} />
             <div className={styles.gradBottom} />
