@@ -16,37 +16,41 @@ export default async function sitemap() {
   return [
     {
       url: base,
-      lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
+      url: `${base}/scripts`,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${base}/taichung/booking`,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${base}/hanmen-quiz`,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${base}/evil-flower-quiz`,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${base}/comet-yuanwu-quiz`,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${base}/no-more-heartbreak-quiz`,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${base}/qiuji-quiz`,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },

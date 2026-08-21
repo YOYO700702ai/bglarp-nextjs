@@ -1,0 +1,237 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0;
+  border-top: 1px solid rgba(143, 168, 115, 0.1);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(232, 166, 59, 0.08), transparent 28%),
+    radial-gradient(circle at 88% 72%, rgba(45, 90, 74, 0.18), transparent 32%),
+    #0a1511;
+  scroll-margin-top: 78px;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 2.4rem));
+  margin: 0 auto;
+}
+
+.header {
+  display: grid;
+  gap: 1.25rem;
+  padding-bottom: 1.7rem;
+  border-bottom: 1px solid rgba(213, 228, 195, 0.12);
+}
+
+.kicker,
+.faqHeading span {
+  color: #e8a63b;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+}
+
+.header h2,
+.faqHeading h3 {
+  margin: 0.55rem 0 0;
+  color: #d5e4c3;
+  font-family: 'Noto Serif TC', serif;
+  letter-spacing: 0.08em;
+}
+
+.header h2 {
+  max-width: 760px;
+  font-size: clamp(2rem, 5vw, 3.35rem);
+  line-height: 1.24;
+}
+
+.header > p {
+  max-width: 620px;
+  margin: 0;
+  color: #aab7a7;
+  font-size: 0.92rem;
+  line-height: 1.9;
+}
+
+.startGrid {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.startCard {
+  position: relative;
+  padding: 1.2rem 1.15rem 1.25rem 4rem;
+  border: 1px solid rgba(143, 168, 115, 0.18);
+  border-radius: 8px;
+  background: rgba(8, 15, 12, 0.58);
+}
+
+.startCard > span {
+  position: absolute;
+  top: 1.1rem;
+  left: 1.15rem;
+  color: #e8a63b;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.startCard h3 {
+  margin: 0;
+  color: #fff1cf;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+}
+
+.startCard p {
+  margin: 0.5rem 0 0;
+  color: #9eada0;
+  font-size: 0.82rem;
+  line-height: 1.75;
+}
+
+.faqBlock {
+  display: grid;
+  gap: 1.3rem;
+  margin-top: 2.5rem;
+}
+
+.faqHeading h3 {
+  font-size: clamp(1.55rem, 4vw, 2.2rem);
+}
+
+.faqList {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.faqItem {
+  border: 1px solid rgba(213, 228, 195, 0.13);
+  border-radius: 7px;
+  background: rgba(5, 12, 9, 0.56);
+}
+
+.faqItem[open] {
+  border-color: rgba(232, 166, 59, 0.36);
+  background: rgba(232, 166, 59, 0.055);
+}
+
+.faqItem summary {
+  position: relative;
+  padding: 1rem 3.2rem 1rem 1rem;
+  color: #d5e4c3;
+  cursor: pointer;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  list-style: none;
+}
+
+.faqItem summary::-webkit-details-marker {
+  display: none;
+}
+
+.faqItem summary::after {
+  position: absolute;
+  top: 50%;
+  right: 1.1rem;
+  color: #e8a63b;
+  content: '+';
+  font-size: 1.35rem;
+  transform: translateY(-50%);
+}
+
+.faqItem[open] summary::after {
+  content: '−';
+}
+
+.faqItem p {
+  margin: 0;
+  padding: 0 1rem 1.1rem;
+  color: #aab7a7;
+  font-size: 0.86rem;
+  line-height: 1.9;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 2rem;
+}
+
+.actions a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.1rem;
+  border-radius: 5px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.actions a:hover {
+  transform: translateY(-2px);
+}
+
+.primaryAction {
+  border: 1px solid #e8a63b;
+  background: #e8a63b;
+  color: #142b24;
+}
+
+.secondaryAction {
+  border: 1px solid rgba(232, 166, 59, 0.42);
+  color: #f0c66f;
+}
+
+.secondaryAction:hover {
+  border-color: #e8a63b;
+  background: rgba(232, 166, 59, 0.08);
+}
+
+@media (min-width: 720px) {
+  .header {
+    grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+    align-items: end;
+  }
+
+  .header > p {
+    justify-self: end;
+  }
+
+  .startGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .faqBlock {
+    grid-template-columns: minmax(210px, 0.35fr) minmax(0, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .section {
+    padding: 4rem 0;
+  }
+
+  .container {
+    width: min(100% - 1.6rem, 1180px);
+  }
+
+  .actions {
+    display: grid;
+  }
+
+  .actions a {
+    width: 100%;
+  }
+}

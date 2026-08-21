@@ -2,6 +2,8 @@ import { notFound, permanentRedirect } from 'next/navigation';
 import Link from 'next/link';
 import { getAllScripts } from '@/lib/scripts';
 import { getScriptExperience, getCharacterImage } from '@/lib/scriptExperiences';
+import JsonLd from '@/components/JsonLd';
+import { buildScriptJsonLd } from '@/lib/seo';
 import styles from './page.module.css';
 
 function routeKeyCandidates(rawName) {
@@ -51,6 +53,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: `${script.name} | BGLARP 實境推理館`,
       description: desc,
+      url: `/scripts/${encodeURIComponent(script.slug || script.name)}`,
       images: script.image ? [{ url: script.image }] : [],
     },
   };
@@ -90,9 +93,11 @@ export default async function ScriptPage({ params }) {
   const allTags = Array.from(new Set([...(card.players || []), ...tags]));
   const paragraphs = (card.synopsis || '（資料未建立）').split('\n').filter(p => p.trim());
   const charLines = (card.characters || '').split('\n').filter(l => l.trim());
+  const scriptJsonLd = buildScriptJsonLd(card);
 
   return (
     <div className={styles.page}>
+      <JsonLd id="bglarp-script-jsonld" data={scriptJsonLd} />
       <nav className={styles.backBar}>
         <Link href="/" className={styles.backLink}>
           ← 返回劇本列表
