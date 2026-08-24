@@ -4,12 +4,12 @@ import BookingSection from '@/components/BookingSection';
 import Footer from '@/components/Footer';
 import FloatingBookBtn from '@/components/FloatingBookBtn';
 import JsonLd from '@/components/JsonLd';
-import { BOOKING_PAGE_JSON_LD } from '@/lib/seo';
+import { BOOKING_FAQS, BOOKING_PAGE_JSON_LD } from '@/lib/seo';
 import styles from './page.module.css';
 
 export const metadata = {
   title: '台中一中街劇本殺預約 | BGLARP 實境推理館',
-  description: 'BGLARP 採全預約制，建議至少提前 3 天私訊或致電，提供日期、時段、人數與劇本偏好。',
+  description: 'BGLARP 採全預約制，建議至少提前 3 天私訊或致電；店家訊息回覆確認後，預約才算成立。',
   alternates: { canonical: '/taichung/booking' },
   openGraph: {
     title: '台中一中街劇本殺預約 | BGLARP',
@@ -33,7 +33,7 @@ const STEPS = [
   {
     number: '03',
     title: '由店家回覆確認場次',
-    text: '場次、遊戲時長與最終費用以預約回覆為準，確認完成後再安排行程。',
+    text: '店家透過訊息回覆確認後，預約才算成立；場次、遊戲時長與最終費用以該次回覆為準。',
   },
 ];
 
@@ -55,7 +55,7 @@ export default function BookingPage() {
             <h1>台中一中街劇本殺預約</h1>
             <p>
               BGLARP 實境推理館採全預約制，建議至少提前 3 天聯絡。
-              預約時提供日期、時段、人數，以及想玩的劇本或偏好類型，可以更快完成場次確認。
+              預約時提供日期、時段、人數，以及想玩的劇本或偏好類型；店家訊息回覆確認後，預約才算成立。
             </p>
             <div className={styles.actions}>
               <a href="https://m.me/bglarp.studio" target="_blank" rel="noopener noreferrer">開啟 Messenger 私訊</a>
@@ -78,6 +78,23 @@ export default function BookingPage() {
                   <h3>{step.title}</h3>
                   <p>{step.text}</p>
                 </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" className={styles.faqSection} aria-labelledby="booking-faq-title">
+          <div className={styles.faqInner}>
+            <header>
+              <span className={styles.kicker}>BEFORE YOU ARRIVE</span>
+              <h2 id="booking-faq-title">預約與到店常見問題</h2>
+            </header>
+            <div className={styles.faqList}>
+              {BOOKING_FAQS.map(item => (
+                <details key={item.question} className={styles.faqItem}>
+                  <summary>{item.question}</summary>
+                  <p>{item.answer}</p>
+                </details>
               ))}
             </div>
           </div>

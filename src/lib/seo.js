@@ -8,19 +8,21 @@ export const SITE_URL = 'https://www.bglarp.com';
 
 export const BUSINESS_ID = `${SITE_URL}/#business`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
+export const GROUP_BOOKING_SERVICE_ID = `${SITE_URL}/#group-booking-service`;
+export const BUSINESS_HOURS_TEXT = '週一至週五 12:00–22:00；週六、週日 10:00–22:00';
 
 export const PLAYER_FAQS = [
   {
     question: '劇本殺是什麼？第一次玩需要先準備嗎？',
-    answer: '劇本殺是由玩家分別扮演故事角色，透過閱讀、交流、推理與演繹，一起找出事件真相或完成角色目標的沉浸式遊戲。第一次玩不需要預習；預約時告訴我們是新手，我們會依人數與喜好推薦適合、價格好入門的劇本，再由親切、專業的 GM 帶領遊戲。',
+    answer: '劇本殺是由玩家分別扮演故事角色，透過閱讀、交流、推理與演繹，一起找出事件真相或完成角色目標的沉浸式遊戲。第一次玩不需要預習；可以先從官網標示「新手」的劇本開始，或在預約時告訴我們是新手，我們會依人數與喜好推薦適合、價格好入門的劇本，再由親切、專業的 GM 帶領遊戲。',
   },
   {
     question: '怎麼選適合自己的劇本？',
-    answer: '先確認同行人數，再決定偏好推理還原、情感沉浸、歡樂互動或陣營對抗，最後確認可接受的遊戲時間與價格。BGLARP 每本劇本頁都會標示人數、類型、預估時長與收費，無法決定時也可以在預約訊息中請我們推薦。',
+    answer: '先確認同行人數，再決定偏好推理還原、情感沉浸、歡樂互動或陣營對抗，最後確認可接受的遊戲時間與價格。官方新手推薦以劇本卡及詳細頁顯示的「新手」標籤為準，名單會隨上映內容更新；無法決定時也可以在預約訊息中請我們推薦。',
   },
   {
     question: '一場需要幾位玩家？人數不足可以玩嗎？',
-    answer: '每本劇本需要的人數不同，請以該劇本頁面顯示的人數限制為準。劇本的角色數通常與玩家人數相對應；如果尚未確定人數，建議先私訊告知目前人數，再一起挑選可安排的劇本。',
+    answer: '每本劇本需要的人數不同，玩家需自行組滿該劇本頁面標示的人數；單人或人數不足無法直接開場。如果尚未組滿，可以提早私訊店家詢問相關揪團群組資訊，但不保證一定能成團。',
   },
   {
     question: '遊戲時間與費用是多少？',
@@ -28,7 +30,7 @@ export const PLAYER_FAQS = [
   },
   {
     question: '要提前多久預約？怎麼預約？',
-    answer: 'BGLARP 採全預約制，建議至少提前 3 天，透過 BGLARP Facebook 專頁私訊或致電（04）2225-0020 預約。預約時請提供日期、時段、人數，以及想玩的劇本或偏好類型。',
+    answer: 'BGLARP 採全預約制，建議至少提前 3 天，透過 BGLARP Facebook 專頁私訊或致電（04）2225-0020 預約。預約時請提供日期、時段、人數，以及想玩的劇本或偏好類型；店家透過訊息回覆確認場次後，預約才算成立。',
   },
   {
     question: '玩劇本殺需要自己準備服裝嗎？',
@@ -36,7 +38,46 @@ export const PLAYER_FAQS = [
   },
   {
     question: 'BGLARP 在哪裡？',
-    answer: 'BGLARP 實境推理館位於台中市北區太平路 19 巷 1 號 3 樓，鄰近一中街商圈。建議提早 5 分鐘抵達，預留上樓與場前準備時間。',
+    answer: 'BGLARP 實境推理館位於台中市北區太平路 19 巷 1 號 3 樓，鄰近一中街商圈。場館僅能走樓梯抵達，建議提早 5 分鐘到場，預留上樓與場前準備時間。',
+  },
+];
+
+export const BOOKING_FAQS = [
+  {
+    question: '營業時間與客服回覆時間是什麼時候？',
+    answer: `${BUSINESS_HOURS_TEXT}。BGLARP 採全預約制，特殊假日如有異動，以店家公告與預約回覆為準；客服訊息的實際回覆時間也以店家回覆為準。`,
+  },
+  {
+    question: '附近可以停車嗎？',
+    answer: 'BGLARP 沒有合作停車場。場館正對面及附近有民營收費停車場，其中鄰近一處目前為每小時 NT$20；費率與空位可能變動，請以停車場現場公告為準。',
+  },
+  {
+    question: '可以舉辦生日、包場、公司或學校團體活動嗎？',
+    answer: '可以。BGLARP 承接生日聚會、朋友私人包場、公司團建與校園社團活動；可安排的劇本、人數、時段與費用請先私訊確認。',
+  },
+  {
+    question: '傳送預約訊息後，場次就成立了嗎？',
+    answer: '還沒有。收到店家訊息回覆並確認場次後，預約才算成立。',
+  },
+  {
+    question: '預約後可以取消或改期嗎？',
+    answer: '取消或改期會依場次與實際情況個別處理，請儘早聯絡店家確認。',
+  },
+  {
+    question: '玩家遲到會怎麼處理？',
+    answer: '會依劇本流程與當日排程處理，可能縮短遊戲時間；尖峰假日若影響後續場次，也可能取消場次。若可能遲到，請儘早聯絡店家。',
+  },
+  {
+    question: '玩家有年齡限制嗎？',
+    answer: '原則上至少 12 歲；少數劇本限制 18 歲以上。適用年齡依各劇本規定，預約時請向店家再次確認。',
+  },
+  {
+    question: '恐怖、NPC／肢體互動或敏感內容會事先提醒嗎？',
+    answer: '如劇本涉及恐怖、NPC／肢體互動或其他需注意內容，店家會在預約與場次確認過程中提醒；如有在意的內容，請在選本前先提出。',
+  },
+  {
+    question: '場館有電梯嗎？',
+    answer: '沒有。BGLARP 位於 3 樓，僅能由樓梯抵達；如有行動需求，請在預約前先評估。',
   },
 ];
 
@@ -61,6 +102,29 @@ const businessJsonLd = {
     '@type': 'City',
     name: '台中市',
   },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'https://schema.org/Monday',
+        'https://schema.org/Tuesday',
+        'https://schema.org/Wednesday',
+        'https://schema.org/Thursday',
+        'https://schema.org/Friday',
+      ],
+      opens: '12:00',
+      closes: '22:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'https://schema.org/Saturday',
+        'https://schema.org/Sunday',
+      ],
+      opens: '10:00',
+      closes: '22:00',
+    },
+  ],
   hasMap: 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%8D%80%E5%A4%AA%E5%B9%B3%E8%B7%AF19%E5%B7%B71%E8%99%9F3%E6%A8%93',
   sameAs: [
     'https://www.facebook.com/bglarp.studio/',
@@ -75,10 +139,25 @@ const businessJsonLd = {
   },
 };
 
+const groupBookingServiceJsonLd = {
+  '@type': 'Service',
+  '@id': GROUP_BOOKING_SERVICE_ID,
+  name: 'BGLARP 劇本殺團體預約',
+  description: 'BGLARP 承接生日聚會、私人包場、公司團建與校園社團活動，可安排內容以店家訊息回覆為準。',
+  serviceType: ['生日聚會', '私人包場', '公司團建', '校園社團活動'],
+  provider: { '@id': BUSINESS_ID },
+  areaServed: {
+    '@type': 'City',
+    name: '台中市',
+  },
+  url: `${SITE_URL}/taichung/booking`,
+};
+
 export const ROOT_JSON_LD = {
   '@context': 'https://schema.org',
   '@graph': [
     businessJsonLd,
+    groupBookingServiceJsonLd,
     {
       '@type': 'WebSite',
       '@id': WEBSITE_ID,
@@ -178,11 +257,29 @@ export const BOOKING_PAGE_JSON_LD = {
       '@id': `${SITE_URL}/taichung/booking#webpage`,
       url: `${SITE_URL}/taichung/booking`,
       name: '台中一中街劇本殺預約 | BGLARP 實境推理館',
-      description: 'BGLARP 採全預約制，建議至少提前 3 天私訊或致電，提供日期、時段、人數與劇本偏好。',
+      description: 'BGLARP 採全預約制，建議至少提前 3 天私訊或致電，提供日期、時段、人數與劇本偏好；店家訊息回覆確認後，預約才算成立。',
       inLanguage: 'zh-Hant-TW',
       isPartOf: { '@id': WEBSITE_ID },
       about: { '@id': BUSINESS_ID },
+      mainEntity: [
+        { '@id': GROUP_BOOKING_SERVICE_ID },
+        { '@id': `${SITE_URL}/taichung/booking#faq` },
+      ],
       breadcrumb: { '@id': `${SITE_URL}/taichung/booking#breadcrumb` },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${SITE_URL}/taichung/booking#faq`,
+      url: `${SITE_URL}/taichung/booking#faq`,
+      inLanguage: 'zh-Hant-TW',
+      mainEntity: BOOKING_FAQS.map(({ question, answer }) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: answer,
+        },
+      })),
     },
     {
       '@type': 'BreadcrumbList',
