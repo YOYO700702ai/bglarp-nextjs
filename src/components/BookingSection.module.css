@@ -73,12 +73,20 @@
     font-size: 0.85rem;
 }
 
-.contactItem a {
+.contactItem a,
+.contactItem p {
     color: #7A9968;
     text-decoration: none;
     font-size: 0.8rem;
     letter-spacing: 0.05em;
     line-height: 1.6;
+}
+
+.contactItem p {
+    margin: 0;
+}
+
+.contactItem a {
     transition: color 0.2s;
 }
 
