@@ -2,6 +2,11 @@ import { notFound, permanentRedirect } from 'next/navigation';
 import Link from 'next/link';
 import { getAllScripts } from '@/lib/scripts';
 import { getScriptExperience, getCharacterImage } from '@/lib/scriptExperiences';
+import {
+  FLAGSHIP_PRICE_MIN,
+  FLAGSHIP_SCRIPT_LABEL,
+  isFlagshipScript,
+} from '@/lib/scriptClassification';
 import JsonLd from '@/components/JsonLd';
 import { buildScriptJsonLd } from '@/lib/seo';
 import styles from './page.module.css';
@@ -43,7 +48,8 @@ export async function generateMetadata({ params }) {
   const match = findScriptByRoute(scripts, rawName);
   if (!match) return { title: '劇本未找到 | BGLARP' };
   const { script } = match;
-  const desc = script.synopsis?.replace(/\n/g, ' ').slice(0, 120) || `台中 BGLARP 實境推理館 - ${script.name}`;
+  const baseDesc = script.synopsis?.replace(/\n/g, ' ').slice(0, 120) || `台中 BGLARP 實境推理館 - ${script.name}`;
+  const desc = `${isFlagshipScript(script) ? `每人定價 NT$${FLAGSHIP_PRICE_MIN}（含）以上的旗艦劇本。` : ''}${baseDesc}`.slice(0, 155);
   return {
     title: `${script.name} | BGLARP 實境推理館`,
     description: desc,
@@ -79,6 +85,7 @@ export default async function ScriptPage({ params }) {
     permanentRedirect(`/scripts/${encodeURIComponent(card.slug)}`);
   }
   const experience = getScriptExperience(card.name);
+  const isFlagship = isFlagshipScript(card);
 
   const dur = card.duration || '未標示';
   const price = card.priceStatus === 'free'
@@ -90,7 +97,11 @@ export default async function ScriptPage({ params }) {
   const baseTags = Array.isArray(card.genre) ? card.genre : [];
   const customTextArr = card.customTags ? card.customTags.replace(/\//g, ',').replace(/、/g, ',').split(',').map(t => t.trim()).filter(Boolean) : [];
   const tags = Array.from(new Set([...baseTags, ...customTextArr]));
-  const allTags = Array.from(new Set([...(card.players || []), ...tags]));
+  const allTags = Array.from(new Set([
+    ...(isFlagship ? [FLAGSHIP_SCRIPT_LABEL] : []),
+    ...(card.players || []),
+    ...tags,
+  ]));
   const paragraphs = (card.synopsis || '（資料未建立）').split('\n').filter(p => p.trim());
   const charLines = (card.characters || '').split('\n').filter(l => l.trim());
   const scriptJsonLd = buildScriptJsonLd(card);
