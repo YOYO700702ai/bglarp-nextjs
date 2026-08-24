@@ -1,3 +1,9 @@
+import {
+  FLAGSHIP_PRICE_MIN,
+  FLAGSHIP_SCRIPT_LABEL,
+  isFlagshipScript,
+} from '@/lib/scriptClassification';
+
 export const SITE_URL = 'https://www.bglarp.com';
 
 export const BUSINESS_ID = `${SITE_URL}/#business`;
@@ -6,7 +12,7 @@ export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const PLAYER_FAQS = [
   {
     question: '劇本殺是什麼？第一次玩需要先準備嗎？',
-    answer: '劇本殺是由玩家分別扮演故事角色，透過閱讀、交流、推理與演繹，一起找出事件真相或完成角色目標的沉浸式遊戲。第一次玩不需要預習；預約時告訴我們是新手，我們會依人數與喜好推薦合適的入門劇本。',
+    answer: '劇本殺是由玩家分別扮演故事角色，透過閱讀、交流、推理與演繹，一起找出事件真相或完成角色目標的沉浸式遊戲。第一次玩不需要預習；預約時告訴我們是新手，我們會依人數與喜好推薦適合、價格好入門的劇本，再由親切、專業的 GM 帶領遊戲。',
   },
   {
     question: '怎麼選適合自己的劇本？',
@@ -18,7 +24,7 @@ export const PLAYER_FAQS = [
   },
   {
     question: '遊戲時間與費用是多少？',
-    answer: '不同劇本的遊戲時間與收費各不相同。每本劇本的詳細頁面都會列出預估時長及每人收費；實際場次與最終費用請在預約時再次確認。',
+    answer: `一般新手劇本每人約 NT$450–600；每人 NT$${FLAGSHIP_PRICE_MIN}（含）以上歸類為旗艦劇本，目前最高約 NT$2,200。演員 NPC 配置、遊戲時長與實際費用請以個別劇本頁及預約確認為準。`,
   },
   {
     question: '要提前多久預約？怎麼預約？',
@@ -39,11 +45,11 @@ const businessJsonLd = {
   '@id': BUSINESS_ID,
   name: 'BGLARP 實境推理館',
   alternateName: 'BGLARP',
-  description: '台中一中街劇本殺、沉浸劇場、狼人殺與陣營遊戲，全預約制實境推理體驗。',
+  description: '台中一中街全預約制實境推理體驗，提供新手友善的選本協助、親切專業的 GM 帶場，以及一般新手劇本每人約 NT$450–600 的入門選擇。',
   url: SITE_URL,
   telephone: '+886-4-2225-0020',
   image: `${SITE_URL}/hero-cover.jpg`,
-  priceRange: 'NT$400-NT$2000',
+  priceRange: 'NT$450–2,200／人',
   address: {
     '@type': 'PostalAddress',
     streetAddress: '北區太平路19巷1號3樓',
@@ -60,7 +66,7 @@ const businessJsonLd = {
     'https://www.facebook.com/bglarp.studio/',
     'https://www.instagram.com/bglarp.studio/',
   ],
-  knowsAbout: ['劇本殺', '沉浸式劇場', '實境推理', '狼人殺', '陣營遊戲'],
+  knowsAbout: ['劇本殺', '劇本殺新手推薦', '沉浸式劇場', '實境推理', '狼人殺', '陣營遊戲'],
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: '+886-4-2225-0020',
@@ -243,6 +249,10 @@ export function buildScriptJsonLd(card) {
   const genres = Array.isArray(card.genre)
     ? card.genre.map(item => cleanText(item)).filter(Boolean)
     : [];
+  const isFlagship = isFlagshipScript(card);
+  const categories = isFlagship
+    ? [...new Set([FLAGSHIP_SCRIPT_LABEL, ...genres])]
+    : (genres.length ? genres : ['劇本殺', '實境推理']);
 
   const offer = scriptOffer(card, pageUrl);
   const stableImage = structuredImageUrl(card.image);
@@ -253,8 +263,10 @@ export function buildScriptJsonLd(card) {
     description,
     url: pageUrl,
     ...(stableImage ? { image: stableImage } : {}),
-    serviceType: genres.length ? genres.join('、') : '劇本殺沉浸式推理體驗',
-    category: genres.length ? genres : ['劇本殺', '實境推理'],
+    serviceType: isFlagship
+      ? `${FLAGSHIP_SCRIPT_LABEL}${genres.length ? `｜${genres.join('、')}` : ''}`
+      : (genres.length ? genres.join('、') : '劇本殺沉浸式推理體驗'),
+    category: categories,
     provider: { '@id': BUSINESS_ID },
     areaServed: {
       '@type': 'City',

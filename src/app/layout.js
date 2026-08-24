@@ -6,13 +6,13 @@ import './globals.css';
 export const metadata = {
   metadataBase: new URL('https://www.bglarp.com'),
   title: 'BGLARP 實境推理館 | 台中劇本殺・沉浸劇場・狼人殺・陣營遊戲',
-  description: '台中一中街 BGLARP 實境推理館。打破現實與虛構的邊界，走進專屬場景演繹你的第二人生。劇本殺、沉浸劇場、狼人殺、陣營遊戲一次滿足。',
+  description: '台中一中街 BGLARP 實境推理館，提供新手友善的選本協助、親切專業的 GM 帶場，以及一般新手劇本每人約 NT$450–600 的入門選擇。',
   keywords: '劇本殺, 沉浸劇場, 狼人殺, 陣營遊戲, LARP, 實境推理, 台中劇本殺, 一中街劇本殺, BGLARP',
   icons: { icon: '/favicon.ico' },
   verification: { google: 'FgTNUir7Fyy9YwREQaCB4vwgPX1DAdy6LP9i88s7tp4' },
   openGraph: {
     title: 'BGLARP 實境推理館 | 台中劇本殺・沉浸劇場',
-    description: '台中一中街 BGLARP 實境推理館。打破現實與虛構的邊界，走進專屬場景演繹你的第二人生。',
+    description: '第一次玩也不用先做功課；BGLARP 提供新手友善的選本協助、親切專業的 GM 帶場，以及價格好入門的劇本選擇。',
     url: 'https://www.bglarp.com',
     siteName: 'BGLARP 實境推理館',
     locale: 'zh_TW',

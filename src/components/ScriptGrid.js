@@ -2,10 +2,11 @@
 import { useState, useEffect } from 'react';
 import ScriptCard from './ScriptCard';
 import { getScriptExperience } from '@/lib/scriptExperiences';
+import { FLAGSHIP_PRICE_MIN, isFlagshipScript } from '@/lib/scriptClassification';
 import styles from './ScriptGrid.module.css';
 
-const TABS = ['現正熱映', '奢華劇本區', '心測專區', '限時活動'];
-const LUXURY_PRICE_THRESHOLD = 1000;
+const FLAGSHIP_TAB = '旗艦劇本區';
+const TABS = ['現正熱映', FLAGSHIP_TAB, '心測專區', '限時活動'];
 const FACEBOOK_PAGE_URL = 'https://www.facebook.com/bglarp.studio/';
 const FEATURED_ACTIVITY = {
     videoId: '6bYtqkPyz90',
@@ -24,13 +25,13 @@ const PROMOTIONS = [
 ];
 const TAB_KICKERS = {
     '現正熱映': 'NOW SHOWING',
-    '奢華劇本區': 'PREMIUM SCRIPT ROOM',
+    [FLAGSHIP_TAB]: 'PREMIUM SCRIPT ROOM',
     '心測專區': 'PERSONALITY STORIES',
     '限時活動': 'LIMITED EVENT',
 };
-const LUXURY_NOTES = [
+const FLAGSHIP_NOTES = [
+    `每人價格 NT$${FLAGSHIP_PRICE_MIN}（含）以上`,
     '時長長 - 屁股要有把握撐住',
-    '價格貴 - 可能要花掉你幾頓晚餐',
     '有可能有多NPC陪你，有可能有刺激的機制等你',
     '只要能撐住，你將會得到難忘珍貴的遊玩體驗',
 ];
@@ -74,8 +75,8 @@ export default function ScriptGrid() {
     }, []);
 
     let tabScripts = scripts;
-    if (activeTab === '奢華劇本區') {
-        tabScripts = scripts.filter(s => typeof s.price === 'number' && s.price > LUXURY_PRICE_THRESHOLD);
+    if (activeTab === FLAGSHIP_TAB) {
+        tabScripts = scripts.filter(isFlagshipScript);
     } else if (activeTab === '心測專區') {
         tabScripts = scripts.filter(s => getScriptExperience(s.name)?.url);
     }
@@ -158,7 +159,7 @@ export default function ScriptGrid() {
                 </div>
 
                 <span id="quiz" className={styles.anchorOffset} aria-hidden="true" />
-                {(activeTab === '現正熱映' || activeTab === '奢華劇本區' || activeTab === '心測專區') ? (
+                {(activeTab === '現正熱映' || activeTab === FLAGSHIP_TAB || activeTab === '心測專區') ? (
                     <>
                         {activeTab === '心測專區' && (
                             <aside className={styles.quizIntro} aria-label="心測專區介紹">
@@ -168,14 +169,14 @@ export default function ScriptGrid() {
                             </aside>
                         )}
 
-                        {activeTab === '奢華劇本區' && (
-                            <aside className={styles.luxuryIntro} aria-label="奢華劇本區介紹">
+                        {activeTab === FLAGSHIP_TAB && (
+                            <aside className={styles.luxuryIntro} aria-label="旗艦劇本區介紹">
                                 <div className={styles.luxuryGlow} />
                                 <div className={styles.luxuryKicker}>PREMIUM SCRIPT ROOM</div>
                                 <div className={styles.luxuryContent}>
                                     <p className={styles.luxuryLead}>這裡的劇本</p>
                                     <ul className={styles.luxuryList}>
-                                        {LUXURY_NOTES.map(note => (
+                                        {FLAGSHIP_NOTES.map(note => (
                                             <li key={note}>{note}</li>
                                         ))}
                                     </ul>

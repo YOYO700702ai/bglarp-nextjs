@@ -33,8 +33,8 @@ export default function PlayerGuide() {
             <h2 id="player-guide-title">第一次玩台中劇本殺？先看這裡</h2>
           </div>
           <p>
-            不用先研究術語。從人數、喜好、時間與價格開始，
-            就能找到適合這次聚會的故事。
+            BGLARP 提供新手友善的選本協助，由親切、專業的 GM 帶領。
+            一般新手劇本每人約 NT$450–600，第一次玩也能安心選擇。
           </p>
         </header>
 
