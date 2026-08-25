@@ -1,3 +1,5 @@
+import { CONFIRMED_CHARACTER_PORTRAITS } from './confirmedCharacterPortraits';
+
 const EXPERIENCES = [
   {
     match: ['Save'],
@@ -168,9 +170,12 @@ export function getScriptExperience(name) {
 }
 
 export function getCharacterImage(scriptName, characterName) {
+  const trimmed = String(characterName || '').trim();
+  const confirmedImages = CONFIRMED_CHARACTER_PORTRAITS[String(scriptName || '').trim()];
+  if (confirmedImages?.[trimmed]) return confirmedImages[trimmed];
+
   const exp = getScriptExperience(scriptName);
   if (!exp || !exp.characterImages) return null;
-  const trimmed = String(characterName || '').trim();
   if (exp.characterImages[trimmed]) return exp.characterImages[trimmed];
   // Fallback: match by includes (handle 「無常：男」 format)
   for (const [key, url] of Object.entries(exp.characterImages)) {
