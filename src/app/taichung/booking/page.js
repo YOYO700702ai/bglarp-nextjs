@@ -4,7 +4,7 @@ import BookingSection from '@/components/BookingSection';
 import Footer from '@/components/Footer';
 import FloatingBookBtn from '@/components/FloatingBookBtn';
 import JsonLd from '@/components/JsonLd';
-import { BOOKING_FAQS, BOOKING_PAGE_JSON_LD } from '@/lib/seo';
+import { BOOKING_PAGE_JSON_LD } from '@/lib/seo';
 import styles from './page.module.css';
 
 export const metadata = {
@@ -78,23 +78,6 @@ export default function BookingPage() {
                   <h3>{step.title}</h3>
                   <p>{step.text}</p>
                 </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="faq" className={styles.faqSection} aria-labelledby="booking-faq-title">
-          <div className={styles.faqInner}>
-            <header>
-              <span className={styles.kicker}>BEFORE YOU ARRIVE</span>
-              <h2 id="booking-faq-title">預約與到店常見問題</h2>
-            </header>
-            <div className={styles.faqList}>
-              {BOOKING_FAQS.map(item => (
-                <details key={item.question} className={styles.faqItem}>
-                  <summary>{item.question}</summary>
-                  <p>{item.answer}</p>
-                </details>
               ))}
             </div>
           </div>

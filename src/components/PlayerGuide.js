@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { HOME_FAQ_JSON_LD, PLAYER_FAQS } from '@/lib/seo';
+import { BOOKING_FAQS, GUIDE_PAGE_JSON_LD, PLAYER_FAQS } from '@/lib/seo';
 import styles from './PlayerGuide.module.css';
 
 const STARTING_POINTS = [
@@ -24,13 +24,19 @@ const STARTING_POINTS = [
 export default function PlayerGuide() {
   return (
     <section id="guide" className={styles.section} aria-labelledby="player-guide-title">
-      <JsonLd id="bglarp-player-faq-jsonld" data={HOME_FAQ_JSON_LD} />
+      <JsonLd id="bglarp-guide-page-jsonld" data={GUIDE_PAGE_JSON_LD} />
 
       <div className={styles.container}>
+        <nav aria-label="麵包屑" className={styles.breadcrumb}>
+          <Link href="/">BGLARP 首頁</Link>
+          <span aria-hidden="true">/</span>
+          <span>新手指南</span>
+        </nav>
+
         <header className={styles.header}>
           <div>
             <span className={styles.kicker}>FIRST VISIT</span>
-            <h2 id="player-guide-title">第一次玩台中劇本殺？先看這裡</h2>
+            <h1 id="player-guide-title">第一次玩台中劇本殺？先看這裡</h1>
           </div>
           <p>
             BGLARP 提供新手友善的選本協助，由親切、專業的 GM 帶領。
@@ -42,7 +48,7 @@ export default function PlayerGuide() {
           {STARTING_POINTS.map(item => (
             <article key={item.number} className={styles.startCard}>
               <span>{item.number}</span>
-              <h3>{item.title}</h3>
+              <h2>{item.title}</h2>
               <p>{item.text}</p>
             </article>
           ))}
@@ -51,12 +57,28 @@ export default function PlayerGuide() {
         <div className={styles.faqBlock}>
           <div className={styles.faqHeading}>
             <span>QUICK ANSWERS</span>
-            <h3>玩家常見問題</h3>
+            <h2>玩家常見問題</h2>
           </div>
 
           <div className={styles.faqList}>
             {PLAYER_FAQS.map((item, index) => (
               <details key={item.question} className={styles.faqItem} open={index === 0}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.faqBlock}>
+          <div className={styles.faqHeading}>
+            <span>BEFORE YOU ARRIVE</span>
+            <h2>預約與到店常見問題</h2>
+          </div>
+
+          <div className={styles.faqList}>
+            {BOOKING_FAQS.map(item => (
+              <details key={item.question} className={styles.faqItem}>
                 <summary>{item.question}</summary>
                 <p>{item.answer}</p>
               </details>

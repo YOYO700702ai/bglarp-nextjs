@@ -46,7 +46,7 @@ export default async function ScriptsDirectoryPage() {
               每張劇本卡可進入詳細頁，查看遊玩人數、預估時長、價格與劇情簡介。
             </p>
             <div className={styles.heroActions}>
-              <Link href="/#guide">我是第一次玩</Link>
+              <Link href="/guide">我是第一次玩</Link>
               <Link href="/taichung/booking">查看預約方式</Link>
             </div>
           </div>
