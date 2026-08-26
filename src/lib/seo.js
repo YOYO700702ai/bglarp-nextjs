@@ -81,6 +81,8 @@ export const BOOKING_FAQS = [
   },
 ];
 
+const GUIDE_FAQS = [...PLAYER_FAQS, ...BOOKING_FAQS];
+
 const businessJsonLd = {
   '@type': 'EntertainmentBusiness',
   '@id': BUSINESS_ID,
@@ -169,20 +171,55 @@ export const ROOT_JSON_LD = {
   ],
 };
 
-export const HOME_FAQ_JSON_LD = {
+const GUIDE_PAGE_URL = `${SITE_URL}/guide`;
+const GUIDE_FAQ_ID = `${GUIDE_PAGE_URL}#faq`;
+
+export const GUIDE_PAGE_JSON_LD = {
   '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  '@id': `${SITE_URL}/#player-faq`,
-  url: `${SITE_URL}/#guide`,
-  inLanguage: 'zh-Hant-TW',
-  mainEntity: PLAYER_FAQS.map(({ question, answer }) => ({
-    '@type': 'Question',
-    name: question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: answer,
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${GUIDE_PAGE_URL}#webpage`,
+      url: GUIDE_PAGE_URL,
+      name: '劇本殺新手指南 | BGLARP 實境推理館',
+      description: '第一次玩劇本殺，從人數、喜好、時間與價格開始挑選，並查看 BGLARP 玩家、預約與到店常見問題。',
+      inLanguage: 'zh-Hant-TW',
+      isPartOf: { '@id': WEBSITE_ID },
+      mainEntity: { '@id': GUIDE_FAQ_ID },
     },
-  })),
+    {
+      '@type': 'FAQPage',
+      '@id': GUIDE_FAQ_ID,
+      url: GUIDE_PAGE_URL,
+      inLanguage: 'zh-Hant-TW',
+      mainEntity: GUIDE_FAQS.map(({ question, answer }) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: answer,
+        },
+      })),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${GUIDE_PAGE_URL}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'BGLARP 首頁',
+          item: SITE_URL,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: '新手指南',
+          item: GUIDE_PAGE_URL,
+        },
+      ],
+    },
+  ],
 };
 
 function structuredImageUrl(value) {
@@ -261,25 +298,8 @@ export const BOOKING_PAGE_JSON_LD = {
       inLanguage: 'zh-Hant-TW',
       isPartOf: { '@id': WEBSITE_ID },
       about: { '@id': BUSINESS_ID },
-      mainEntity: [
-        { '@id': GROUP_BOOKING_SERVICE_ID },
-        { '@id': `${SITE_URL}/taichung/booking#faq` },
-      ],
+      mainEntity: { '@id': GROUP_BOOKING_SERVICE_ID },
       breadcrumb: { '@id': `${SITE_URL}/taichung/booking#breadcrumb` },
-    },
-    {
-      '@type': 'FAQPage',
-      '@id': `${SITE_URL}/taichung/booking#faq`,
-      url: `${SITE_URL}/taichung/booking#faq`,
-      inLanguage: 'zh-Hant-TW',
-      mainEntity: BOOKING_FAQS.map(({ question, answer }) => ({
-        '@type': 'Question',
-        name: question,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: answer,
-        },
-      })),
     },
     {
       '@type': 'BreadcrumbList',

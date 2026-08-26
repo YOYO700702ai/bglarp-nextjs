@@ -23,7 +23,7 @@ export default function Navbar() {
                 </button>
                 <div className={`${styles.links} ${open ? styles.linksOpen : ''}`}>
                     <Link href="/scripts" onClick={() => setOpen(false)}>上映劇本</Link>
-                    <Link href="/#guide" onClick={() => setOpen(false)}>新手指南</Link>
+                    <Link href="/guide" onClick={() => setOpen(false)}>新手指南</Link>
                     <Link href="/taichung/booking" onClick={() => setOpen(false)}>預約入戲</Link>
                 </div>
             </div>

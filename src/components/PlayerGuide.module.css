@@ -1,7 +1,8 @@
 .section {
   position: relative;
   overflow: hidden;
-  padding: 5rem 0;
+  min-height: 100vh;
+  padding: 7.25rem 0 5rem;
   border-top: 1px solid rgba(143, 168, 115, 0.1);
   background:
     radial-gradient(circle at 12% 18%, rgba(232, 166, 59, 0.08), transparent 28%),
@@ -15,6 +16,23 @@
   z-index: 1;
   width: min(1180px, calc(100% - 2.4rem));
   margin: 0 auto;
+}
+
+.breadcrumb {
+  display: flex;
+  gap: 0.55rem;
+  margin-bottom: 2rem;
+  color: #7f9581;
+  font-size: 0.76rem;
+}
+
+.breadcrumb a {
+  color: #b9caaa;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: #e8a63b;
 }
 
 .header {
@@ -32,15 +50,15 @@
   letter-spacing: 0.22em;
 }
 
-.header h2,
-.faqHeading h3 {
+.header h1,
+.faqHeading h2 {
   margin: 0.55rem 0 0;
   color: #d5e4c3;
   font-family: 'Noto Serif TC', serif;
   letter-spacing: 0.08em;
 }
 
-.header h2 {
+.header h1 {
   max-width: 760px;
   font-size: clamp(2rem, 5vw, 3.35rem);
   line-height: 1.24;
@@ -78,7 +96,7 @@
   font-weight: 900;
 }
 
-.startCard h3 {
+.startCard h2 {
   margin: 0;
   color: #fff1cf;
   font-family: 'Noto Serif TC', serif;
@@ -99,7 +117,7 @@
   margin-top: 2.5rem;
 }
 
-.faqHeading h3 {
+.faqHeading h2 {
   font-size: clamp(1.55rem, 4vw, 2.2rem);
 }
 
@@ -220,7 +238,7 @@
 
 @media (max-width: 520px) {
   .section {
-    padding: 4rem 0;
+    padding: 6.5rem 0 4rem;
   }
 
   .container {
