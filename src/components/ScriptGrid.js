@@ -6,28 +6,21 @@ import { FLAGSHIP_PRICE_MIN, isFlagshipScript } from '@/lib/scriptClassification
 import styles from './ScriptGrid.module.css';
 
 const FLAGSHIP_TAB = '旗艦劇本區';
-const TABS = ['現正熱映', FLAGSHIP_TAB, '心測專區', '限時活動'];
-const FACEBOOK_PAGE_URL = 'https://www.facebook.com/bglarp.studio/';
-const FEATURED_ACTIVITY = {
+const TABS = ['現正熱映', FLAGSHIP_TAB, '心測專區', '預約入戲'];
+const BOOKING_URL = 'https://m.me/bglarp.studio';
+const FEATURED_STORY = {
     videoId: '6bYtqkPyz90',
     poster: 'https://i.ytimg.com/vi/6bYtqkPyz90/hqdefault.jpg',
-    title: '暑假優惠開跑',
-    subtitle: '整個暑假，都是走進案發現場的季節。',
-    description: '學生優惠 8/31 前有效，出示在學學生證任意劇本折 50 元。開學前把想玩的本一次補完，冷氣吹整天。',
-    highlights: ['學生優惠', '折 50 元', '暑假限定'],
+    title: '下一場故事，等你入戲',
+    subtitle: '揪上朋友，一起成為故事裡的主角。',
+    description: '想燒腦推理、投入角色情感，或來場歡樂聚會？告訴我們人數、日期與喜歡的類型，讓 BGLARP 陪你挑選適合的劇本，預約一場難忘的相聚。',
+    highlights: ['好友揪團', '沉浸體驗', '私訊選本'],
 };
-const PROMOTIONS = [
-    {
-        src: '/promotions/summer-student-discount.jpg',
-        alt: '暑假學生優惠：即日起至 8/31，出示在學學生證任意劇本折 50 元',
-        ratio: 0.708,
-    },
-];
 const TAB_KICKERS = {
     '現正熱映': 'NOW SHOWING',
     [FLAGSHIP_TAB]: 'PREMIUM SCRIPT ROOM',
     '心測專區': 'PERSONALITY STORIES',
-    '限時活動': 'LIMITED EVENT',
+    '預約入戲': 'YOUR NEXT STORY',
 };
 const FLAGSHIP_NOTES = [
     `每人價格 NT$${FLAGSHIP_PRICE_MIN}（含）以上`,
@@ -43,7 +36,7 @@ export default function ScriptGrid() {
     const [genreFilter, setGenreFilter] = useState('全部');
     const [searchQuery, setSearchQuery] = useState('');
     const [displayLimit, setDisplayLimit] = useState(25);
-    const [activeTab, setActiveTab] = useState('限時活動');
+    const [activeTab, setActiveTab] = useState('預約入戲');
     const [activityPlaying, setActivityPlaying] = useState(false);
 
     const normalize = (s) => String(s || '').toLowerCase().replace(/\s+/g, '');
@@ -255,36 +248,36 @@ export default function ScriptGrid() {
                             </>
                         )}
                     </>
-                ) : activeTab === '限時活動' ? (
+                ) : activeTab === '預約入戲' ? (
                     <div className={styles.activityLayout}>
-                        <section className={styles.activityFeature} aria-label="暑假限時活動">
+                        <section className={styles.activityFeature} aria-label="預約劇本體驗">
                             <div className={styles.activityCopy}>
-                                <span className={styles.activityKicker}>LIMITED EVENT</span>
-                                <h3>{FEATURED_ACTIVITY.title}</h3>
-                                <p className={styles.activitySubtitle}>{FEATURED_ACTIVITY.subtitle}</p>
+                                <span className={styles.activityKicker}>YOUR NEXT STORY</span>
+                                <h3>{FEATURED_STORY.title}</h3>
+                                <p className={styles.activitySubtitle}>{FEATURED_STORY.subtitle}</p>
                                 <div className={styles.activityActions}>
                                     <a
-                                        href={FACEBOOK_PAGE_URL}
+                                        href={BOOKING_URL}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        我要卡位
+                                        私訊預約
                                     </a>
                                 </div>
-                                <p className={styles.activityDescription}>{FEATURED_ACTIVITY.description}</p>
+                                <p className={styles.activityDescription}>{FEATURED_STORY.description}</p>
                                 <div className={styles.activityTags}>
-                                    {FEATURED_ACTIVITY.highlights.map(item => (
+                                    {FEATURED_STORY.highlights.map(item => (
                                         <span key={item}>{item}</span>
                                     ))}
                                 </div>
                             </div>
-                            <div className={styles.activityCampaignPanel} aria-label="暑假優惠活動短片">
+                            <div className={styles.activityCampaignPanel} aria-label="BGLARP 劇本體驗短片">
                                 <div className={styles.activityVideoFrame}>
                                     {activityPlaying ? (
                                         <iframe
                                             className={styles.activityIframe}
-                                            src={`https://www.youtube-nocookie.com/embed/${FEATURED_ACTIVITY.videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1&iv_load_policy=3`}
-                                            title="暑假優惠活動短片"
+                                            src={`https://www.youtube-nocookie.com/embed/${FEATURED_STORY.videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1&iv_load_policy=3`}
+                                            title="BGLARP 劇本體驗短片"
                                             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
                                             allowFullScreen
                                         />
@@ -293,9 +286,9 @@ export default function ScriptGrid() {
                                             type="button"
                                             className={styles.activityPoster}
                                             onClick={() => setActivityPlaying(true)}
-                                            aria-label="播放暑假優惠活動短片"
+                                            aria-label="播放 BGLARP 劇本體驗短片"
                                         >
-                                            <img src={FEATURED_ACTIVITY.poster} alt="" referrerPolicy="no-referrer" />
+                                            <img src={FEATURED_STORY.poster} alt="" referrerPolicy="no-referrer" />
                                             <span className={styles.activityPlayBtn} aria-hidden="true">
                                                 <svg viewBox="0 0 64 64" width="58" height="58">
                                                     <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.56)" stroke="#E8A63B" strokeWidth="2" />
@@ -308,26 +301,6 @@ export default function ScriptGrid() {
                             </div>
                         </section>
 
-                        <div className={styles.promotionWallHeader}>
-                            <span>EVENT POSTERS</span>
-                            <h3>本期活動海報</h3>
-                            <p>挑你今晚想刷的組合，進粉專看活動資訊，揪團卡位。</p>
-                        </div>
-
-                        <div className={styles.promotionGrid}>
-                            {PROMOTIONS.map((promo, i) => (
-                                <a
-                                    key={i}
-                                    href={promo.href || FACEBOOK_PAGE_URL}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={styles.promotionItem}
-                                    style={{ flexGrow: promo.ratio || 1 }}
-                                >
-                                    <img src={promo.src} alt={promo.alt} loading="lazy" />
-                                </a>
-                            ))}
-                        </div>
                     </div>
                 ) : (
                     <div className={styles.emptyPanel}>
