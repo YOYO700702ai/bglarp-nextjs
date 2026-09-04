@@ -4,6 +4,8 @@ import {
   shouldReadPublishedCatalog,
 } from '@/lib/publishedScripts';
 
+const NEWBIE_SCRIPT_NAMES = new Set(['逃離北極', '砍二刀']);
+
 async function fetchNotionPages() {
   const token = process.env.NOTION_TOKEN;
   const dbId = process.env.DATABASE_ID;
@@ -95,15 +97,24 @@ export async function getAllScriptsFromNotion() {
 }
 
 async function loadAllScripts() {
+  let scripts;
   if (shouldReadPublishedCatalog()) {
     // Once cut over, an automatic Notion fallback could re-publish a script
     // whose Notion unpublish job is still pending. Throwing lets ISR/CDN keep
     // serving the last successful snapshot. An operator can deliberately set
     // SCRIPT_CATALOG_SOURCE=notion when a manual fallback is appropriate.
-    return getPublishedScriptsFromSupabase();
+    scripts = await getPublishedScriptsFromSupabase();
+  } else {
+    scripts = await getAllScriptsFromNotion();
   }
 
-  return getAllScriptsFromNotion();
+  // Site-level tags drive the cover stamp, genre filter, and detail page.
+  return scripts.map((script) => {
+    if (!NEWBIE_SCRIPT_NAMES.has(script.name) || script.genre?.includes('新手')) {
+      return script;
+    }
+    return { ...script, genre: [...(script.genre || []), '新手'] };
+  });
 }
 
 // Metadata and page rendering can request the same catalog in one server
