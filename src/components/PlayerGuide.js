@@ -87,7 +87,7 @@ export default function PlayerGuide() {
         </div>
 
         <div className={styles.actions}>
-          <Link href="/scripts" className={styles.primaryAction}>查看上映劇本</Link>
+          <Link href="/#scripts" className={styles.primaryAction}>查看現正熱映</Link>
           <Link href="/taichung/booking" className={styles.secondaryAction}>查看預約方式</Link>
           <a
             href="https://m.me/bglarp.studio"

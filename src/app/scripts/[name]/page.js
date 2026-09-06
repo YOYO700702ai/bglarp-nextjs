@@ -110,7 +110,7 @@ export default async function ScriptPage({ params }) {
     <div className={styles.page}>
       <JsonLd id="bglarp-script-jsonld" data={scriptJsonLd} />
       <nav className={styles.backBar}>
-        <Link href="/" className={styles.backLink}>
+        <Link href="/#scripts" className={styles.backLink}>
           ← 返回劇本列表
         </Link>
       </nav>
