@@ -20,11 +20,6 @@ export default async function sitemap() {
       priority: 1,
     },
     {
-      url: `${base}/scripts`,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
       url: `${base}/guide`,
       changeFrequency: 'monthly',
       priority: 0.9,

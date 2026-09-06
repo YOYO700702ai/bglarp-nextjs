@@ -7,6 +7,15 @@ import styles from './ScriptGrid.module.css';
 
 const FLAGSHIP_TAB = '旗艦劇本區';
 const TABS = ['現正熱映', FLAGSHIP_TAB, '心測專區', '預約入戲'];
+const TAB_HASHES = {
+    '現正熱映': '#scripts',
+    [FLAGSHIP_TAB]: '#scripts-flagship',
+    '心測專區': '#quiz',
+    '預約入戲': '#scripts-booking',
+};
+const HASH_TABS = Object.fromEntries(
+    Object.entries(TAB_HASHES).map(([tab, hash]) => [hash, tab]),
+);
 const BOOKING_URL = 'https://m.me/bglarp.studio';
 const FEATURED_STORY = {
     videoId: '6bYtqkPyz90',
@@ -62,9 +71,40 @@ export default function ScriptGrid() {
     }, []);
 
     useEffect(() => {
-        if (typeof window !== 'undefined' && window.location.hash === '#quiz') {
-            window.requestAnimationFrame(() => setActiveTab('心測專區'));
-        }
+        const activateLinkedTab = (tab) => {
+            window.requestAnimationFrame(() => {
+                setActiveTab(tab);
+                window.requestAnimationFrame(() => {
+                    document.getElementById('scripts')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        };
+
+        const syncTabFromLocation = () => {
+            const linkedTab = HASH_TABS[window.location.hash];
+            if (linkedTab) activateLinkedTab(linkedTab);
+        };
+
+        const handleLinkedTabClick = (event) => {
+            const link = event.target.closest?.('a[href]');
+            if (!link) return;
+
+            const target = new URL(link.href, window.location.href);
+            if (target.origin !== window.location.origin || target.pathname !== window.location.pathname) return;
+
+            const linkedTab = HASH_TABS[target.hash];
+            if (linkedTab) activateLinkedTab(linkedTab);
+        };
+
+        syncTabFromLocation();
+        document.addEventListener('click', handleLinkedTabClick);
+        window.addEventListener('hashchange', syncTabFromLocation);
+        window.addEventListener('popstate', syncTabFromLocation);
+        return () => {
+            document.removeEventListener('click', handleLinkedTabClick);
+            window.removeEventListener('hashchange', syncTabFromLocation);
+            window.removeEventListener('popstate', syncTabFromLocation);
+        };
     }, []);
 
     let tabScripts = scripts;
@@ -116,6 +156,14 @@ export default function ScriptGrid() {
         setActiveTab(tab);
         setActivityPlaying(false);
         setDisplayLimit(25);
+        const hash = TAB_HASHES[tab];
+        if (hash) {
+            window.history.replaceState(
+                null,
+                '',
+                `${window.location.pathname}${window.location.search}${hash}`,
+            );
+        }
     };
     const handlePlayerFilterChange = (value) => {
         setPlayerFilter(value);

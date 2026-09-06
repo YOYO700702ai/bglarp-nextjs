@@ -60,7 +60,7 @@ export default function BookingPage() {
             <div className={styles.actions}>
               <a href="https://m.me/bglarp.studio" target="_blank" rel="noopener noreferrer">開啟 Messenger 私訊</a>
               <a href="tel:0422250020">致電（04）2225-0020</a>
-              <Link href="/scripts">先挑選劇本</Link>
+              <Link href="/#scripts">先挑選劇本</Link>
             </div>
           </div>
         </section>
