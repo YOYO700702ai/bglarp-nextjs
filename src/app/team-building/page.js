@@ -3,14 +3,14 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import styles from './page.module.css';
 
-const PAGE_DESCRIPTION = 'BGLARP 承接 20–30 人團體活動與大型解謎團建企劃。從公司聚會、部門交流，到依人數、場地與活動目標規劃的解謎任務，一起討論適合團隊的玩法。';
+const PAGE_DESCRIPTION = 'BGLARP 承接 20–30 人團體活動與大型解謎活動企劃。從公司聚會、部門交流，到依人數、場地與活動目標規劃的解謎任務，一起討論適合團隊的玩法。';
 
 export const metadata = {
-  title: '企業團建・大型解謎企劃 | BGLARP 實境推理館',
+  title: '企業團隊活動・大型解謎企劃 | BGLARP 實境推理館',
   description: PAGE_DESCRIPTION,
   alternates: { canonical: '/team-building' },
   openGraph: {
-    title: '企業團建・大型解謎企劃 | BGLARP',
+    title: '企業團隊活動・大型解謎企劃 | BGLARP',
     description: PAGE_DESCRIPTION,
     url: '/team-building',
     siteName: 'BGLARP 實境推理館',
@@ -74,17 +74,17 @@ export default function TeamBuildingPage() {
           <div className={styles.heroInner}>
             <div className={styles.heroCopy}>
               <p className={styles.eyebrow}>BGLARP · FOR TEAMS</p>
-              <h1 id="team-building-title">企業團建<span className={styles.titleDot}>・</span><br />大型解謎企劃</h1>
+              <h1 id="team-building-title">企業團隊活動<span className={styles.titleDot}>・</span><br />大型解謎企劃</h1>
               <p className={styles.heroStatement}>讓同事成為隊友，<br />一起解開任務。</p>
               <p className={styles.heroDescription}>
-                從 20–30 人的公司聚會，到大型解謎團建企劃。<br className={styles.desktopBreak} />
+                從 20–30 人的公司聚會，到大型解謎活動企劃。<br className={styles.desktopBreak} />
                 讓團隊走進故事，在挑戰中交流、在任務中合作。
               </p>
               <div className={styles.heroActions}>
                 <a className={styles.primaryButton} href="#group-activities">20–30 人團體活動<Arrow /></a>
                 <a className={styles.secondaryButton} href="#custom-projects">大型解謎企劃<Arrow /></a>
               </div>
-              <p className={styles.heroFootnote}>公司聚會 / 部門交流 / 客製團建</p>
+              <p className={styles.heroFootnote}>公司聚會 / 部門交流 / 客製團隊活動</p>
             </div>
             <figure className={styles.heroVisual}>
               <div className={styles.heroImageWrap}>
@@ -140,7 +140,7 @@ export default function TeamBuildingPage() {
                 <p className={styles.serviceNumber}>EXPERIENCE 02</p>
                 <span className={styles.serviceTag}>依需求討論客製企劃</span>
                 <h3 id="custom-title">以故事串起任務，<br />讓團隊一起走進挑戰。</h3>
-                <p>承接大型解謎團建企劃，以探索、討論與線索交流串連不同小隊。依參與人數、場地條件與活動目標，討論合適的解謎形式與整體流程。</p>
+                <p>承接大型解謎活動企劃，以探索、討論與線索交流串連不同小隊。依參與人數、場地條件與活動目標，討論合適的解謎形式與整體流程。</p>
                 <ul className={styles.projectScope} aria-label="企劃討論方向"><li>故事與任務設計</li><li>小隊合作機制</li><li>活動流程規劃</li></ul>
                 <p className={styles.serviceNote}>企劃規模與執行方式依需求評估，歡迎提供預計人數與場地。</p>
                 <a href="#inquiry" className={styles.textLink}>洽談大型企劃<Arrow /></a>
@@ -176,7 +176,7 @@ export default function TeamBuildingPage() {
 
         <section id="inquiry" className={styles.inquiry} aria-labelledby="inquiry-title">
           <div className={`${styles.container} ${styles.inquiryInner}`}>
-            <div className={styles.inquiryCopy}><p className={styles.eyebrow}>YOUR NEXT TEAM STORY</p><h2 id="inquiry-title">下一場公司活動，<br />一起玩出新故事。</h2><p>告訴我們預計的人數與日期，<br />一起討論適合你們團隊的玩法。</p><div className={styles.contactActions}><a className={styles.primaryButton} href="https://m.me/bglarp.studio" target="_blank" rel="noopener noreferrer">私訊洽詢企業團建<Arrow diagonal /></a><a className={styles.phoneLink} href="tel:0422250020">或致電（04）2225-0020<Arrow /></a></div></div>
+            <div className={styles.inquiryCopy}><p className={styles.eyebrow}>YOUR NEXT TEAM STORY</p><h2 id="inquiry-title">下一場公司活動，<br />一起玩出新故事。</h2><p>告訴我們預計的人數與日期，<br />一起討論適合你們團隊的玩法。</p><div className={styles.contactActions}><a className={styles.primaryButton} href="https://m.me/bglarp.studio" target="_blank" rel="noopener noreferrer">私訊洽詢企業團隊活動<Arrow diagonal /></a><a className={styles.phoneLink} href="tel:0422250020">或致電（04）2225-0020<Arrow /></a></div></div>
             <aside className={styles.inquiryBrief} aria-label="洽詢前準備的資訊"><p className={styles.briefLabel}>A LITTLE ABOUT YOUR TEAM</p><h3>洽詢時，帶上這 5 個資訊。</h3><dl><div><dt>01 / 預計日期</dt><dd>日期與希望的活動時段</dd></div><div><dt>02 / 參與人數</dt><dd>預估人數與團隊組成</dd></div><div><dt>03 / 活動地點</dt><dd>預計城市、場地或待討論</dd></div><div><dt>04 / 活動目的</dt><dd>公司聚會、破冰交流或團隊合作</dd></div><div><dt>05 / 預算區間</dt><dd>預計的整體活動預算</dd></div></dl><p className={styles.briefNote}>還沒有完整想法也沒關係，先從已知的需求聊起。</p></aside>
           </div>
         </section>
