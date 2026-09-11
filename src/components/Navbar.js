@@ -28,7 +28,7 @@ export default function Navbar() {
                 <div id="main-navigation-links" className={`${styles.links} ${open ? styles.linksOpen : ''}`}>
                     <Link href="/#scripts" onClick={() => setOpen(false)}>現正熱映</Link>
                     <Link href="/guide" onClick={() => setOpen(false)}>新手指南</Link>
-                    <Link href="/team-building" aria-current={pathname === '/team-building' ? 'page' : undefined} onClick={() => setOpen(false)}>企業團建</Link>
+                    <Link href="/team-building" aria-current={pathname === '/team-building' ? 'page' : undefined} onClick={() => setOpen(false)}>企業團隊活動</Link>
                     <Link href="/taichung/booking" onClick={() => setOpen(false)}>預約入戲</Link>
                 </div>
             </div>
