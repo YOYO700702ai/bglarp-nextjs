@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import styles from './page.module.css';
 
-const PAGE_DESCRIPTION = 'BGLARP 承接 20–30 人團體活動與大型解謎活動企劃。從公司聚會、部門交流，到依人數、場地與活動目標規劃的解謎任務，一起討論適合團隊的玩法。';
+const PAGE_DESCRIPTION = '平常一起上班，今天一起破案！BGLARP 提供 20–30 人團體活動與大型解謎企劃。想揪同事對戲、找線索或組隊闖關，先告訴我們日期、人數與預算，聊聊怎麼玩。';
 
 export const metadata = {
   title: '企業團隊活動・大型解謎企劃 | BGLARP 實境推理館',
@@ -28,29 +28,29 @@ export const metadata = {
 const APPROACHES = [
   {
     number: '01',
-    english: 'BREAK THE ICE',
-    title: '從任務，打開話題。',
-    text: '把第一次對話交給故事。透過共同任務與線索交流，創造彼此認識、自然互動的機會。',
+    english: '先借張線索',
+    title: '「你那張借我看！」',
+    text: '還叫不出名字也沒關係，拿著線索湊過去，先問一句「你找到什麼？」，就有得聊了。',
   },
   {
     number: '02',
-    english: 'WORK TOGETHER',
-    title: '讓每個人，都能參與。',
-    text: '將線索與任務分散在不同角色或小隊，邀請大家交換資訊、討論方法，一起找出下一步。',
+    english: '換你出主意',
+    title: '「等一下，我有想法！」',
+    text: '有人記得細節，有人想到怪招。把發現攤開來，卡住的地方換個人看看，說不定就通了。',
   },
   {
     number: '03',
-    english: 'SHARE A MOMENT',
-    title: '一起完成，一起記得。',
-    text: '圍繞共同的故事目標，將各自的發現拼在一起，留下團隊共同面對挑戰的活動回憶。',
+    english: '答案接起來了',
+    title: '「原來是這樣啦！」',
+    text: '東拼一塊、西湊一張，終於接起來了！那個答案突然冒出來的瞬間，值得跟隊友擊個掌。',
   },
 ];
 
 const STEPS = [
-  { title: '提供需求', text: '告訴我們日期、人數、地點、活動目的與預算區間。' },
-  { title: '討論方向', text: '依團隊組成與場地條件，討論遊戲形式、分組方式及活動節奏。' },
-  { title: '確認方案', text: '確認活動內容、執行範圍、時間安排與報價。' },
-  { title: '準備與執行', text: '依確認的方案準備故事、任務與流程，迎接團隊的共同挑戰。' },
+  { title: '先聊聊', text: '哪天、幾個人、在哪裡、想玩什麼、預算多少？知道多少就先說多少。' },
+  { title: '挑個玩法', text: '想多一點對戲、找線索，還是小隊闖關？再來看看適合怎麼分組、安排時間。' },
+  { title: '把細節說好', text: '內容、時間、場地配合事項與費用，都確認清楚後再定案。' },
+  { title: '準備開玩！', text: '我們依約定準備活動，你把集合資訊傳給大家。當天就在約定的地方集合，準備開玩！' },
 ];
 
 function Arrow({ diagonal = false }) {
@@ -73,18 +73,18 @@ export default function TeamBuildingPage() {
         <section className={styles.hero} aria-labelledby="team-building-title">
           <div className={styles.heroInner}>
             <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>BGLARP · FOR TEAMS</p>
+              <p className={styles.eyebrow}>BGLARP · 隊友集合啦</p>
               <h1 id="team-building-title">企業團隊活動<span className={styles.titleDot}>・</span><br />大型解謎企劃</h1>
-              <p className={styles.heroStatement}>讓同事成為隊友，<br />一起解開任務。</p>
+              <p className={styles.heroStatement}>平常一起上班，<br />今天一起破案！</p>
               <p className={styles.heroDescription}>
-                從 20–30 人的公司聚會，到大型解謎活動企劃。<br className={styles.desktopBreak} />
-                讓團隊走進故事，在挑戰中交流、在任務中合作。
+                揪 20–30 人來玩，或找我們規劃大型解謎活動。<br className={styles.desktopBreak} />
+                那位平常話不多的同事，搞不好是隱藏版神探喔。
               </p>
               <div className={styles.heroActions}>
-                <a className={styles.primaryButton} href="#group-activities">20–30 人團體活動<Arrow /></a>
-                <a className={styles.secondaryButton} href="#custom-projects">大型解謎企劃<Arrow /></a>
+                <a className={styles.primaryButton} href="#group-activities">我們有 20–30 人<Arrow /></a>
+                <a className={styles.secondaryButton} href="#custom-projects">想辦大型解謎活動<Arrow /></a>
               </div>
-              <p className={styles.heroFootnote}>公司聚會 / 部門交流 / 客製團隊活動</p>
+              <p className={styles.heroFootnote}>公司聚會 / 部門聯誼 / 大型解謎</p>
             </div>
             <figure className={styles.heroVisual}>
               <div className={styles.heroImageWrap}>
@@ -96,19 +96,19 @@ export default function TeamBuildingPage() {
                   sizes="(max-width: 767px) 100vw, (max-width: 1100px) 50vw, 58vw"
                   className={styles.heroImage}
                 />
-                <div className={styles.imageStamp} aria-hidden="true"><span>A SHARED</span><span>ADVENTURE.</span></div>
+                <div className={styles.imageStamp} aria-hidden="true"><span>等等，</span><span>這張有線索！</span></div>
               </div>
               <figcaption>活動情境示意</figcaption>
             </figure>
           </div>
-          <div className={styles.heroBaseline} aria-hidden="true"><span>GOOD STORIES BRING PEOPLE TOGETHER.</span><span>SCROLL TO EXPLORE ↓</span></div>
+          <div className={styles.heroBaseline} aria-hidden="true"><span>本日任務：找齊隊友，集合開玩！</span><span>往下挑玩法 ↓</span></div>
         </section>
 
         <section className={styles.services} aria-labelledby="services-title">
           <div className={styles.container}>
             <header className={styles.sectionHeading}>
-              <div><p className={styles.eyebrow}>01 / FIND YOUR EXPERIENCE</p><h2 id="services-title">一場活動，<br />從你們的需求開始。</h2></div>
-              <p>安排一次團隊相聚，或打造一場專屬任務。<br />先選擇方向，再一起把想法變成活動。</p>
+              <div><p className={styles.eyebrow}>01 / 今天想怎麼玩</p><h2 id="services-title">這次公司活動，<br />想玩哪一種？</h2></div>
+              <p>小團體想揪一場，或想辦大一點的解謎活動，<br />都可以找我們聊聊。</p>
             </header>
 
             <article id="group-activities" className={styles.serviceRow} aria-labelledby="group-title">
@@ -119,13 +119,13 @@ export default function TeamBuildingPage() {
                 <figcaption>活動情境示意</figcaption>
               </figure>
               <div className={styles.serviceCopy}>
-                <p className={styles.serviceNumber}>EXPERIENCE 01</p>
-                <span className={styles.serviceTag}>適合 20–30 人團體洽詢</span>
-                <h3 id="group-title">團體相聚，<br />多一點故事與互動。</h3>
-                <p>公司聚會、部門聯誼、團體出遊，讓聚在一起的時間有不一樣的玩法。從遊戲偏好出發，協助安排適合團隊的內容、分組與場次。</p>
-                <div className={styles.serviceDetail}><span>團體活動</span><strong>20–30 <small>人</small></strong></div>
-                <p className={styles.serviceNote}>實際遊戲內容、分組與場次，依人數及日期討論安排。</p>
-                <a href="#inquiry" className={styles.textLink}>洽詢團體活動<Arrow /></a>
+                <p className={styles.serviceNumber}>玩法 01 / 揪團來玩</p>
+                <span className={styles.serviceTag}>20–30 人，揪團來玩</span>
+                <h3 id="group-title">欸，你怎麼<br />這麼會演！</h3>
+                <p>拿到角色劇本，今天就換個身分說話吧。你忙著找線索，旁邊的人可能正在努力藏祕密……公司聚會、部門聯誼，或一群朋友想揪團，都歡迎來玩！</p>
+                <div className={styles.serviceDetail}><span>這次揪幾位？</span><strong>20–30 <small>人</small></strong></div>
+                <p className={styles.serviceNote}>告訴我們日期和人數，我們會一起確認適合的劇本、分組與場次。</p>
+                <a href="#inquiry" className={styles.textLink}>幫我們排一場<Arrow /></a>
               </div>
             </article>
 
@@ -137,13 +137,13 @@ export default function TeamBuildingPage() {
                 <figcaption>活動情境示意</figcaption>
               </figure>
               <div className={styles.serviceCopy}>
-                <p className={styles.serviceNumber}>EXPERIENCE 02</p>
-                <span className={styles.serviceTag}>依需求討論客製企劃</span>
-                <h3 id="custom-title">以故事串起任務，<br />讓團隊一起走進挑戰。</h3>
-                <p>承接大型解謎活動企劃，以探索、討論與線索交流串連不同小隊。依參與人數、場地條件與活動目標，討論合適的解謎形式與整體流程。</p>
-                <ul className={styles.projectScope} aria-label="企劃討論方向"><li>故事與任務設計</li><li>小隊合作機制</li><li>活動流程規劃</li></ul>
-                <p className={styles.serviceNote}>企劃規模與執行方式依需求評估，歡迎提供預計人數與場地。</p>
-                <a href="#inquiry" className={styles.textLink}>洽談大型企劃<Arrow /></a>
+                <p className={styles.serviceNumber}>玩法 02 / 大型解謎</p>
+                <span className={styles.serviceTag}>大型活動，另外規劃</span>
+                <h3 id="custom-title">人多？<br />那就組隊找線索！</h3>
+                <p>這一隊找到密碼，那一隊拿到地圖——等等，湊在一起好像有答案！想把公司活動辦成一場解謎任務，我們可以依人數、場地和想玩的內容，規劃故事、關卡與小隊合作的玩法。</p>
+                <ul className={styles.projectScope} aria-label="企劃討論方向"><li>故事與角色</li><li>分組與線索</li><li>關卡與流程</li></ul>
+                <p className={styles.serviceNote}>先告訴我們大約幾人、在哪裡玩，活動規模、場地需求與費用再一起確認。</p>
+                <a href="#inquiry" className={styles.textLink}>聊聊大型活動怎麼玩<Arrow /></a>
               </div>
             </article>
           </div>
@@ -151,33 +151,33 @@ export default function TeamBuildingPage() {
 
         <section className={styles.approaches} aria-labelledby="approaches-title">
           <div className={styles.container}>
-            <header className={styles.approachHeading}><p className={styles.eyebrow}>02 / THE WAY WE PLAY</p><h2 id="approaches-title">讓互動，<br className={styles.mobileBreak} />自然發生在遊戲裡。</h2><p>從破冰到共同挑戰，依活動目標討論適合的設計。</p></header>
+            <header className={styles.approachHeading}><p className={styles.eyebrow}>02 / 遊戲裡的小劇場</p><h2 id="approaches-title">你們可能<br className={styles.mobileBreak} />會聊到……</h2><p>借張線索、問個問題，從遊戲聊起就好。</p></header>
             <div className={styles.approachGrid}>
               {APPROACHES.map(item => <article key={item.number} className={styles.approachItem}><div className={styles.approachTop}><span className={styles.approachNumber}>{item.number}</span><span>{item.english}</span></div><h3>{item.title}</h3><p>{item.text}</p></article>)}
             </div>
-            <p className={styles.approachNote}>以上為可洽談的設計方向，具體內容依確認的方案安排。</p>
+            <p className={styles.approachNote}>每場玩法依選定的劇本或活動方案安排。</p>
           </div>
         </section>
 
         <section className={styles.expertise} aria-labelledby="expertise-title">
           <div className={`${styles.container} ${styles.expertiseInner}`}>
-            <div className={styles.expertiseIntro}><p className={styles.eyebrow}>03 / BEHIND THE EXPERIENCE</p><h2 id="expertise-title">把故事、解謎<br />與團隊互動，<br /><span>放進同一場活動。</span></h2></div>
-            <div className={styles.expertiseCopy}><p>以劇本帶領、密室解謎設計與遊戲化教學的專長為基礎，從故事情境、任務安排到參與方式，思考如何讓團隊投入其中。</p><p>一個值得討論的線索，一段需要交換資訊的任務，一個共同前進的理由。讓活動的每一步，都與你們想要的互動相連。</p><ul className={styles.expertiseList} aria-label="活動設計專長"><li><span>STORY</span>劇本與情境帶領</li><li><span>PUZZLE</span>密室與解謎設計</li><li><span>LEARNING</span>遊戲化教學</li></ul></div>
+            <div className={styles.expertiseIntro}><p className={styles.eyebrow}>03 / 這群人平常在忙什麼</p><h2 id="expertise-title">劇本、機關、帶場，<br />這些交給我們。<br /><span>你先負責揪人！</span></h2></div>
+            <div className={styles.expertiseCopy}><p>我們平常做劇本殺、設計密室，也做遊戲化教學。角色怎麼帶、謎題怎麼出、規則怎麼說，都是我們會花心思準備的事。</p><p>你可以直接說：「大家第一次玩，想輕鬆一點。」或是「這群人很愛動腦，給他們一點挑戰！」我們再來討論適合的內容。</p><ul className={styles.expertiseList} aria-label="活動設計專長"><li><span>會帶戲</span>劇本與角色帶領</li><li><span>會出題</span>密室與解謎設計</li><li><span>懂教學</span>遊戲化教學</li></ul></div>
           </div>
         </section>
 
         <section className={styles.process} aria-labelledby="process-title">
           <div className={styles.container}>
-            <header className={styles.sectionHeading}><div><p className={styles.eyebrow}>04 / LET’S MAKE IT HAPPEN</p><h2 id="process-title">從一個想法，<br />到一場團隊的冒險。</h2></div><p>先分享需求，<br />一起確認適合的活動內容與執行安排。</p></header>
+            <header className={styles.sectionHeading}><div><p className={styles.eyebrow}>04 / 揪團小隊長看這裡</p><h2 id="process-title">負責揪團的你，<br />先跟我們聊聊。</h2></div><p>第一次安排也沒關係，<br />先把手上的資訊告訴我們。</p></header>
             <ol className={styles.processGrid}>{STEPS.map((step, index) => <li key={step.title}><span className={styles.stepNumber}>0{index + 1}</span><h3>{step.title}</h3><p>{step.text}</p></li>)}</ol>
-            <div className={styles.pricingNote}><span>關於費用</span><p>依活動日期、人數、地點、時間與客製內容評估報價，歡迎先提供需求，與我們討論合適的安排。</p></div>
+            <div className={styles.pricingNote}><span>費用怎麼算？</span><p>人數、日期、場地、活動時間和客製內容都會影響費用。先告訴我們大概的預算，我們再提供適合的安排與報價。</p></div>
           </div>
         </section>
 
         <section id="inquiry" className={styles.inquiry} aria-labelledby="inquiry-title">
           <div className={`${styles.container} ${styles.inquiryInner}`}>
-            <div className={styles.inquiryCopy}><p className={styles.eyebrow}>YOUR NEXT TEAM STORY</p><h2 id="inquiry-title">下一場公司活動，<br />一起玩出新故事。</h2><p>告訴我們預計的人數與日期，<br />一起討論適合你們團隊的玩法。</p><div className={styles.contactActions}><a className={styles.primaryButton} href="https://m.me/bglarp.studio" target="_blank" rel="noopener noreferrer">私訊洽詢企業團隊活動<Arrow diagonal /></a><a className={styles.phoneLink} href="tel:0422250020">或致電（04）2225-0020<Arrow /></a></div></div>
-            <aside className={styles.inquiryBrief} aria-label="洽詢前準備的資訊"><p className={styles.briefLabel}>A LITTLE ABOUT YOUR TEAM</p><h3>洽詢時，帶上這 5 個資訊。</h3><dl><div><dt>01 / 預計日期</dt><dd>日期與希望的活動時段</dd></div><div><dt>02 / 參與人數</dt><dd>預估人數與團隊組成</dd></div><div><dt>03 / 活動地點</dt><dd>預計城市、場地或待討論</dd></div><div><dt>04 / 活動目的</dt><dd>公司聚會、破冰交流或團隊合作</dd></div><div><dt>05 / 預算區間</dt><dd>預計的整體活動預算</dd></div></dl><p className={styles.briefNote}>還沒有完整想法也沒關係，先從已知的需求聊起。</p></aside>
+            <div className={styles.inquiryCopy}><p className={styles.eyebrow}>好，準備揪人</p><h2 id="inquiry-title">這次公司活動，<br />揪大家來玩吧！</h2><p>不用先寫一份完美企劃。<br />傳個訊息，告訴我們「大概幾個人、哪天想玩」就好。</p><div className={styles.contactActions}><a className={styles.primaryButton} href="https://m.me/bglarp.studio" target="_blank" rel="noopener noreferrer">私訊聊聊活動<Arrow diagonal /></a><a className={styles.phoneLink} href="tel:0422250020">也可以打給我們（04）2225-0020<Arrow /></a></div></div>
+            <aside className={styles.inquiryBrief} aria-label="洽詢前準備的資訊"><p className={styles.briefLabel}>先準備這幾樣就好</p><h3>有這些資訊，更好安排！</h3><dl><div><dt>01 / 哪天想玩</dt><dd>預計日期與時段</dd></div><div><dt>02 / 這次幾位</dt><dd>大概幾位、同事還是朋友</dd></div><div><dt>03 / 在哪裡玩</dt><dd>城市、場地，還沒決定也可以</dd></div><div><dt>04 / 想怎麼玩</dt><dd>輕鬆聚聚、認識彼此，或多動點腦</dd></div><div><dt>05 / 大概預算</dt><dd>整場活動大約的預算</dd></div></dl><p className={styles.briefNote}>還有幾項沒決定？沒關係，先聊聊也可以。</p></aside>
           </div>
         </section>
       </main>
