@@ -19,6 +19,8 @@
 }
 
 .logo {
+  flex-shrink: 0;
+  min-height: 44px;
   color: #D5E4C3;
   font-size: 1.1rem;
   font-weight: bold;
@@ -42,7 +44,11 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px;
+  padding: 10px;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
   z-index: 110;
 }
 
@@ -69,6 +75,8 @@
 /* Mobile links */
 .links {
   display: none;
+  max-height: calc(100dvh - 100%);
+  overflow-y: auto;
   position: absolute;
   top: 100%;
   left: 0;
@@ -86,6 +94,10 @@
 }
 
 .links a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
   color: #8FA873;
   text-decoration: none;
   font-size: 0.9rem;
@@ -98,20 +110,33 @@
   color: #E8A63B;
 }
 
+.links a[aria-current='page'] {
+  color: #E8A63B;
+}
+
+.nav a:focus-visible,
+.burger:focus-visible {
+  outline: 2px solid #E8A63B;
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+
 /* Desktop */
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .burger {
     display: none;
   }
 
   .links {
     display: flex;
+    max-height: none;
+    overflow-y: visible;
     position: static;
     flex-direction: row;
     background: none;
     backdrop-filter: none;
     padding: 0;
-    gap: 2rem;
+    gap: clamp(1rem, 2vw, 2rem);
     border: none;
   }
 
