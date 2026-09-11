@@ -17,10 +17,10 @@ export const metadata = {
     locale: 'zh_TW',
     type: 'website',
     images: [{
-      url: '/images/team-building/team-hero.webp',
+      url: '/images/team-building/team-hero-manhwa-v2.webp',
       width: 1536,
       height: 1024,
-      alt: '團隊圍桌交流解謎線索的活動情境示意',
+      alt: '韓系漫畫中的角色劇本、線索與團隊解謎情境示意',
     }],
   },
 };
@@ -89,8 +89,8 @@ export default function TeamBuildingPage() {
             <figure className={styles.heroVisual}>
               <div className={styles.heroImageWrap}>
                 <Image
-                  src="/images/team-building/team-hero.webp"
-                  alt="同事們圍坐桌前，一起討論與交換解謎線索的情境示意"
+                  src="/images/team-building/team-hero-manhwa-v2.webp"
+                  alt="韓系漫畫人物閱讀角色劇本、交換祕密線索，一起推理解謎的情境示意"
                   fill
                   priority
                   sizes="(max-width: 767px) 100vw, (max-width: 1100px) 50vw, 58vw"
@@ -114,7 +114,7 @@ export default function TeamBuildingPage() {
             <article id="group-activities" className={styles.serviceRow} aria-labelledby="group-title">
               <figure className={styles.serviceFigure}>
                 <div className={styles.serviceImageWrap}>
-                  <Image src="/images/team-building/group-session.webp" alt="小組圍桌閱讀任務卡、討論遊戲內容的團體活動情境示意" fill sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1100px) 48vw, 560px" className={styles.serviceImage} />
+                  <Image src="/images/team-building/group-session-manhwa-v2.webp" alt="韓系漫畫小組比對角色劇本、線索卡與案件地圖的團體活動情境示意" fill sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1100px) 48vw, 560px" className={styles.serviceImage} />
                 </div>
                 <figcaption>活動情境示意</figcaption>
               </figure>
@@ -132,7 +132,7 @@ export default function TeamBuildingPage() {
             <article id="custom-projects" className={`${styles.serviceRow} ${styles.reverseRow}`} aria-labelledby="custom-title">
               <figure className={styles.serviceFigure}>
                 <div className={styles.serviceImageWrap}>
-                  <Image src="/images/team-building/puzzle-planning.webp" alt="以場地圖、線索與任務道具討論大型解謎活動的企劃情境示意" fill sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1100px) 48vw, 560px" className={styles.serviceImage} />
+                  <Image src="/images/team-building/puzzle-planning-manhwa-v2.webp" alt="韓系漫畫中不同小隊透過場地任務地圖、線索與密碼機關合作解謎的情境示意" fill sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1100px) 48vw, 560px" className={styles.serviceImage} />
                 </div>
                 <figcaption>活動情境示意</figcaption>
               </figure>
