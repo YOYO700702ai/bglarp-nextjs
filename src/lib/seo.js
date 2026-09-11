@@ -53,7 +53,7 @@ export const BOOKING_FAQS = [
   },
   {
     question: '可以舉辦生日、包場、公司或學校團體活動嗎？',
-    answer: '可以。BGLARP 承接生日聚會、朋友私人包場、公司團建與校園社團活動；可安排的劇本、人數、時段與費用請先私訊確認。',
+    answer: '可以。BGLARP 承接生日聚會、朋友私人包場、公司團隊活動與校園社團活動；可安排的劇本、人數、時段與費用請先私訊確認。',
   },
   {
     question: '傳送預約訊息後，場次就成立了嗎？',
@@ -145,8 +145,8 @@ const groupBookingServiceJsonLd = {
   '@type': 'Service',
   '@id': GROUP_BOOKING_SERVICE_ID,
   name: 'BGLARP 劇本殺團體預約',
-  description: 'BGLARP 承接生日聚會、私人包場、公司團建與校園社團活動，可安排內容以店家訊息回覆為準。',
-  serviceType: ['生日聚會', '私人包場', '公司團建', '校園社團活動'],
+  description: 'BGLARP 承接生日聚會、私人包場、公司團隊活動與校園社團活動，可安排內容以店家訊息回覆為準。',
+  serviceType: ['生日聚會', '私人包場', '公司團隊活動', '校園社團活動'],
   provider: { '@id': BUSINESS_ID },
   areaServed: {
     '@type': 'City',
