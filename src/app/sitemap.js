@@ -30,6 +30,11 @@ export default async function sitemap() {
       priority: 0.9,
     },
     {
+      url: `${base}/team-building`,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${base}/hanmen-quiz`,
       changeFrequency: 'monthly',
       priority: 0.7,
