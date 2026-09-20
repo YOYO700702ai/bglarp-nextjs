@@ -1,6 +1,15 @@
 # Cloudflare migration — release record
 
-## Current status — 2026-09-21 04:44 Taiwan
+## Final hosting/billing status — 2026-09-21 04:48 Taiwan
+
+- **Vercel Pro cancelled**, dashboard visibly shows **Hobby Plan / Active**. Cancellation dialog estimated $11.33 refund; bank receipt not verified.
+- Main final Worker version: `8f7bcb78-f878-455d-91a3-0dd6b65f2c93`; classroom version `ef3e5f0d-5748-4abf-ab14-6e03847b26fd`.
+- Classroom legacy redirect deployed successfully: `dpl_5xyHn65B6mereHoUsmB9heHfaSBf`. Old paths/query return 308 to classroom.bglarp.com. New origin now resolves normally on this computer; Chrome shows original teacher login page.
+- Post-cancellation main live checks, new classroom 200, legacy 308, member GET 200 and LINE endpoint/signature/official test pass.
+- Source saved in PR #18 (this repo) and classroom PR #36. Not merged. Classroom requires human review by its repository rules.
+- Original Vercel projects retained, not deleted. Pausing the old BGLARP copy was **not executed**: Vercel CLI requires the owner to type the project name in an interactive terminal. Did not automate that confirmation or bypass it. Main DNS has no Vercel origin dependency; do not use the old copy as the new commercial production service.
+
+## 04:44 checkpoint (resolved items are recorded above)
 
 | Service | Official origin | Hosting / data |
 | --- | --- | --- |
