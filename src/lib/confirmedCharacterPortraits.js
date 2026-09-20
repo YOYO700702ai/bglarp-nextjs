@@ -60,12 +60,12 @@ export const CONFIRMED_CHARACTER_PORTRAITS = {
     "今尾未來": "/character-portraits/batch-02/lifangguan-mousha-shimo/06-jinwei-weilai.webp"
   },
   "塑料溫室": {
-    "朴珍珠": "/character-portraits/batch-02/plastic-greenhouse/01-piao-zhenzhu.webp",
-    "劉憲永": "/character-portraits/batch-02/plastic-greenhouse/02-liu-xianyong.webp",
-    "劉明朗": "/character-portraits/batch-02/plastic-greenhouse/03-liu-minglang.webp",
-    "鄭宰賀": "/character-portraits/batch-02/plastic-greenhouse/04-zheng-zaihe.webp",
-    "鄭卓英": "/character-portraits/batch-02/plastic-greenhouse/05-zheng-zhuoying.webp",
-    "崔昭賢": "/character-portraits/batch-02/plastic-greenhouse/06-cui-zhaoxian.webp"
+    "朴珍珠": "/character-portraits/plastic-greenhouse-20260920/01-piao-zhenzhu.webp",
+    "劉憲永": "/character-portraits/plastic-greenhouse-20260920/02-liu-xianyong.webp",
+    "劉明朗": "/character-portraits/plastic-greenhouse-20260920/03-liu-minglang.webp",
+    "鄭宰賀": "/character-portraits/plastic-greenhouse-20260920/04-zheng-zaihe.webp",
+    "鄭卓英": "/character-portraits/plastic-greenhouse-20260920/05-zheng-zhuoying.webp",
+    "崔昭賢": "/character-portraits/plastic-greenhouse-20260920/06-cui-zhaoxian.webp"
   },
   "焚心": {
     "流瑤": "/character-portraits/batch-02/fenxin/01-liuyao.webp",
