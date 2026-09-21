@@ -28,6 +28,23 @@
     letter-spacing: 0.1em;
 }
 
+.legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 1rem;
+    margin-top: 0.65rem;
+    padding: 0 1rem;
+    color: #87968B;
+    font-size: 0.75rem;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+}
+
+.legal span {
+    white-space: nowrap;
+}
+
 /* Extra bottom padding on mobile for floating button */
 @media (max-width: 767px) {
     .footer {
