@@ -1,6 +1,7 @@
 import { notFound, permanentRedirect } from 'next/navigation';
 import Link from 'next/link';
 import { getAllScripts } from '@/lib/scripts';
+import { staticScriptParams } from '@/lib/staticScriptParams';
 import { getScriptExperience, getCharacterImage } from '@/lib/scriptExperiences';
 import {
   FLAGSHIP_PRICE_MIN,
@@ -67,7 +68,7 @@ export async function generateMetadata({ params }) {
 
 export async function generateStaticParams() {
   const scripts = await getAllScripts();
-  return scripts.map(s => ({ name: s.slug || s.name }));
+  return staticScriptParams(scripts);
 }
 
 export const dynamicParams = true;

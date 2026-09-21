@@ -1,0 +1,17 @@
+{
+  "observedAtTaipei": "2026-09-21 04:25",
+  "source": "Cloudflare DNS dashboard, seven records",
+  "zone": "bglarp.com",
+  "replaceOnly": [
+    {"type":"A","name":"bglarp.com","content":"76.76.21.21","proxied":false,"ttl":"Auto"},
+    {"type":"CNAME","name":"www.bglarp.com","content":"f11e8115279bce7f.vercel-dns-017.com","proxied":false,"ttl":"Auto"}
+  ],
+  "preserve": [
+    {"type":"CNAME","name":"_domainconnect.bglarp.com","content":"_domainconnect.gd.domaincontrol.com","proxied":false},
+    {"type":"TXT","name":"bglarp.com","content":"google-site-verification=yZ34tp88snR7zlCRm8CoYcybvalIscrTq1Bgc_szscE"},
+    {"type":"TXT","name":"_dmarc.bglarp.com","content":"v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:dmarc_rua@onsecureserver.net;"},
+    {"type":"Worker","name":"member.bglarp.com","service":"bglarp-member"},
+    {"type":"Worker","name":"classroom.bglarp.com","service":"classroom-pet-quest"}
+  ],
+  "rollback": "Remove only bglarp-site custom domains then restore the exact two replaceOnly records. Do not change the zone nameservers or the five preserve records. Keep the Vercel deployment for rollback."
+}

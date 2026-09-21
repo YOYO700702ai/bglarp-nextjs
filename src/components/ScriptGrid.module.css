@@ -663,91 +663,198 @@
     transform: translate(-50%, -50%) scale(1.08);
 }
 
-.promotionWallHeader {
-    display: grid;
-    gap: 0.35rem;
-    padding: 0 0.2rem;
-}
-
-.promotionWallHeader span {
-    color: #E8A63B;
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 0.24em;
-}
-
-.promotionWallHeader h3 {
-    margin: 0;
-    color: #D5E4C3;
-    font-family: 'Noto Serif TC', serif;
-    font-size: clamp(1.25rem, 4vw, 1.8rem);
-    letter-spacing: 0.08em;
-}
-
-.promotionWallHeader p {
-    max-width: 720px;
-    margin: 0;
-    color: rgba(213, 228, 195, 0.72);
-    line-height: 1.7;
-    letter-spacing: 0.04em;
-}
-
-.promotionGrid {
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: start;
-    gap: 1rem;
-    padding: 1rem;
-    border: 1px solid rgba(143, 168, 115, 0.18);
-    border-radius: 8px;
-    background:
-        linear-gradient(180deg, rgba(143, 168, 115, 0.08), rgba(8, 15, 12, 0.36)),
-        rgba(6, 12, 9, 0.66);
-}
-
-.promotionItem {
+.memberCampaign {
     position: relative;
-    display: block;
+    isolation: isolate;
     overflow: hidden;
-    border: 1px solid rgba(232, 166, 59, 0.22);
-    border-radius: 6px;
-    background: #0c1410;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    cursor: pointer;
+    border: 1px solid rgba(232, 166, 59, 0.25);
+    border-radius: 12px;
+    background: #081610;
 }
 
-.promotionItem::after {
+.memberArtwork {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
+.memberArtwork img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.memberArtwork::after {
     content: "";
     position: absolute;
-    inset: 8px;
-    border: 1px solid rgba(255, 242, 204, 0.18);
-    pointer-events: none;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(5, 15, 10, 0.86), rgba(5, 15, 10, 0.45) 39%, transparent 65%);
 }
 
-.promotionItem:hover {
-    transform: translateY(-3px);
-    border-color: rgba(232, 166, 59, 0.65);
-    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.52), 0 0 18px rgba(232, 166, 59, 0.12);
+.memberCopy {
+    width: 54%;
+    padding: clamp(2rem, 4.6vw, 4.5rem);
 }
 
-.promotionItem img {
-    width: 100%;
-    height: auto;
+.memberEyebrow {
+    color: #d3b575;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+}
+
+.memberCopy h3 {
+    margin: 1.1rem 0 0;
+    color: #fff2d2;
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(2rem, 3.6vw, 3.35rem);
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+}
+
+.memberCopy h3 span {
     display: block;
 }
 
-.memberActivityArtwork {
-    width: 100%;
-    max-width: 1120px;
-    margin: 0 auto;
+.memberLead {
+    margin: 0.9rem 0 0;
+    color: #c7d2bf;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
 }
 
-@media (max-width: 480px) {
-    .memberActivityArtwork img {
-        aspect-ratio: 4 / 3;
-        object-fit: cover;
-        object-position: 68% center;
+.memberMilestones {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 1.8rem 0;
+    padding: 0;
+    max-width: 355px;
+}
+
+.memberMilestones > div + div {
+    padding-left: 1rem;
+    border-left: 1px solid rgba(211, 181, 117, 0.27);
+}
+
+.memberMilestones dt {
+    color: #e9ca8a;
+    font-size: 0.78rem;
+    white-space: nowrap;
+}
+
+.memberMilestones strong {
+    font-family: Georgia, serif;
+    font-size: 2.15rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.memberMilestones dd {
+    margin: 0.25rem 0 0;
+    color: #c7d2bf;
+    font-size: 0.72rem;
+    line-height: 1.5;
+}
+
+.memberPrimary {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.5rem;
+    min-height: 48px;
+    padding: 0.8rem 1.25rem;
+    border-radius: 4px;
+    background: #e9c580;
+    color: #142b24;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.memberPrimary:hover {
+    background: #ffdda0;
+}
+
+.memberLinks {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1.3rem;
+    margin-top: 0.5rem;
+}
+
+.memberLinks a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: #c2cbb8;
+    font-size: 0.75rem;
+    text-decoration-color: rgba(194, 203, 184, 0.35);
+    text-underline-offset: 4px;
+}
+
+.memberLinks a:hover {
+    color: #fff2d2;
+}
+
+.memberPrimary:focus-visible,
+.memberLinks a:focus-visible {
+    outline: 2px solid #ffdda0;
+    outline-offset: 4px;
+}
+
+@media (max-width: 719px) {
+    .memberArtwork {
+        bottom: auto;
+        height: 265px;
+    }
+
+    .memberArtwork img {
+        object-position: right center;
+    }
+
+    .memberArtwork::after {
+        background: linear-gradient(180deg, transparent 40%, #081610 100%);
+    }
+
+    .memberCopy {
+        width: 100%;
+        padding: 230px 1.4rem 1.2rem;
+    }
+
+    .memberCopy h3 {
+        margin-top: 0.65rem;
+        font-size: clamp(1.75rem, 6.8vw, 2.5rem);
+        line-height: 1.4;
+    }
+
+    .memberLead {
+        font-size: 0.8rem;
+    }
+
+    .memberMilestones {
+        margin: 1.3rem 0;
+    }
+
+    .memberMilestones > div + div {
+        padding-left: 0.65rem;
+    }
+
+    .memberPrimary {
+        width: 100%;
+    }
+
+    .memberLinks {
+        justify-content: space-between;
+        column-gap: 0.5rem;
+    }
+
+    .memberLinks a {
+        font-size: 0.7rem;
     }
 }
 
@@ -771,20 +878,6 @@
         align-self: center;
     }
 
-    .promotionGrid {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: flex-start;
-        gap: 1rem;
-        padding: 1.15rem;
-    }
-
-    .promotionItem {
-        flex-grow: 1;
-        flex-shrink: 1;
-        flex-basis: 0;
-        min-width: 200px;
-    }
 }
 
 @media (min-width: 1180px) {

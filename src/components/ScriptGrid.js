@@ -28,8 +28,6 @@ const FEATURED_STORY = {
     poster: 'https://i.ytimg.com/vi/6bYtqkPyz90/hqdefault.jpg',
     title: '下一場故事，等你入戲',
     subtitle: '揪上朋友，一起成為故事裡的主角。',
-    description: '想燒腦推理、投入角色情感，或來場歡樂聚會？告訴我們人數、日期與喜歡的類型，讓 BGLARP 陪你挑選適合的劇本，預約一場難忘的相聚。',
-    highlights: ['好友揪團', '沉浸體驗', '私訊選本'],
 };
 const TAB_KICKERS = {
     '現正熱映': 'NOW SHOWING',
@@ -304,51 +302,34 @@ export default function ScriptGrid() {
                     </>
                 ) : activeTab === LATEST_ACTIVITY_TAB ? (
                     <div className={styles.activityLayout}>
-                        <section className={styles.promotionWallHeader} aria-labelledby="new-member-activity-title">
-                            <span>NEW MEMBER PROGRAM</span>
-                            <h3 id="new-member-activity-title">新會員系統正式上線</h3>
-                            <p>
-                                先加入官方 LINE，再開啟會員卡抽任務卡。每玩一本，由 GM 開放掃碼集章；每張集滿 3 章即可領取獎勵，累計 2 張升 VIP、5 張升 BG 乾爹。
-                            </p>
-                            <p>
-                                舊會員請留好實體卡：舊卡可使用至 2026/10/31（含）；11/1 起停止使用，但仍可持卡到店換新會員福利。每人限領一次「升等進度＋1 張」與生日單人免費券 1 張，使用限制以票券說明為準。
-                            </p>
-                            <div className={styles.activityTags} aria-label="新會員活動重點">
-                                <span>任務卡 3 章領獎</span>
-                                <span>2 張升 VIP</span>
-                                <span>5 張升 BG 乾爹</span>
-                                <span>舊卡到店換新禮</span>
-                            </div>
-                            <div className={styles.activityActions}>
-                                <a href={LINE_FRIEND_URL} target="_blank" rel="noopener noreferrer">
-                                    加入官方 LINE
-                                </a>
-                                <a href={MEMBER_CARD_URL} target="_blank" rel="noopener noreferrer">
-                                    開啟會員卡
-                                </a>
-                                <a href={MEMBER_ACTIVITY_URL} target="_blank" rel="noopener noreferrer">
-                                    查看完整活動辦法
-                                </a>
-                            </div>
-                        </section>
-
-                        <div className={styles.promotionGrid}>
-                            <a
-                                href={MEMBER_ACTIVITY_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`${styles.promotionItem} ${styles.memberActivityArtwork}`}
-                                aria-label="在 Facebook 查看 BGLARP 新會員活動完整辦法"
-                            >
+                        <section className={styles.memberCampaign} aria-labelledby="new-member-activity-title">
+                            <div className={styles.memberArtwork}>
                                 <Image
                                     src="/activity/new-member-activity-hero.webp"
-                                    alt="BGLARP 新會員活動主視覺，手機會員卡、集章任務與舊卡換新禮"
+                                    alt=""
                                     width={1672}
                                     height={941}
-                                    sizes="(max-width: 719px) calc(100vw - 4rem), 1120px"
+                                    sizes="(max-width: 719px) calc(100vw - 2rem), 1280px"
                                 />
-                            </a>
-                        </div>
+                            </div>
+                            <div className={styles.memberCopy}>
+                                <span className={styles.memberEyebrow}>BGLARP 會員計畫</span>
+                                <h3 id="new-member-activity-title">新會員，<span>開啟新故事。</span></h3>
+                                <p className={styles.memberLead}>集章領好禮，累計任務卡升等。</p>
+                                <dl className={styles.memberMilestones} aria-label="會員集章與升等重點">
+                                    <div><dt><strong>3</strong> 章</dt><dd>任務卡領獎</dd></div>
+                                    <div><dt><strong>2</strong> 張卡</dt><dd>升等 VIP</dd></div>
+                                    <div><dt><strong>5</strong> 張卡</dt><dd>成為 BG 乾爹</dd></div>
+                                </dl>
+                                <a className={styles.memberPrimary} href={MEMBER_CARD_URL} target="_blank" rel="noopener noreferrer">
+                                    開啟會員卡 <span aria-hidden="true">→</span>
+                                </a>
+                                <div className={styles.memberLinks}>
+                                    <a href={LINE_FRIEND_URL} target="_blank" rel="noopener noreferrer">加入官方 LINE</a>
+                                    <a href={MEMBER_ACTIVITY_URL} target="_blank" rel="noopener noreferrer">活動辦法・舊卡換禮 <span aria-hidden="true">↗</span></a>
+                                </div>
+                            </div>
+                        </section>
 
                         <section className={styles.activityFeature} aria-label="預約劇本體驗">
                             <div className={styles.activityCopy}>
@@ -363,12 +344,6 @@ export default function ScriptGrid() {
                                     >
                                         私訊預約
                                     </a>
-                                </div>
-                                <p className={styles.activityDescription}>{FEATURED_STORY.description}</p>
-                                <div className={styles.activityTags}>
-                                    {FEATURED_STORY.highlights.map(item => (
-                                        <span key={item}>{item}</span>
-                                    ))}
                                 </div>
                             </div>
                             <div className={styles.activityCampaignPanel} aria-label="BGLARP 劇本體驗短片">

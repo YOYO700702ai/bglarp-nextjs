@@ -9,6 +9,10 @@ export default function Footer() {
             <div className={styles.copy}>
                 &copy; 2026 BGLARP 實境推理館. All Rights Reserved.
             </div>
+            <div className={styles.legal}>
+                <span>營運單位：嘰嘰喳喳企業社</span>
+                <span>統編：60805054</span>
+            </div>
         </footer>
     );
 }
