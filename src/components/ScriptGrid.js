@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import ScriptCard from './ScriptCard';
 import { getScriptExperience } from '@/lib/scriptExperiences';
@@ -6,17 +7,22 @@ import { FLAGSHIP_PRICE_MIN, isFlagshipScript } from '@/lib/scriptClassification
 import styles from './ScriptGrid.module.css';
 
 const FLAGSHIP_TAB = '旗艦劇本區';
-const TABS = ['現正熱映', FLAGSHIP_TAB, '心測專區', '預約入戲'];
+const LATEST_ACTIVITY_TAB = '最新活動';
+const TABS = ['現正熱映', FLAGSHIP_TAB, '心測專區', LATEST_ACTIVITY_TAB];
 const TAB_HASHES = {
     '現正熱映': '#scripts',
     [FLAGSHIP_TAB]: '#scripts-flagship',
     '心測專區': '#quiz',
-    '預約入戲': '#scripts-booking',
+    [LATEST_ACTIVITY_TAB]: '#scripts-limited',
 };
-const HASH_TABS = Object.fromEntries(
-    Object.entries(TAB_HASHES).map(([tab, hash]) => [hash, tab]),
-);
+const HASH_TABS = {
+    ...Object.fromEntries(Object.entries(TAB_HASHES).map(([tab, hash]) => [hash, tab])),
+    '#scripts-booking': LATEST_ACTIVITY_TAB,
+};
 const BOOKING_URL = 'https://m.me/bglarp.studio';
+const LINE_FRIEND_URL = 'https://lin.ee/S61LL0m';
+const MEMBER_CARD_URL = 'https://liff.line.me/2011124107-GVTDMium';
+const MEMBER_ACTIVITY_URL = 'https://www.facebook.com/bglarp.studio/posts/pfbid02GZ3MHU4HALpYB8jpbTVL7oUmRJvQx6SF3NSKn31FG5PpoMZmsCMKhYXvoGCP88wYl';
 const FEATURED_STORY = {
     videoId: '6bYtqkPyz90',
     poster: 'https://i.ytimg.com/vi/6bYtqkPyz90/hqdefault.jpg',
@@ -29,7 +35,7 @@ const TAB_KICKERS = {
     '現正熱映': 'NOW SHOWING',
     [FLAGSHIP_TAB]: 'PREMIUM SCRIPT ROOM',
     '心測專區': 'PERSONALITY STORIES',
-    '預約入戲': 'YOUR NEXT STORY',
+    [LATEST_ACTIVITY_TAB]: 'LATEST EVENTS',
 };
 const FLAGSHIP_NOTES = [
     `每人價格 NT$${FLAGSHIP_PRICE_MIN}（含）以上`,
@@ -45,7 +51,7 @@ export default function ScriptGrid() {
     const [genreFilter, setGenreFilter] = useState('全部');
     const [searchQuery, setSearchQuery] = useState('');
     const [displayLimit, setDisplayLimit] = useState(25);
-    const [activeTab, setActiveTab] = useState('預約入戲');
+    const [activeTab, setActiveTab] = useState(LATEST_ACTIVITY_TAB);
     const [activityPlaying, setActivityPlaying] = useState(false);
 
     const normalize = (s) => String(s || '').toLowerCase().replace(/\s+/g, '');
@@ -296,8 +302,54 @@ export default function ScriptGrid() {
                             </>
                         )}
                     </>
-                ) : activeTab === '預約入戲' ? (
+                ) : activeTab === LATEST_ACTIVITY_TAB ? (
                     <div className={styles.activityLayout}>
+                        <section className={styles.promotionWallHeader} aria-labelledby="new-member-activity-title">
+                            <span>NEW MEMBER PROGRAM</span>
+                            <h3 id="new-member-activity-title">新會員系統正式上線</h3>
+                            <p>
+                                先加入官方 LINE，再開啟會員卡抽任務卡。每玩一本，由 GM 開放掃碼集章；每張集滿 3 章即可領取獎勵，累計 2 張升 VIP、5 張升 BG 乾爹。
+                            </p>
+                            <p>
+                                舊會員請留好實體卡：舊卡可使用至 2026/10/31（含）；11/1 起停止使用，但仍可持卡到店換新會員福利。每人限領一次「升等進度＋1 張」與生日單人免費券 1 張，使用限制以票券說明為準。
+                            </p>
+                            <div className={styles.activityTags} aria-label="新會員活動重點">
+                                <span>任務卡 3 章領獎</span>
+                                <span>2 張升 VIP</span>
+                                <span>5 張升 BG 乾爹</span>
+                                <span>舊卡到店換新禮</span>
+                            </div>
+                            <div className={styles.activityActions}>
+                                <a href={LINE_FRIEND_URL} target="_blank" rel="noopener noreferrer">
+                                    加入官方 LINE
+                                </a>
+                                <a href={MEMBER_CARD_URL} target="_blank" rel="noopener noreferrer">
+                                    開啟會員卡
+                                </a>
+                                <a href={MEMBER_ACTIVITY_URL} target="_blank" rel="noopener noreferrer">
+                                    查看完整活動辦法
+                                </a>
+                            </div>
+                        </section>
+
+                        <div className={styles.promotionGrid}>
+                            <a
+                                href={MEMBER_ACTIVITY_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`${styles.promotionItem} ${styles.memberActivityArtwork}`}
+                                aria-label="在 Facebook 查看 BGLARP 新會員活動完整辦法"
+                            >
+                                <Image
+                                    src="/activity/new-member-activity-hero.webp"
+                                    alt="BGLARP 新會員活動主視覺，手機會員卡、集章任務與舊卡換新禮"
+                                    width={1672}
+                                    height={941}
+                                    sizes="(max-width: 719px) calc(100vw - 4rem), 1120px"
+                                />
+                            </a>
+                        </div>
+
                         <section className={styles.activityFeature} aria-label="預約劇本體驗">
                             <div className={styles.activityCopy}>
                                 <span className={styles.activityKicker}>YOUR NEXT STORY</span>
