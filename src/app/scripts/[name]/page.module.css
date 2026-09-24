@@ -301,6 +301,38 @@
     text-align: center;
 }
 
+.charGrid.charCardGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 12px;
+}
+
+.charCardImage {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+    border: 1px solid rgba(232, 166, 59, 0.55);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #17130f;
+}
+
+.charCardImage img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.charCardImage:focus-visible {
+    outline: 2px solid #e8a63b;
+    outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+    .charGrid.charCardGrid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
 .charAvatar {
     position: relative;
     width: 60px;

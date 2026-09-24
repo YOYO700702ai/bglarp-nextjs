@@ -87,6 +87,7 @@ export default async function ScriptPage({ params }) {
   }
   const experience = getScriptExperience(card.name);
   const isFlagship = isFlagshipScript(card);
+  const showFullCharacterCards = card.name === '魔女論破';
 
   const dur = card.duration || '未標示';
   const price = card.priceStatus === 'free'
@@ -193,7 +194,7 @@ export default async function ScriptPage({ params }) {
         {charLines.length > 0 && (
           <>
             <div className={styles.sectionTitle}>角色檔案</div>
-            <div className={styles.charGrid}>
+            <div className={`${styles.charGrid} ${showFullCharacterCards ? styles.charCardGrid : ''}`}>
               {charLines.map((line, idx) => {
                 let charName = line;
                 let charDesc = '';
@@ -208,13 +209,19 @@ export default async function ScriptPage({ params }) {
                 const charImg = getCharacterImage(card.name, charName);
                 return (
                   <div key={idx} className={styles.charItem}>
-                    <div className={styles.charAvatar} aria-label={charName}>
+                    {showFullCharacterCards && charImg ? (
+                      <a href={charImg} target="_blank" rel="noopener noreferrer" className={styles.charCardImage} aria-label={`查看${charName}完整角色圖`}>
+                        <img src={charImg} alt={charName} width="1080" height="1515" loading="lazy" />
+                      </a>
+                    ) : (
+                      <div className={styles.charAvatar} aria-label={charName}>
                       {charImg ? (
                         <img src={charImg} alt={charName} className={styles.charPortrait} />
                       ) : (
                         <div className={styles.charSilhouette} />
                       )}
-                    </div>
+                      </div>
+                    )}
                     <div className={styles.charName}>{charName}</div>
                     {charDesc && <div className={styles.charDesc}>{charDesc}</div>}
                   </div>

@@ -1,6 +1,15 @@
 // Generated from the 2026-08-25 production character audit.
 // Includes only exact, owner-confirmed current character mappings.
 export const CONFIRMED_CHARACTER_PORTRAITS = {
+  "魔女論破": {
+    "貪婪魔女的親眷": "/character-portraits/witch-debate-20260924/greed.jpg",
+    "嫉妒魔女的親眷": "/character-portraits/witch-debate-20260924/envy.jpg",
+    "暴食魔女的親眷": "/character-portraits/witch-debate-20260924/gluttony.jpg",
+    "色慾魔女的親眷": "/character-portraits/witch-debate-20260924/lust.jpg",
+    "傲慢魔女的親眷": "/character-portraits/witch-debate-20260924/pride.jpg",
+    "憤怒魔女的親眷": "/character-portraits/witch-debate-20260924/wrath.jpg",
+    "怠惰魔女的親眷": "/character-portraits/witch-debate-20260924/sloth.jpg"
+  },
   "砍二刀": {
     "尿頻者": "/character-portraits/batch-01/kan-er-dao/01-niao-pin-zhe.webp",
     "尋愛者": "/character-portraits/batch-01/kan-er-dao/02-xun-ai-zhe.webp",
