@@ -1,4 +1,5 @@
 import { cache } from 'react';
+import { matchCharacterMetadata, parseCharacterMetadata } from './characterMedia.js';
 import {
   getPublishedScriptsFromSupabase,
   shouldReadPublishedCatalog,
@@ -62,9 +63,14 @@ export async function getAllScriptsFromNotion() {
     const props = p.properties || {};
     const name = getText(props, '劇本名稱', true) || '未命名';
     const synopsis = getText(props, '劇情簡介');
-    const charMulti = props['角色']?.multi_select || [];
-    const charRich = getText(props, '角色');
+    const characterProperty = process.env.SCRIPT_NOTION_CHARACTERS_PROPERTY || '角色';
+    const charMulti = props[characterProperty]?.multi_select || [];
+    const charRich = getText(props, characterProperty);
     const characters = charMulti.length > 0 ? charMulti.map(o => o.name).join('\n') : charRich;
+    const { characterImages, characterDescriptions } = matchCharacterMetadata(
+      parseCharacterMetadata(getText(props, process.env.SCRIPT_NOTION_CHARACTER_IMAGES_PROPERTY || '角色圖片')),
+      charMulti.length > 0 ? charMulti.map(o => o.name) : charRich.split('\n').map(line => line.trim()).filter(Boolean),
+    );
     const genreMulti = (props['類型']?.multi_select || []).map(o => o.name);
     const customTags = getText(props, '類型標籤');
     const genreText = customTags.split(/[,\/、.。·\s]+/).map(s => s.trim()).filter(Boolean);
@@ -85,6 +91,8 @@ export async function getAllScriptsFromNotion() {
       name,
       synopsis,
       characters,
+      characterImages,
+      characterDescriptions,
       genre,
       customTags,
       duration,

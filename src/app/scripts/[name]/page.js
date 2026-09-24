@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { getAllScripts } from '@/lib/scripts';
 import { staticScriptParams } from '@/lib/staticScriptParams';
 import { getScriptExperience, getCharacterImage } from '@/lib/scriptExperiences';
+import { getCharacterMedia, parseCharacterLabel } from '@/lib/characterMedia';
+import { publicScriptFingerprint } from '@/lib/script-public-verification';
 import {
   FLAGSHIP_PRICE_MIN,
   FLAGSHIP_SCRIPT_LABEL,
@@ -87,7 +89,9 @@ export default async function ScriptPage({ params }) {
   }
   const experience = getScriptExperience(card.name);
   const isFlagship = isFlagshipScript(card);
-  const showFullCharacterCards = card.name === '魔女論破';
+  const legacyFullCharacterCards = card.name === '魔女論破';
+  const showFullCharacterCards = legacyFullCharacterCards
+    || Object.keys(card.characterImages || {}).some((name) => getCharacterMedia(card.characterImages, name)?.display === 'card');
 
   const dur = card.duration || '未標示';
   const price = card.priceStatus === 'free'
@@ -106,10 +110,11 @@ export default async function ScriptPage({ params }) {
   ]));
   const paragraphs = (card.synopsis || '（資料未建立）').split('\n').filter(p => p.trim());
   const charLines = (card.characters || '').split('\n').filter(l => l.trim());
+  const characterMetadataNames = { ...card.characterImages, ...card.characterDescriptions };
   const scriptJsonLd = buildScriptJsonLd(card);
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} data-bgl-script-fingerprint={publicScriptFingerprint(card)}>
       <JsonLd id="bglarp-script-jsonld" data={scriptJsonLd} />
       <nav className={styles.backBar}>
         <Link href="/#scripts" className={styles.backLink}>
@@ -196,27 +201,24 @@ export default async function ScriptPage({ params }) {
             <div className={styles.sectionTitle}>角色檔案</div>
             <div className={`${styles.charGrid} ${showFullCharacterCards ? styles.charCardGrid : ''}`}>
               {charLines.map((line, idx) => {
-                let charName = line;
-                let charDesc = '';
-                for (const sep of ['：', ':', '－', ' - ']) {
-                  if (line.includes(sep)) {
-                    const parts = line.split(sep);
-                    charName = parts[0].trim();
-                    charDesc = parts.slice(1).join(sep).trim();
-                    break;
-                  }
-                }
-                const charImg = getCharacterImage(card.name, charName);
+                const metadataName = line.trim();
+                const { name: charName, description: legacyDescription } = parseCharacterLabel(line, characterMetadataNames);
+                const charDesc = Object.hasOwn(card.characterDescriptions || {}, metadataName)
+                  ? card.characterDescriptions[metadataName] : legacyDescription;
+                const media = getCharacterMedia(card.characterImages, metadataName);
+                const charImg = media?.image.url || getCharacterImage(card.name, charName);
+                const imageAlt = media?.image.alt || charName;
+                const showCard = media ? media.display === 'card' : legacyFullCharacterCards;
                 return (
                   <div key={idx} className={styles.charItem}>
-                    {showFullCharacterCards && charImg ? (
+                    {showCard && charImg ? (
                       <a href={charImg} target="_blank" rel="noopener noreferrer" className={styles.charCardImage} aria-label={`查看${charName}完整角色圖`}>
-                        <img src={charImg} alt={charName} width="1080" height="1515" loading="lazy" />
+                        <img src={charImg} alt={imageAlt} width={media ? undefined : 1080} height={media ? undefined : 1515} loading="lazy" />
                       </a>
                     ) : (
                       <div className={styles.charAvatar} aria-label={charName}>
                       {charImg ? (
-                        <img src={charImg} alt={charName} className={styles.charPortrait} />
+                        <img src={charImg} alt={imageAlt} className={styles.charPortrait} loading="lazy" />
                       ) : (
                         <div className={styles.charSilhouette} />
                       )}

@@ -33,6 +33,10 @@ function asCharacters(value) {
       return {
         name: String(character?.name || '').trim(),
         description: String(character?.description || ''),
+        // Preserve server-validated media even when this browser does not know
+        // the server-only storage bucket setting. The save API validates it.
+        ...(character?.image != null ? { image: { ...character.image } } : {}),
+        ...(character?.display !== undefined ? { display: character.display } : {}),
       };
     })
     .filter((character) => character.name || character.description);
@@ -129,6 +133,8 @@ export function toAdminScriptPayload(script) {
       .map((character) => ({
         name: character.name.trim(),
         description: character.description.trim(),
+        ...(character.image ? { image: { ...character.image } } : {}),
+        ...(character.display !== undefined ? { display: character.display } : {}),
       }))
       .filter((character) => character.name || character.description),
     cover: {

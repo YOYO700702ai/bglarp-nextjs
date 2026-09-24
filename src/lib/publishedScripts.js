@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { characterMetadataFromCharacters } from './characterMedia.js';
 
 function getPublicSupabaseClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -32,9 +33,8 @@ function characterLines(characters) {
   return characters
     .map((character) => {
       const name = String(character?.name || '').trim();
-      const description = String(character?.description || '').trim();
       if (!name) return '';
-      return description ? `${name}：${description}` : name;
+      return name;
     })
     .filter(Boolean)
     .join('\n');
@@ -56,6 +56,7 @@ export function mapPublishedCatalogRow(row) {
     name: String(content.name || '').trim() || '未命名',
     synopsis: String(content.synopsis || '').trim(),
     characters: characterLines(content.characters),
+    ...characterMetadataFromCharacters(content.characters),
     genre: normalizeStringList(content.genres),
     customTags: normalizeStringList(content.customTags).join('、'),
     duration: String(content.durationLabel || '').trim()

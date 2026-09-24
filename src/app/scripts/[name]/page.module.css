@@ -429,6 +429,8 @@
     color: #a1a1aa;
     line-height: 1.4;
     max-width: 100px;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
 }
 
 /* Book button */

@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { buildNotionCharacterImagesProperty } from '../characterMedia.js';
 import {
   SCRIPT_COLUMNS,
   SCRIPT_SYNC_JOB_COLUMNS,
@@ -112,8 +113,10 @@ function playerLabels(content) {
 }
 
 function characterText(characters) {
+  // Names remain authoritative in this column, including multi_select schemas.
+  // Descriptions live in versioned metadata so embedded newlines are lossless.
   return (characters || [])
-    .map(({ name, description }) => description ? `${name}｜${description}` : name)
+    .map(({ name }) => name)
     .join('\n');
 }
 
@@ -163,6 +166,15 @@ function buildNotionProperties(schema, content) {
     rich_text: richText(characterText(content.characters)),
     multi_select: namedOptions(content.characters.map(({ name }) => name)),
   });
+  try {
+    Object.assign(output, buildNotionCharacterImagesProperty(
+      schema,
+      content.characters,
+      propertyName('SCRIPT_NOTION_CHARACTER_IMAGES_PROPERTY', '角色圖片'),
+    ));
+  } catch (error) {
+    throw new NotionSyncError(error.message);
+  }
   setProperty(output, schema, propertyName('SCRIPT_NOTION_GENRES_PROPERTY', '類型'), {
     multi_select: namedOptions(content.genres),
     rich_text: richText(content.genres.join('、')),

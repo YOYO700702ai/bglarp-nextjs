@@ -1,4 +1,5 @@
 import { invalidRequest } from './errors';
+import { normalizeCharacterMedia } from '../characterMedia.js';
 
 const CONTENT_KEYS = new Set([
   'name',
@@ -83,15 +84,22 @@ function normalizeCharacters(value) {
     if (!isPlainObject(character)) {
       throw invalidRequest('角色資料格式不正確。', { [`characters.${index}`]: '必須是物件' });
     }
-    const unexpected = Object.keys(character).filter((key) => !['name', 'description'].includes(key));
+    const unexpected = Object.keys(character).filter((key) => !['name', 'description', 'image', 'display'].includes(key));
     if (unexpected.length) {
       throw invalidRequest('角色資料含有不支援的欄位。', {
         [`characters.${index}`]: unexpected.join(', '),
       });
     }
+    let media;
+    try {
+      media = normalizeCharacterMedia(character, `characters.${index}`);
+    } catch (error) {
+      throw invalidRequest(error.message, { [error.field || `characters.${index}.image`]: error.message });
+    }
     return {
       name: text(character.name, `characters.${index}.name`, { required: true, max: 80 }),
       description: text(character.description, `characters.${index}.description`, { max: 1000 }),
+      ...media,
     };
   });
 }

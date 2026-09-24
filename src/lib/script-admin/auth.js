@@ -71,3 +71,15 @@ export function requireScriptAi(request) {
     },
   };
 }
+
+// This credential is deliberately separate from the existing draft-only AI token.
+export function requireScriptBot(request) {
+  const expectedToken = process.env.SCRIPT_ADMIN_BOT_TOKEN;
+  if (!expectedToken) throw unavailable('小六上架通道尚未完成設定。');
+  const match = (request.headers.get('authorization') || '').match(/^Bearer\s+(.+)$/i);
+  if (!match || !constantTimeEqual(match[1], expectedToken)) throw unauthenticated();
+  return {
+    adminClient: createSupabaseAdminClient(),
+    actor: { id: null, type: 'ai', role: 'bot' },
+  };
+}
