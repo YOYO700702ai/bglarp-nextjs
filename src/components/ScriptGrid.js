@@ -302,6 +302,32 @@ export default function ScriptGrid() {
                     </>
                 ) : activeTab === LATEST_ACTIVITY_TAB ? (
                     <div className={styles.activityLayout}>
+                        <section className={styles.octoberCampaign} aria-labelledby="chungyo-october-title">
+                            <div className={styles.octoberArtwork}>
+                                <Image
+                                    src="/activity/chungyo-halloween-2026.webp"
+                                    alt="BGLARP × 中友百貨十月聯合活動海報"
+                                    width={1254}
+                                    height={1254}
+                                    sizes="(max-width: 719px) calc(100vw - 4rem), (max-width: 1399px) 44vw, 570px"
+                                />
+                            </div>
+                            <div className={styles.octoberCopy}>
+                                <span className={styles.octoberPeriod}>10 月限定</span>
+                                <h3 id="chungyo-october-title">BGLARP <span className={styles.octoberCross}>×</span><span className={styles.octoberPartner}>中友百貨</span></h3>
+                                <p className={styles.octoberOffer}>
+                                    來店出示中友百貨會員身分，玩任一劇本費用折抵 <strong>NT$100</strong>。
+                                </p>
+                                <p className={styles.octoberCostume}>
+                                    只要扮裝入場，就可以體驗轉轉盤！<br />
+                                    <span>抽小禮物與萬聖節提燈！！</span>
+                                </p>
+                                <a className={styles.octoberBooking} href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                                    私訊預約 <span aria-hidden="true">→</span>
+                                </a>
+                            </div>
+                        </section>
+
                         <section className={styles.memberCampaign} aria-labelledby="new-member-activity-title">
                             <div className={styles.memberArtwork}>
                                 <Image

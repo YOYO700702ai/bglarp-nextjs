@@ -428,6 +428,146 @@
     padding: 0.35rem 0 2.4rem;
 }
 
+.octoberCampaign {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(1.5rem, 3.5vw, 3.5rem);
+    padding: clamp(1rem, 2vw, 1.75rem);
+    border: 1px solid rgba(233, 197, 128, 0.4);
+    border-radius: 12px;
+    background:
+        radial-gradient(ellipse at 95% 5%, rgba(199, 118, 37, 0.12), transparent 55%),
+        #0d1510;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+}
+
+.octoberArtwork {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(233, 197, 128, 0.2);
+    border-radius: 6px;
+    background: #080f0c;
+}
+
+.octoberArtwork img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.octoberCopy {
+    min-width: 0;
+    padding: 0.5rem clamp(0rem, 1.5vw, 1.5rem) 0.5rem 0;
+}
+
+.octoberPeriod {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(233, 197, 128, 0.4);
+    border-radius: 3px;
+    color: #e9c580;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+}
+
+.octoberCopy h3 {
+    margin: 1rem 0 1.2rem;
+    color: #fff2d2;
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1.75rem, 3.2vw, 3rem);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+}
+
+.octoberCross {
+    color: #d3b575;
+    font-weight: 400;
+}
+
+.octoberPartner {
+    display: block;
+}
+
+.octoberOffer {
+    margin: 0;
+    color: #d5ddcc;
+    font-size: clamp(1rem, 1.5vw, 1.18rem);
+    line-height: 1.85;
+}
+
+.octoberOffer strong {
+    color: #f3cc85;
+    font-size: 1.25em;
+    white-space: nowrap;
+}
+
+.octoberCostume {
+    margin: 1.35rem 0 1.65rem;
+    padding-top: 1.15rem;
+    border-top: 1px solid rgba(233, 197, 128, 0.2);
+    color: #c7d2bf;
+    font-size: 0.95rem;
+    line-height: 1.9;
+}
+
+.octoberCostume span {
+    color: #f0d7a7;
+}
+
+.octoberBooking {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.5rem;
+    min-height: 48px;
+    padding: 0.8rem 1.25rem;
+    border-radius: 4px;
+    background: #e9c580;
+    color: #142b24;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.octoberBooking:hover {
+    background: #ffdda0;
+}
+
+.octoberBooking:focus-visible {
+    outline: 2px solid #ffdda0;
+    outline-offset: 4px;
+}
+
+@media (max-width: 719px) {
+    .octoberCampaign {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.3rem;
+        padding: 0.85rem;
+    }
+
+    .octoberCopy {
+        padding: 0 0.3rem 0.4rem;
+    }
+
+    .octoberCopy h3 {
+        margin: 0.8rem 0 1rem;
+        font-size: clamp(1.75rem, 6.8vw, 2.5rem);
+    }
+
+    .octoberCostume {
+        margin: 1.15rem 0 1.35rem;
+    }
+
+    .octoberBooking {
+        width: 100%;
+    }
+}
+
 .activityFeature {
     position: relative;
     overflow: hidden;
