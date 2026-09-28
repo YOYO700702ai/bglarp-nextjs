@@ -9,6 +9,7 @@ import styles from './ScriptGrid.module.css';
 const FLAGSHIP_TAB = '旗艦劇本區';
 const LATEST_ACTIVITY_TAB = '最新活動';
 const TABS = ['現正熱映', FLAGSHIP_TAB, '心測專區', LATEST_ACTIVITY_TAB];
+const TAB_ANALYTICS = { '現正熱映': 'tab:showing', [FLAGSHIP_TAB]: 'tab:flagship', '心測專區': 'tab:quiz', [LATEST_ACTIVITY_TAB]: 'tab:activity' };
 const TAB_HASHES = {
     '現正熱映': '#scripts',
     [FLAGSHIP_TAB]: '#scripts-flagship',
@@ -194,6 +195,7 @@ export default function ScriptGrid() {
                         {TABS.map(t => (
                             <button
                                 key={t}
+                                data-analytics-target={TAB_ANALYTICS[t]}
                                 className={`${styles.tab} ${activeTab === t ? styles.tabActive : ''}`}
                                 onClick={() => handleTabChange(t)}
                             >
@@ -322,7 +324,7 @@ export default function ScriptGrid() {
                                     只要扮裝入場，就可以體驗轉轉盤！<br />
                                     <span>抽小禮物與萬聖節提燈！！</span>
                                 </p>
-                                <a className={styles.octoberBooking} href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                                <a className={styles.octoberBooking} href={BOOKING_URL} data-analytics-target="booking:october" target="_blank" rel="noopener noreferrer">
                                     私訊預約 <span aria-hidden="true">→</span>
                                 </a>
                             </div>
@@ -352,7 +354,7 @@ export default function ScriptGrid() {
                                 </a>
                                 <div className={styles.memberLinks}>
                                     <a href={LINE_FRIEND_URL} target="_blank" rel="noopener noreferrer">加入官方 LINE</a>
-                                    <a href={MEMBER_ACTIVITY_URL} target="_blank" rel="noopener noreferrer">活動辦法・舊卡換禮 <span aria-hidden="true">↗</span></a>
+                                    <a href={MEMBER_ACTIVITY_URL} data-analytics-target="activity:member" target="_blank" rel="noopener noreferrer">活動辦法・舊卡換禮 <span aria-hidden="true">↗</span></a>
                                 </div>
                             </div>
                         </section>
@@ -387,6 +389,7 @@ export default function ScriptGrid() {
                                             type="button"
                                             className={styles.activityPoster}
                                             onClick={() => setActivityPlaying(true)}
+                                            data-analytics-target="activity:video"
                                             aria-label="播放 BGLARP 劇本體驗短片"
                                         >
                                             <img src={FEATURED_STORY.poster} alt="" referrerPolicy="no-referrer" />

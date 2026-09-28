@@ -13,6 +13,7 @@ export default function Footer() {
                 <span>營運單位：嘰嘰喳喳企業社</span>
                 <span>統編：60805054</span>
             </div>
+            <p className={styles.analyticsNotice}>官網使用每日更新的匿名識別碼，統計頁面瀏覽與按鈕點擊，協助改善內容。</p>
         </footer>
     );
 }

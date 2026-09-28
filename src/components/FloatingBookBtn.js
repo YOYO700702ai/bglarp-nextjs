@@ -5,6 +5,7 @@ export default function FloatingBookBtn() {
     return (
         <a
             href="https://www.facebook.com/bglarp.studio/"
+            data-analytics-target="booking:facebook"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.btn}

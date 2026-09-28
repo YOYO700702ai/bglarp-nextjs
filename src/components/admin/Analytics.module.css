@@ -1,0 +1,140 @@
+.report {
+  --analytics-ink: #142033;
+  --analytics-muted: #657083;
+  --analytics-line: #dce2e9;
+  --admin-gold-dark: #8b611f;
+  width: 100%;
+  min-width: 0;
+  color: var(--analytics-ink);
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.report *, .report *::before, .report *::after { box-sizing: border-box; }
+.report button { font: inherit; cursor: pointer; }
+.report button:focus-visible, .report summary:focus-visible, .chartScroll:focus-visible, .tableScroll:focus-visible { outline: 3px solid #b8822c; outline-offset: 3px; }
+.report button:disabled { opacity: .6; cursor: wait; }
+
+.heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 22px; margin-bottom: 26px; }
+.eyebrow { margin: 0; color: #8b611f; font-size: 11px; font-weight: 700; letter-spacing: .18em; }
+.heading h1 { margin: 5px 0 9px; font-size: clamp(30px, 4vw, 46px); line-height: 1.2; letter-spacing: -.025em; }
+.heading p:last-child { margin: 0; color: var(--analytics-muted); font-size: 15px; }
+.timezone { flex-shrink: 0; margin-bottom: 3px; color: var(--analytics-muted); font-size: 12px; }
+.controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ranges { display: flex; padding: 4px; border: 1px solid var(--analytics-line); border-radius: 10px; background: #e9edf2; }
+.ranges button { min-height: 40px; padding: 0 17px; border: 0; border-radius: 7px; color: #536176; background: transparent; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.ranges button[aria-pressed='true'] { color: #fff; background: #14243b; box-shadow: 0 3px 8px #14203318; }
+.ranges button:hover:not([aria-pressed='true']) { background: #fff9; }
+.refresh { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 16px; border: 1px solid var(--analytics-line); border-radius: 8px; color: var(--analytics-ink); background: #fff; font-size: 13px; font-weight: 700; }
+.refresh svg { width: 17px; height: 17px; }
+.refresh:hover:not(:disabled) { border-color: #9ba8b8; background: #fafbfc; }
+.periodRow { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; margin: 11px 0 22px; color: var(--analytics-muted); font-size: 12px; }
+.trackingNote { display: flex; align-items: flex-start; gap: 10px; padding: 13px 16px; border: 1px solid #ead9b6; border-radius: 9px; background: #fffbf2; color: #77603a; }
+.trackingNote p { margin: 0; font-size: 13px; }
+.trackingDot { flex: 0 0 auto; width: 7px; height: 7px; margin-top: 7px; border-radius: 50%; background: #b8822c; }
+.metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.metric { min-width: 0; display: grid; align-content: start; gap: 6px; padding: 22px; border: 1px solid var(--analytics-line); border-radius: 12px; background: #fff; }
+.metric > span { color: #536176; font-size: 13px; font-weight: 600; }
+.metric > strong { overflow-wrap: anywhere; color: #162740; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(28px, 3vw, 39px); font-weight: 700; line-height: 1.25; font-variant-numeric: tabular-nums; }
+.metric:last-child { border-color: #e4d2ae; background: #fffdf8; }
+.metric:last-child > strong { color: #916322; }
+.metric small { color: var(--analytics-muted); font-size: 11px; line-height: 1.5; }
+.visitorNote { margin: 14px 0 25px; color: var(--analytics-muted); font-size: 12px; line-height: 1.85; }
+.visitorNote strong { margin-right: 6px; color: #4b5b70; }
+.panel { min-width: 0; margin-bottom: 20px; overflow: hidden; border: 1px solid var(--analytics-line); border-radius: 12px; background: #fff; box-shadow: 0 5px 24px #18233304; }
+.panelHeading { padding: 23px 24px 15px; }
+.panelHeading h2 { margin: 0 0 4px; font-size: 20px; line-height: 1.4; }
+.panelHeading p { margin: 0; color: var(--analytics-muted); font-size: 12px; }
+.chartLegend { display: flex; flex-wrap: wrap; gap: 10px 22px; padding: 0 24px 10px; color: #59667a; font-size: 11px; }
+.chartLegend > span { display: inline-flex; align-items: center; gap: 7px; }
+.chartLegend i { width: 11px; height: 11px; border-radius: 2px; }
+.viewKey { background: #203550; }
+.visitorKey { background: #b8822c; }
+.unavailableKey { background: repeating-linear-gradient(45deg, #dce2e9, #dce2e9 2px, #f3f5f7 2px, #f3f5f7 4px); }
+.chartScroll { max-width: 100%; overflow-x: auto; padding: 4px 16px 0; scrollbar-width: thin; }
+.chart { display: block; width: 100%; height: auto; min-height: 240px; }
+.chartHint { margin: 2px 24px 16px; color: var(--analytics-muted); font-size: 11px; }
+.dailyDetails { border-top: 1px solid #e5e9ef; }
+.dailyDetails summary { display: flex; align-items: center; gap: 8px; min-height: 50px; padding: 12px 24px; color: #31455e; background: #fafbfc; font-size: 13px; font-weight: 700; cursor: pointer; list-style: none; }
+.dailyDetails summary::before { content: '›'; font-size: 20px; line-height: 1; transform: rotate(0deg); }
+.dailyDetails[open] summary::before { transform: rotate(90deg); }
+.dailyDetails summary::-webkit-details-marker { display: none; }
+.dailyDetails summary span { margin-left: auto; color: var(--analytics-muted); font-size: 11px; font-weight: 400; }
+.tableScroll { max-width: 100%; max-height: 370px; overflow: auto; scrollbar-width: thin; }
+.dailyTable { width: 100%; min-width: 430px; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+.dailyTable th, .dailyTable td { padding: 11px 24px; border-top: 1px solid #edf0f4; text-align: right; }
+.dailyTable th:first-child { text-align: left; }
+.dailyTable thead th { position: sticky; top: 0; z-index: 1; color: #627087; background: #f7f9fb; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.dailyTable tbody th { font-weight: 500; }
+.dailyTable small { display: block; color: #7b8492; font-size: 10px; }
+.unavailableRow { color: #87909d; background: #fafbfc; }
+.twoColumns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.rankHeader { display: flex; justify-content: space-between; gap: 12px; padding: 0 24px 12px; border-bottom: 1px solid #edf0f4; color: var(--analytics-muted); font-size: 10px; }
+.rankHeader > span:last-child { text-align: right; }
+.rankList { margin: 0; padding: 0 24px; list-style: none; }
+.rankList li { display: grid; grid-template-columns: 23px minmax(0, 1fr) auto; align-items: start; gap: 10px; padding: 16px 0; }
+.rankList li + li { border-top: 1px solid #edf0f4; }
+.rankNumber { padding-top: 1px; color: #a18d6b; font-family: Georgia, serif; font-size: 13px; }
+.rankIdentity { min-width: 0; display: grid; gap: 3px; }
+.rankIdentity > strong { overflow-wrap: anywhere; color: #2a3c55; font-size: 13px; font-weight: 600; line-height: 1.6; }
+.rankIdentity > small { overflow-wrap: anywhere; color: var(--analytics-muted); font-size: 10px; line-height: 1.7; }
+.rankValue { min-width: 42px; display: grid; gap: 5px; text-align: right; font-variant-numeric: tabular-nums; }
+.rankValue > strong { font-size: 14px; line-height: 1.6; }
+.rankValue > small { color: var(--analytics-muted); font-size: 11px; }
+.rankTrack { display: block; max-width: 260px; height: 4px; margin-top: 6px; border-radius: 3px; background: #f1f4f8; }
+.rankTrack i { display: block; height: 100%; border-radius: inherit; background: #8b9bb0; }
+.panelNote { margin: 0; padding: 13px 24px; border-top: 1px solid #edf0f4; color: var(--analytics-muted); background: #fafbfc; font-size: 11px; }
+.breakdownList { display: grid; gap: 19px; margin: 0; padding: 5px 24px 26px; list-style: none; }
+.breakdownList li > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; margin-bottom: 7px; font-size: 12px; }
+.breakdownList strong { color: #40526b; font-weight: 600; }
+.breakdownList small { margin-left: 5px; color: var(--analytics-muted); font-size: 10px; }
+.breakdownTrack { display: block; height: 7px; border-radius: 4px; background: #f0f3f7; }
+.breakdownTrack i { display: block; height: 100%; border-radius: inherit; background: #b8965e; }
+.emptyList { margin: 0; padding: 30px 24px 40px; color: var(--analytics-muted); font-size: 13px; text-align: center; }
+.stateCard { padding: 60px 24px; border: 1px solid var(--analytics-line); border-radius: 13px; background: #fff; text-align: center; }
+.stateCard h2 { margin: 8px 0 15px; font-size: 24px; }
+.stateCard p { margin: 5px auto; max-width: 540px; color: var(--analytics-muted); font-size: 14px; line-height: 1.85; }
+.stateEyebrow { color: #966f31; font-size: 12px; letter-spacing: .08em; }
+
+@media (max-width: 1050px) {
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .twoColumns { grid-template-columns: minmax(0, 1fr); gap: 0; }
+}
+
+@media (max-width: 640px) {
+  .heading { align-items: flex-start; flex-direction: column; gap: 9px; margin-bottom: 20px; }
+  .heading p:last-child { font-size: 13px; }
+  .timezone { font-size: 11px; }
+  .controls { align-items: stretch; flex-direction: column; gap: 9px; }
+  .ranges { width: 100%; }
+  .ranges button { flex: 1; min-width: 0; padding: 0 5px; font-size: 12px; }
+  .refresh { min-height: 42px; }
+  .periodRow { margin-bottom: 16px; font-size: 11px; }
+  .trackingNote { padding: 12px; }
+  .trackingNote p { font-size: 12px; }
+  .metrics { gap: 9px; margin-top: 13px; }
+  .metric { gap: 7px; padding: 15px 12px; }
+  .metric > span { font-size: 12px; }
+  .metric > strong { font-size: 29px; }
+  .metric small { font-size: 10px; }
+  .visitorNote { font-size: 11px; }
+  .panel { margin-bottom: 15px; }
+  .panelHeading { padding: 20px 16px 14px; }
+  .panelHeading h2 { font-size: 18px; }
+  .panelHeading p { font-size: 11px; }
+  .chartLegend { padding-inline: 16px; gap: 8px 15px; font-size: 10px; }
+  .chartScroll { padding-inline: 5px; }
+  .chartHint { margin-inline: 16px; font-size: 10px; }
+  .dailyDetails summary { padding-inline: 16px; }
+  .dailyTable th, .dailyTable td { padding: 10px 16px; }
+  .rankHeader { padding-inline: 16px; font-size: 9px; }
+  .rankList { padding-inline: 16px; }
+  .rankList li { grid-template-columns: 19px minmax(0, 1fr) auto; gap: 7px; }
+  .rankIdentity > strong { font-size: 12px; }
+  .rankValue { min-width: 30px; }
+  .panelNote { padding-inline: 16px; font-size: 10px; }
+  .breakdownList { padding-inline: 16px; }
+  .stateCard { padding: 42px 20px; }
+  .stateCard h2 { font-size: 22px; }
+  .stateCard p { font-size: 13px; }
+}

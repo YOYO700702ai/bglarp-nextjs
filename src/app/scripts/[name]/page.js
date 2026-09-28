@@ -114,7 +114,7 @@ export default async function ScriptPage({ params }) {
   const scriptJsonLd = buildScriptJsonLd(card);
 
   return (
-    <div className={styles.page} data-bgl-script-fingerprint={publicScriptFingerprint(card)}>
+    <div className={styles.page} data-bgl-script-fingerprint={publicScriptFingerprint(card)} data-analytics-page={`/scripts/${publicKey}`}>
       <JsonLd id="bglarp-script-jsonld" data={scriptJsonLd} />
       <nav className={styles.backBar}>
         <Link href="/#scripts" className={styles.backLink}>
@@ -235,7 +235,7 @@ export default async function ScriptPage({ params }) {
 
         {/* Book button */}
         <div className={styles.bookWrap}>
-          <a href="https://www.facebook.com/bglarp.studio/" target="_blank" rel="noopener noreferrer" className={styles.bookBtn}>
+          <a href="https://www.facebook.com/bglarp.studio/" data-analytics-target="booking:facebook" target="_blank" rel="noopener noreferrer" className={styles.bookBtn}>
             馬上預約 →
           </a>
         </div>

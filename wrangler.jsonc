@@ -13,6 +13,7 @@
   "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
   "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "bglarp-site" }],
   "r2_buckets": [{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "bglarp-site-next-cache" }],
+  "d1_databases": [{ "binding": "ANALYTICS_DB", "database_name": "bglarp-site-analytics", "database_id": "c0a66ef2-ea64-498e-a7e9-0dcf59dd9cf1" }],
   "durable_objects": {
     "bindings": [
       { "name": "NEXT_CACHE_DO_QUEUE", "class_name": "DOQueueHandler" },

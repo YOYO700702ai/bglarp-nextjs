@@ -1,5 +1,6 @@
 import Script from 'next/script';
 import JsonLd from '@/components/JsonLd';
+import AnalyticsTracker from '@/components/AnalyticsTracker';
 import { ROOT_JSON_LD } from '@/lib/seo';
 import './globals.css';
 
@@ -54,6 +55,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {children}
+        <AnalyticsTracker />
       </body>
     </html>
   );

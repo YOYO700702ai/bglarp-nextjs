@@ -7,7 +7,7 @@ import styles from './Admin.module.css';
 
 const USERNAME_PATTERN = /^[a-z0-9._-]+$/;
 
-export default function AdminAccessState({ state, message, onRetry }) {
+export default function AdminAccessState({ state, message, onRetry, loginTitle = '登入後才能管理劇本', loadingMessage = '請稍候，我們正在安全地開啟劇本後台。' }) {
   const [signingIn, setSigningIn] = useState(false);
   const [signInError, setSignInError] = useState('');
   const [username, setUsername] = useState('');
@@ -64,7 +64,7 @@ export default function AdminAccessState({ state, message, onRetry }) {
       <div className={styles.accessCard} role="status" aria-live="polite">
         <span className={styles.spinner} aria-hidden="true" />
         <h1>正在確認員工權限</h1>
-        <p>請稍候，我們正在安全地開啟劇本後台。</p>
+        <p>{loadingMessage}</p>
       </div>
     );
   }
@@ -79,7 +79,7 @@ export default function AdminAccessState({ state, message, onRetry }) {
         {signedOut ? <LockIcon /> : <WarningIcon />}
       </div>
       <p className={styles.eyebrow}>{signedOut ? 'STAFF SIGN IN' : 'ACCESS CHECK'}</p>
-      <h1>{signedOut ? '登入後才能管理劇本' : forbidden ? '這個帳號沒有後台權限' : '後台暫時連不上'}</h1>
+      <h1>{signedOut ? loginTitle : forbidden ? '這個帳號沒有後台權限' : '後台暫時連不上'}</h1>
       <p>{message || (signedOut
         ? '請輸入共用的員工帳號與密碼。'
         : forbidden
