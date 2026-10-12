@@ -25,8 +25,9 @@ const LINE_FRIEND_URL = 'https://lin.ee/S61LL0m';
 const MEMBER_CARD_URL = 'https://liff.line.me/2011124107-GVTDMium';
 const MEMBER_ACTIVITY_URL = 'https://www.facebook.com/bglarp.studio/posts/pfbid02GZ3MHU4HALpYB8jpbTVL7oUmRJvQx6SF3NSKn31FG5PpoMZmsCMKhYXvoGCP88wYl';
 const FEATURED_STORY = {
-    videoId: '6bYtqkPyz90',
-    poster: 'https://i.ytimg.com/vi/6bYtqkPyz90/hqdefault.jpg',
+    videoId: 'WWmjMHxxx_0',
+    poster: '/white-rabbit/mv-poster-portrait.webp',
+    videoTitle: '《白兔和她的屍體》〈第七張椅子〉MV',
     title: '下一場故事，等你入戲',
     subtitle: '揪上朋友，一起成為故事裡的主角。',
 };
@@ -374,13 +375,14 @@ export default function ScriptGrid() {
                                     </a>
                                 </div>
                             </div>
-                            <div className={styles.activityCampaignPanel} aria-label="BGLARP 劇本體驗短片">
+                            <div className={styles.activityCampaignPanel} aria-label={FEATURED_STORY.videoTitle}>
                                 <div className={styles.activityVideoFrame}>
                                     {activityPlaying ? (
                                         <iframe
                                             className={styles.activityIframe}
                                             src={`https://www.youtube-nocookie.com/embed/${FEATURED_STORY.videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1&iv_load_policy=3`}
-                                            title="BGLARP 劇本體驗短片"
+                                            title={FEATURED_STORY.videoTitle}
+                                            referrerPolicy="strict-origin-when-cross-origin"
                                             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
                                             allowFullScreen
                                         />
@@ -390,7 +392,7 @@ export default function ScriptGrid() {
                                             className={styles.activityPoster}
                                             onClick={() => setActivityPlaying(true)}
                                             data-analytics-target="activity:video"
-                                            aria-label="播放 BGLARP 劇本體驗短片"
+                                            aria-label={`播放 ${FEATURED_STORY.videoTitle}`}
                                         >
                                             <img src={FEATURED_STORY.poster} alt="" referrerPolicy="no-referrer" />
                                             <span className={styles.activityPlayBtn} aria-hidden="true">
