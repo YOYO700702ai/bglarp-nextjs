@@ -11,6 +11,7 @@ import {
   isFlagshipScript,
 } from '@/lib/scriptClassification';
 import JsonLd from '@/components/JsonLd';
+import YouTubeStoryVideo from '@/components/YouTubeStoryVideo';
 import { buildScriptJsonLd } from '@/lib/seo';
 import styles from './page.module.css';
 
@@ -178,18 +179,25 @@ export default async function ScriptPage({ params }) {
         {experience?.video && (
           <section className={styles.videoSection} aria-labelledby="script-video-title">
             <div className={styles.sectionTitle} id="script-video-title">故事影片</div>
-            <div className={styles.videoFrame}>
-              <video
-                className={styles.scriptVideo}
-                controls
-                playsInline
-                preload="metadata"
-                poster={experience.video.poster}
-                aria-label={experience.video.title}
-              >
-                <source src={experience.video.src} type="video/mp4" />
-                您的瀏覽器不支援影片播放。
-              </video>
+            <div className={`${styles.videoFrame} ${experience.video.portrait ? styles.portraitVideoFrame : ''}`}>
+              {experience.video.youtubeId ? (
+                <YouTubeStoryVideo
+                  className={`${styles.scriptVideo} ${experience.video.portrait ? styles.portraitVideo : ''}`}
+                  video={experience.video}
+                />
+              ) : (
+                <video
+                  className={styles.scriptVideo}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster={experience.video.poster}
+                  aria-label={experience.video.title}
+                >
+                  <source src={experience.video.src} type="video/mp4" />
+                  您的瀏覽器不支援影片播放。
+                </video>
+              )}
             </div>
             <p className={styles.videoCaption}>{experience.video.title}</p>
           </section>

@@ -273,8 +273,20 @@
     display: block;
     width: 100%;
     aspect-ratio: 16 / 9;
+    border: 0;
     object-fit: contain;
     background: #030303;
+}
+
+.portraitVideoFrame {
+    width: calc(100% - 40px);
+    max-width: 360px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.portraitVideo {
+    aspect-ratio: 9 / 16;
 }
 
 .videoCaption {

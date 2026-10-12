@@ -28,6 +28,12 @@ const EXPERIENCES = [
   },
   {
     match: ['白兔和她的屍體', '白兔和她的尸体', '白兔'],
+    video: {
+      youtubeId: 'WWmjMHxxx_0',
+      poster: '/white-rabbit/mv-poster-portrait.webp',
+      title: '《白兔和她的屍體》〈第七張椅子〉MV',
+      portrait: true,
+    },
     characterImages: {
       '瓦力雄': '/white-rabbit/characters/walixiong.jpg',
       '瓦森達': '/white-rabbit/characters/wasenda.jpg',
