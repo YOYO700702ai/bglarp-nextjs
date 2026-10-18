@@ -130,7 +130,13 @@ export function sameCharacterMedia(previous, current) {
 
 export function publishedCatalogMatches(script, publicScript) {
   if (!publicScript || !script.notionPageId || publicScript.scriptId !== script.notionPageId) return false;
-  if (publicScript.name !== script.name || publicScript.synopsis !== script.synopsis) return false;
+  // Notion can omit U+200B copied into a synopsis. Allow only that omission,
+  // without changing immutable drafts, visible text or other characters.
+  const synopsisMatches = typeof script.synopsis === 'string'
+    && typeof publicScript.synopsis === 'string'
+    && (publicScript.synopsis === script.synopsis
+      || publicScript.synopsis === script.synopsis.replace(/\u200b/g, ''));
+  if (publicScript.name !== script.name || !synopsisMatches) return false;
   if (publicScript.image !== script.cover?.url || publicScript.priceStatus !== script.priceStatus) return false;
   if (publicScript.price !== (script.priceStatus === 'free' ? 0 : script.priceStatus === 'tbd' ? null : script.price)) return false;
   const players = Array.from({ length: script.playerMax - script.playerMin + 1 }, (_, index) => `${script.playerMin + index}人`);

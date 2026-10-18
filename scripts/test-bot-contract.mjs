@@ -111,6 +111,29 @@ test('removed portraits, stale image captions and paths must not be reported as 
   } }), false);
 });
 
+test('Notion omission of synopsis U+200B does not leave a matching publication pending', () => {
+  const saved = { ...script, synopsis: '任家大院\n\u200b任老爺的葬禮\n\u200b妖丹落入誰手？' };
+  const published = { ...publicScript, synopsis: '任家大院\n任老爺的葬禮\n妖丹落入誰手？' };
+  assert.equal(publishedCatalogMatches(saved, published), true);
+  assert.equal(publishedCatalogMatches({ ...script, synopsis: published.synopsis },
+    { ...publicScript, synopsis: saved.synopsis }), false);
+  for (const synopsis of [null, undefined, 0]) {
+    assert.equal(publishedCatalogMatches({ ...script, synopsis }, { ...publicScript, synopsis }), false);
+  }
+  assert.equal(saved.synopsis, '任家大院\n\u200b任老爺的葬禮\n\u200b妖丹落入誰手？');
+
+  // Visible edits, line breaks, whitespace, joiners and other fields stay exact.
+  for (const synopsis of [
+    '任家大院\n任老爺的婚禮\n妖丹落入誰手？',
+    '任家大院任老爺的葬禮\n妖丹落入誰手？',
+    '任家大院\n 任老爺的葬禮\n妖丹落入誰手？',
+    '任家大院\n\u200c任老爺的葬禮\n妖丹落入誰手？',
+    '任家大院\n\u200d任老爺的葬禮\n妖丹落入誰手？',
+  ]) assert.equal(publishedCatalogMatches(saved, { ...published, synopsis }), false);
+  assert.equal(publishedCatalogMatches(saved, { ...published, price: 230 }), false);
+  assert.equal(publishedCatalogMatches(saved, { ...published, name: '\u200b魔女論破' }), false);
+});
+
 test('multiline descriptions are preserved and missing descriptions never pass', () => {
   const described = { ...script, characters: [{ ...script.characters[0], description: '第一行\n第二行' }] };
   assert.equal(publishedCatalogMatches(described, publicScript), false);
