@@ -148,6 +148,22 @@ test('the rendered detail fingerprint detects stale visible content despite matc
   }
 });
 
+test('Chinese role fingerprints are independent of host locale and object insertion order', () => {
+  const roles = ['魔丸', '跋扈', '本心', '深愛', '激情'];
+  const metadata = (order) => Object.fromEntries(order.map(name => [name, { image: { url: `${roleUrl}?role=${name}` } }]));
+  const englishOrder = [...roles].sort((a, b) => a.localeCompare(b, 'en-US'));
+  const chineseOrder = [...roles].sort((a, b) => a.localeCompare(b, 'zh-TW'));
+  assert.notDeepEqual(englishOrder, chineseOrder);
+  const expected = publicScriptFingerprint({ ...publicScript, characterImages: metadata(englishOrder) });
+  const original = String.prototype.localeCompare;
+  try {
+    String.prototype.localeCompare = function () { throw new Error('locale-dependent fingerprint'); };
+    assert.equal(publicScriptFingerprint({ ...publicScript, characterImages: metadata(chineseOrder) }), expected);
+  } finally {
+    String.prototype.localeCompare = original;
+  }
+});
+
 test('bot publishing rejects missing genres, duplicate roles and inconsistent player counts', () => {
   const complete = { ...script, playerMin: 1, playerMax: 1 };
   assert.doesNotThrow(() => validateBotPublishContent(complete));

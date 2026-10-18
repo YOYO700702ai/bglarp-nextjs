@@ -128,11 +128,15 @@ test('a synced catalog row is not live until the actual detail fingerprint agree
       : { ok: true, url, text: async () => `<div data-bgl-script-fingerprint="${publicScriptFingerprint(renderedRow)}">${script.name}<img src="${script.cover.url}"></div>` };
   };
   try {
-    assert.equal((await service.verifyBotPublication(script)).state, 'verification_pending');
+    const stale = await service.verifyBotPublication(script);
+    assert.equal(stale.state, 'verification_pending');
+    assert.equal(stale.reason, 'detail_fingerprint');
     renderedRow = row;
     assert.equal((await service.verifyBotPublication(script)).state, 'live');
     mediaStatus = 403;
-    assert.equal((await service.verifyBotPublication(script)).state, 'verification_pending');
+    const unavailableImage = await service.verifyBotPublication(script);
+    assert.equal(unavailableImage.state, 'verification_pending');
+    assert.equal(unavailableImage.reason, 'public_images');
     assert.equal((await service.verifyBotPublication({ ...script, syncStatus: 'error' })).state, 'sync_pending');
   } finally {
     globalThis.fetch = originalFetch;

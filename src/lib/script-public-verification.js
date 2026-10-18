@@ -3,7 +3,10 @@ import { createHash } from 'node:crypto';
 // The API and the rendered detail must describe the same public revision.
 // A title or cover alone cannot distinguish a stale price, synopsis or role list.
 export function publicScriptFingerprint(script) {
-  const orderedObject = (value) => Object.fromEntries(Object.entries(value || {}).sort(([a], [b]) => a.localeCompare(b)));
+  // Build machines and Workers can have different default locales. Hash the
+  // same code-unit key order everywhere, including Chinese role names.
+  const orderedObject = (value) => Object.fromEntries(Object.entries(value || {})
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
   const payload = {
     scriptId: script?.scriptId || null,
     name: script?.name || '',

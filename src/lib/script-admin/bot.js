@@ -235,6 +235,7 @@ export async function verifyBotPublication(script) {
   if (script.syncStatus !== 'synced') {
     return { state: 'sync_pending', verified: false, url, retryable: true };
   }
+  let reason = 'public_request';
   try {
     const nonce = `${script.id}-${script.publishedVersionId}`;
     const [catalogResponse, detailResponse] = await Promise.all([
@@ -245,19 +246,27 @@ export async function verifyBotPublication(script) {
         cache: 'no-store', signal: AbortSignal.timeout(15000), redirect: 'follow',
       }),
     ]);
-    if (!catalogResponse.ok || !detailResponse.ok) throw new Error('public readback unavailable');
+    reason = 'catalog_http';
+    if (!catalogResponse.ok) throw new Error('public catalog unavailable');
+    reason = 'detail_http';
+    if (!detailResponse.ok) throw new Error('public detail unavailable');
+    reason = 'detail_origin';
     if (new URL(detailResponse.url).origin !== publicOrigin()) throw new Error('unexpected public origin');
+    reason = 'public_response';
     const [catalog, html] = await Promise.all([catalogResponse.json(), detailResponse.text()]);
     const publicScript = Array.isArray(catalog) ? catalog.find((item) => item.scriptId === script.notionPageId) : null;
     const imageUrls = [script.cover?.url, ...script.characters.map((character) => character.image?.url)].filter(Boolean);
     const htmlContains = (value) => html.includes(value) || html.includes(value.replaceAll('&', '&amp;'));
-    if (!publishedCatalogMatches(script, publicScript)
-      || !html.includes(`data-bgl-script-fingerprint="${publicScriptFingerprint(publicScript)}"`)
-      || !htmlContains(script.name)
-      || !imageUrls.every(htmlContains)) throw new Error('public readback not converged');
+    reason = 'catalog_content';
+    if (!publishedCatalogMatches(script, publicScript)) throw new Error('public catalog not converged');
+    reason = 'detail_fingerprint';
+    if (!html.includes(`data-bgl-script-fingerprint="${publicScriptFingerprint(publicScript)}"`)) throw new Error('public detail not converged');
+    reason = 'detail_content';
+    if (!htmlContains(script.name) || !imageUrls.every(htmlContains)) throw new Error('public content unavailable');
     // A service-role download cannot prove that a visitor can actually see an image.
     const storageBase = getCharacterImageStorageBase();
     const publicImages = [...new Set(imageUrls.filter((imageUrl) => storageBase && imageUrl.startsWith(storageBase)))];
+    reason = 'public_images';
     const mediaResponses = await Promise.all(publicImages.map((imageUrl) => fetch(imageUrl, {
       method: 'HEAD', cache: 'no-store', redirect: 'manual', signal: AbortSignal.timeout(10000),
     })));
@@ -267,7 +276,7 @@ export async function verifyBotPublication(script) {
     }
     return { state: 'live', verified: true, url, verifiedAt: new Date().toISOString() };
   } catch {
-    return { state: 'verification_pending', verified: false, url, retryable: true };
+    return { state: 'verification_pending', verified: false, url, retryable: true, reason };
   }
 }
 
